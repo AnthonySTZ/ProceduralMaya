@@ -4,9 +4,12 @@ def reloadLib():
     import UI.NodesView as NodesView
     import UI.MainWindow as MainWindow
     import Core.Nodes.NodesInfo as NodesInfos
+    import Core.Qt.QtInfo as QtInfo
 
     reload(Qt)
+    reload(QtInfo)
     reload(NodesInfos)
+    QtInfo.QtInfo.reloadQtCore()
     NodesInfos.NodesInfo.reloadNodes()
     reload(NodesView)
     reload(MainWindow)
