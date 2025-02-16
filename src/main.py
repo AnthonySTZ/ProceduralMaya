@@ -1,8 +1,12 @@
 import os
 import sys
-from dotenv import load_dotenv
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except:
+    pass
 
 plugin_path = os.path.join(os.environ["PROCEDURAL_MAYA"], "src")
 
