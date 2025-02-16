@@ -3,10 +3,11 @@ def reloadLib():
     import PluginLib.CompactQt.Qt as Qt
     import UI.NodesView as NodesView
     import UI.MainWindow as MainWindow
-    import Core.Nodes.BaseNode as BaseNode
+    import Core.Nodes.NodesInfo as NodesInfos
 
     reload(Qt)
-    reload(BaseNode)
+    reload(NodesInfos)
+    NodesInfos.NodesInfo.reloadNodes()
     reload(NodesView)
     reload(MainWindow)
 
