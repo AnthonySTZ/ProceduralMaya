@@ -1,17 +1,16 @@
-from Lib.CompactQt.Qt import QWidget, QVBoxLayout, QApplication, QDialog
+from importlib import reload
+import Libraries.CompactQt.Qt as Qt
+import Plugin.UI.MainWindow as MainWindow
+
+reload(Qt)
+reload(MainWindow)
+
+
+from Libraries.CompactQt.Qt import QApplication, QWidget
+from Plugin.UI.MainWindow import MainWindow
+
 from maya import OpenMayaUI as omui  # type: ignore
 from shiboken2 import wrapInstance  # type: ignore
-
-
-class MainWindow(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.buildUI()
-
-    def buildUI(self):
-        self.setWindowTitle("Maya Procedural")
-        vbox = QVBoxLayout()
-        self.setLayout(vbox)
 
 
 def createWindow():
