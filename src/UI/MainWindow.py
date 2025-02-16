@@ -1,4 +1,4 @@
-from Libraries.CompactQt.Qt import QVBoxLayout, QDialog
+from PluginLib.CompactQt.Qt import QVBoxLayout, QDialog
 
 
 class MainWindow(QDialog):
