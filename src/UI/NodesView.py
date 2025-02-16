@@ -9,6 +9,7 @@ from PluginLib.CompactQt.Qt import (
     QKeySequence,
 )
 from Core.Nodes.NodesInfo import NodesInfo
+from Core.Qt.QDataAction import QDataAction
 
 
 class NodesView(QWidget):
@@ -40,8 +41,13 @@ class NodesView(QWidget):
         menu = QMenu()
         nodes = NodesInfo.getNodes()
         for node in nodes:
-            menu.addAction(node.__name__)
+            action = QDataAction(node.__name__)
+            action.setUserData(node)
+            menu.addAction(action)
         try:
-            menu.exec(QCursor.pos())
+            res = menu.exec(QCursor.pos())
         except:
-            menu.exec_(QCursor.pos())
+            res = menu.exec_(QCursor.pos())
+
+        if res:
+            print(res.getUserData())
