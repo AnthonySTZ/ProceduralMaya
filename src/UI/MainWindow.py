@@ -8,6 +8,7 @@ class MainWindow(QDialog):
         self.buildUI()
 
     def buildUI(self):
+        self.resize(1200, 800)
         self.setWindowTitle("Maya Procedural")
         vbox = QVBoxLayout()
         self.setLayout(vbox)
