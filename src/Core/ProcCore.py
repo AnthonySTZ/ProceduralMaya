@@ -45,5 +45,13 @@ def createWindow():
     else:
         app = QApplication([])
         window = MainWindow()
+        window.setStyleSheet(
+            """
+            QWidget {
+                background-color: #424242;
+                color: #c2c2c2;
+            }
+            """
+        )
         window.show()
         app.exec()
