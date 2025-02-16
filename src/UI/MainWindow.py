@@ -1,4 +1,5 @@
 from PluginLib.CompactQt.Qt import QVBoxLayout, QDialog
+from .NodesView import NodesView
 
 
 class MainWindow(QDialog):
@@ -10,3 +11,7 @@ class MainWindow(QDialog):
         self.setWindowTitle("Maya Procedural")
         vbox = QVBoxLayout()
         self.setLayout(vbox)
+
+        nodes_viewer = NodesView()
+
+        vbox.addWidget(nodes_viewer)
