@@ -9,8 +9,6 @@ class Cube(BaseNode):
         self._settings = {"width": 1.0, "height": 1.0, "depth": 1.0}
 
     def getOutput(self, output_index):
-        if not (0 < output_index < self._num_outputs):
-            raise NotImplementedError(
-                "Not Enough Output for the index " + str(output_index)
-            )
+        if not (0 <= output_index < self._num_outputs):
+            raise NotImplementedError("Invalid output index " + str(output_index))
         return "Create Cube command with : " + str(self._settings)
