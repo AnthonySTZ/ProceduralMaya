@@ -1,4 +1,13 @@
-from PluginLib.CompactQt.Qt import QWidget, QHBoxLayout, QLabel, Qt, QMenu, QCursor
+from PluginLib.CompactQt.Qt import (
+    QWidget,
+    QHBoxLayout,
+    QLabel,
+    Qt,
+    QMenu,
+    QCursor,
+    QShortcut,
+    QKeySequence,
+)
 from Core.Nodes.NodesInfo import NodesInfo
 
 
@@ -24,6 +33,8 @@ class NodesView(QWidget):
 
         self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.customContextMenuRequested.connect(self.nodesContextMenu)
+        tab_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Tab), self)
+        tab_shortcut.activated.connect(self.nodesContextMenu)
 
     def nodesContextMenu(self):
         menu = QMenu()
