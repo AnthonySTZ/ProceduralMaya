@@ -1,22 +1,21 @@
 def reloadLib():
     from importlib import reload
     import PluginLib.CompactQt.Qt as Qt
-    import UI.MainWindow as MainWindow
     import UI.NodesView as NodesView
+    import UI.MainWindow as MainWindow
 
     reload(Qt)
-    reload(MainWindow)
     reload(NodesView)
-
-
-from PluginLib.CompactQt.Qt import QApplication, QWidget
-from UI.MainWindow import MainWindow
-
-from maya import OpenMayaUI as omui  # type: ignore
-from shiboken2 import wrapInstance  # type: ignore
+    reload(MainWindow)
 
 
 def createWindow():
+    from PluginLib.CompactQt.Qt import QApplication, QWidget
+    from UI.MainWindow import MainWindow
+
+    from maya import OpenMayaUI as omui  # type: ignore
+    from shiboken2 import wrapInstance  # type: ignore
+
     if QApplication.instance():
         # Id any current instances of tool and destroy
         for win in QApplication.allWindows():
