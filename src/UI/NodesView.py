@@ -8,7 +8,15 @@ class NodesView(QWidget):
 
     def buildUI(self):
         hbox = QHBoxLayout()
+        hbox.setContentsMargins(0, 0, 0, 0)
         self.setLayout(hbox)
+        self.setStyleSheet(
+            """
+            QWidget{
+                background-color: #2e2e2e;
+            }
+            """
+        )
 
         text = QLabel("Test Text")
         hbox.addWidget(text)
