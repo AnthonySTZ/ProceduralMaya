@@ -1,5 +1,5 @@
 from PluginLib.CompactQt.Qt import QVBoxLayout, QDialog
-from .NodesView import NodesView
+from UI.NodesView import NodesView
 
 
 class MainWindow(QDialog):

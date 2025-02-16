@@ -1,4 +1,4 @@
-from PluginLib.CompactQt.Qt import QWidget, QHBoxLayout
+from PluginLib.CompactQt.Qt import QWidget, QHBoxLayout, QLabel
 
 
 class NodesView(QWidget):
@@ -7,4 +7,8 @@ class NodesView(QWidget):
         self.buildUI()
 
     def buildUI(self):
-        pass
+        hbox = QHBoxLayout()
+        self.setLayout(hbox)
+
+        text = QLabel("Test Text")
+        hbox.addWidget(text)

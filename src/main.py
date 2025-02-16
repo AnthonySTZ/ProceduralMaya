@@ -10,4 +10,5 @@ import Core.ProcCore as ProcCore
 
 reload(ProcCore)
 
+ProcCore.reloadLib()
 ProcCore.createWindow()

@@ -1,9 +1,12 @@
-from importlib import reload
-import PluginLib.CompactQt.Qt as Qt
-import UI.MainWindow as MainWindow
+def reloadLib():
+    from importlib import reload
+    import PluginLib.CompactQt.Qt as Qt
+    import UI.MainWindow as MainWindow
+    import UI.NodesView as NodesView
 
-reload(Qt)
-reload(MainWindow)
+    reload(Qt)
+    reload(MainWindow)
+    reload(NodesView)
 
 
 from PluginLib.CompactQt.Qt import QApplication, QWidget
