@@ -50,4 +50,6 @@ class NodesView(QWidget):
             res = menu.exec_(QCursor.pos())
 
         if res:
-            print(res.getUserData())
+            nodeType = res.getUserData()
+            node = nodeType()
+            print(node.getOutput(0))
