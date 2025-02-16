@@ -1,4 +1,5 @@
-from PluginLib.CompactQt.Qt import QWidget, QHBoxLayout, QLabel
+from PluginLib.CompactQt.Qt import QWidget, QHBoxLayout, QLabel, Qt, QMenu, QCursor
+from Core.Nodes.NodesInfo import NodesInfo
 
 
 class NodesView(QWidget):
@@ -20,3 +21,16 @@ class NodesView(QWidget):
 
         text = QLabel("Test Text")
         hbox.addWidget(text)
+
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.customContextMenuRequested.connect(self.nodesContextMenu)
+
+    def nodesContextMenu(self):
+        menu = QMenu()
+        nodes = NodesInfo.getNodes()
+        for node in nodes:
+            menu.addAction(node.__name__)
+        try:
+            menu.exec(QCursor.pos())
+        except:
+            menu.exec_(QCursor.pos())
