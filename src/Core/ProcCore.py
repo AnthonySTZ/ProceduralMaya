@@ -32,7 +32,7 @@ def createWindow():
 
         LOAD_IN_MAYA = True
     except:
-        print("Not load in Maya")
+        print("Run plugin as standalone")
 
     if LOAD_IN_MAYA:
         dialog = MainWindow
