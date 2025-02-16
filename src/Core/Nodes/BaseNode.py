@@ -3,8 +3,10 @@ import abc
 
 class BaseNode:
     def __init__(self):
-        self._inputs = []
-        self._outputs = []
+        self._num_inputs = 0
+        self._num_outputs = 0
+        self._inputs = {}
+        self._outputs = {}
         self._parameters = {}
 
     @abc.abstractmethod
