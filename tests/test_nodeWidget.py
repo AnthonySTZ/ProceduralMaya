@@ -19,14 +19,6 @@ cube_node._num_outputs = 3
 
 app = QApplication([])
 window = NodeWidget()
-window.setStyleSheet(
-    """
-            QWidget {
-                background-color: #424242;
-                color: #c2c2c2;
-            }
-            """
-)
 window.setNode(cube_node)
 window.show()
 app.exec()

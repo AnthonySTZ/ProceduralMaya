@@ -16,8 +16,16 @@ class NodeWidget(QWidget):
         self.buildUI()
 
     def buildUI(self):
+        self.setStyleSheet(
+            """
+                    QWidget {
+                        background-color: transparent;
+                    }
+                    """
+        )
         main_vbox = QVBoxLayout()
         main_vbox.setContentsMargins(0, 0, 0, 0)
+        main_vbox.setSpacing(3)
         self.setLayout(main_vbox)
 
         self.inputs_hbox = QHBoxLayout()
