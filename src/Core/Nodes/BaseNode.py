@@ -16,6 +16,12 @@ class BaseNode:
     def setName(self, name):
         self._name = name
 
+    def getNumberOfInputs(self):
+        return self._inputs
+
+    def getNumberOfOutputs(self):
+        return self._outputs
+
     def getParameters(self):
         return self._parameters
 
