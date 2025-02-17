@@ -8,5 +8,7 @@ class QRoundButton(QPushButton):
     def setButtonSize(self, size):
         self.setFixedSize(size, size)
         self.setStyleSheet(
-            "QPushButton{border-radius:" + str(size / 2) + ";border: 1px solid black;}"
+            "QPushButton{border-radius:"
+            + str(size / 2)
+            + ";background-color: #bdbdbd;}"
         )
