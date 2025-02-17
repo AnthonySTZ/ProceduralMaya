@@ -10,6 +10,12 @@ class BaseNode:
         self._outputs = {}
         self._parameters = {}
 
+    def getName(self):
+        return self._name
+
+    def setName(self, name):
+        self._name = name
+
     def getParameters(self):
         return self._parameters
 
