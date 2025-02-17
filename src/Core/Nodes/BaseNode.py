@@ -17,10 +17,10 @@ class BaseNode:
         self._name = name
 
     def getNumberOfInputs(self):
-        return self._inputs
+        return self._num_inputs
 
     def getNumberOfOutputs(self):
-        return self._outputs
+        return self._num_outputs
 
     def getParameters(self):
         return self._parameters
