@@ -1,17 +1,20 @@
 def reloadLib():
-    from importlib import reload
-    import PluginLib.CompactQt.Qt as Qt
-    import UI.UILoader as UILoader
-    import Core.Nodes.NodesInfo as NodesInfos
-    import Core.Qt.QtInfo as QtInfo
+    import os
+    import sys
+    import glob
+    import importlib
+    from pathlib import Path
 
-    reload(Qt)
-    reload(QtInfo)
-    reload(NodesInfos)
-    QtInfo.QtInfo.reloadQtCore()
-    NodesInfos.NodesInfo.reloadNodes()
-    reload(UILoader)
-    UILoader.UILoader.reloadUI()
+    print("Reloading all Modules")
+
+    import_folder = Path(os.environ["PROCEDURAL_MAYA"]).as_posix() + "/src/"
+    for src_file in glob.glob(import_folder + "**/*.py", recursive=True):
+        name = src_file[len(import_folder) :].replace("\\", ".")[:-3]
+
+        if name != "main" and name != "ProcCore":
+            importlib.import_module(name)
+            importlib.reload(sys.modules[name])
+            importlib.import_module(name)
 
 
 def createWindow():
