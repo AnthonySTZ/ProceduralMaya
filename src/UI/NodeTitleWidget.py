@@ -18,6 +18,7 @@ class NodeTitleWidget(QWidget):
                     background-color: #c9c9c9;
                     color: black;
                     border-radius: 7px;
+                    border: 1px solid #828282;
                 }
                 QWidget:hover {
                     background-color: #e0e0e0;
