@@ -56,5 +56,4 @@ class NodesView(QWidget):
 
         new_node.setParent(self)
         new_node.show()
-        new_node.moveToPosition()
         self.nodes.append(new_node)
