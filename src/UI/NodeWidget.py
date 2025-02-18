@@ -9,6 +9,7 @@ from PluginLib.CompactQt.Qt import (
 )
 
 from Core.Qt.QRoundButton import QRoundButton
+from UI.NodeTitleWidget import NodeTitleWidget
 
 
 class NodeWidget(QWidget):
@@ -39,28 +40,8 @@ class NodeWidget(QWidget):
         self.inputs_widget.setLayout(self.inputs_hbox)
         main_vbox.addWidget(self.inputs_widget)
 
-        self.main_rect = QWidget()
-        rect_hbox = QHBoxLayout()
-        rect_hbox.setContentsMargins(0, 0, 0, 0)
-        self.main_rect.setLayout(rect_hbox)
-        self.main_rect.setFixedSize(QSize(90, 25))
-        main_vbox.addWidget(self.main_rect)
-        self.main_rect.setStyleSheet(
-            """
-                QWidget {
-                    background-color: #c9c9c9;
-                    color: black;
-                    border-radius: 7px;
-                }
-                QWidget:hover {
-                    background-color: #e0e0e0;
-                }
-            """
-        )
-
-        self.nodeName = QLabel("Node Name")
-        self.nodeName.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        rect_hbox.addWidget(self.nodeName)
+        self.title_widget = NodeTitleWidget()
+        main_vbox.addWidget(self.title_widget)
 
         self.outputs_hbox = QHBoxLayout()
         self.outputs_hbox.setContentsMargins(0, 0, 0, 0)
@@ -72,7 +53,7 @@ class NodeWidget(QWidget):
         self.inputs_widget.setHidden(True)
         self.outputs_widget.setHidden(True)
 
-        self.nodeName.setText(node.getName())
+        self.title_widget.setNodeTitle(node.getName())
         self.setInputButtons(node)
         self.setOutputButtons(node)
 
@@ -107,7 +88,10 @@ class NodeWidget(QWidget):
         self.move(self._position)
 
     def mousePressEvent(self, event):
-        if event.buttons() == Qt.MouseButton.LeftButton and self.main_rect.underMouse():
+        if (
+            event.buttons() == Qt.MouseButton.LeftButton
+            and self.title_widget.underMouse()
+        ):
             self._is_moving = True
             self._mouse_offset = event.pos()
         return super().mousePressEvent(event)
@@ -120,7 +104,7 @@ class NodeWidget(QWidget):
         if self._is_moving:
             position = event.pos() - self._mouse_offset
             self.setPosition(
-                self.parent().mapFromGlobal(self.main_rect.mapToGlobal(position))
+                self.parent().mapFromGlobal(self.title_widget.mapToGlobal(position))
             )
 
         return super().mouseMoveEvent(event)
