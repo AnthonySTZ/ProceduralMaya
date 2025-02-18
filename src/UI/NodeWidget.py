@@ -1,11 +1,4 @@
-from PluginLib.CompactQt.Qt import (
-    QWidget,
-    QVBoxLayout,
-    QLabel,
-    QHBoxLayout,
-    Qt,
-    QFrame,
-)
+from PluginLib.CompactQt.Qt import QWidget, QVBoxLayout, QLabel, QHBoxLayout, Qt, QPoint
 
 from Core.Qt.QRoundButton import QRoundButton
 
@@ -13,6 +6,7 @@ from Core.Qt.QRoundButton import QRoundButton
 class NodeWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._position = QPoint(0, 0)
         self.buildUI()
 
     def buildUI(self):
@@ -83,3 +77,9 @@ class NodeWidget(QWidget):
             output_btn = QRoundButton()
             output_btn.setButtonSize(10)
             self.outputs_hbox.addWidget(output_btn)
+
+    def setPosition(self, position):
+        self._position = position
+
+    def getPosition(self):
+        return self._position
