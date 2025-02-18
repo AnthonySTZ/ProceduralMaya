@@ -8,12 +8,3 @@ class NodesInfo:
             Cube,
         ]
         return nodes
-
-    @staticmethod
-    def reloadNodes():
-        from importlib import reload
-        import Core.Nodes.BaseNode as BaseNode
-        import Core.Nodes.Cube as Cube
-
-        reload(BaseNode)
-        reload(Cube)
