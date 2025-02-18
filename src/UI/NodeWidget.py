@@ -71,18 +71,23 @@ class NodeWidget(QWidget):
         self.outputs_widget.setHidden(True)
 
         self.nodeName.setText(node.getName())
+        self.setInputButtons(node)
+        self.setOutputButtons(node)
 
+    def setInputButtons(self, node):
         inputs_number = node.getNumberOfInputs()
         if inputs_number > 0:
             self.inputs_widget.setHidden(False)
-        outputs_number = node.getNumberOfOutputs()
-        if outputs_number > 0:
-            self.outputs_widget.setHidden(False)
 
         for _ in range(inputs_number):
             input_btn = QRoundButton()
             input_btn.setButtonSize(8)
             self.inputs_hbox.addWidget(input_btn)
+
+    def setOutputButtons(self, node):
+        outputs_number = node.getNumberOfOutputs()
+        if outputs_number > 0:
+            self.outputs_widget.setHidden(False)
 
         for _ in range(outputs_number):
             output_btn = QRoundButton()
