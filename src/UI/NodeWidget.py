@@ -1,4 +1,12 @@
-from PluginLib.CompactQt.Qt import QWidget, QVBoxLayout, QLabel, QHBoxLayout, Qt, QPoint
+from PluginLib.CompactQt.Qt import (
+    QWidget,
+    QVBoxLayout,
+    QLabel,
+    QHBoxLayout,
+    Qt,
+    QPoint,
+    QSize,
+)
 
 from Core.Qt.QRoundButton import QRoundButton
 
@@ -12,10 +20,10 @@ class NodeWidget(QWidget):
     def buildUI(self):
         self.setStyleSheet(
             """
-                    QWidget {
-                        background-color: transparent;
-                    }
-                    """
+            QWidget {
+                background-color: transparent;
+            }
+            """
         )
         main_vbox = QVBoxLayout()
         main_vbox.setContentsMargins(0, 0, 0, 0)
@@ -33,14 +41,14 @@ class NodeWidget(QWidget):
         rect_hbox = QHBoxLayout()
         rect_hbox.setContentsMargins(0, 0, 0, 0)
         main_rect.setLayout(rect_hbox)
-        main_rect.setFixedHeight(30)
+        main_rect.setFixedSize(QSize(90, 25))
         main_vbox.addWidget(main_rect)
         main_rect.setStyleSheet(
             """
                 QWidget {
                     background-color: #dbdbdb;
                     color: black;
-                    border-radius: 8px;
+                    border-radius: 7px;
                 }
             """
         )
@@ -70,12 +78,12 @@ class NodeWidget(QWidget):
 
         for _ in range(inputs_number):
             input_btn = QRoundButton()
-            input_btn.setButtonSize(10)
+            input_btn.setButtonSize(8)
             self.inputs_hbox.addWidget(input_btn)
 
         for _ in range(outputs_number):
             output_btn = QRoundButton()
-            output_btn.setButtonSize(10)
+            output_btn.setButtonSize(8)
             self.outputs_hbox.addWidget(output_btn)
 
     def setPosition(self, position):

@@ -1,7 +1,6 @@
 from PluginLib.CompactQt.Qt import (
     QWidget,
-    QHBoxLayout,
-    QLabel,
+    QSize,
     Qt,
     QMenu,
     QCursor,
@@ -20,9 +19,6 @@ class NodesView(QWidget):
         self.buildUI()
 
     def buildUI(self):
-        hbox = QHBoxLayout()
-        hbox.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(hbox)
         self.setStyleSheet(
             """
             QWidget{
@@ -30,9 +26,6 @@ class NodesView(QWidget):
             }
             """
         )
-
-        text = QLabel("Test Text")
-        hbox.addWidget(text)
 
         self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.customContextMenuRequested.connect(self.nodesContextMenu)
@@ -61,5 +54,7 @@ class NodesView(QWidget):
         new_node.setNode(node)
         new_node.setPosition(position)
 
+        new_node.setParent(self)
+        new_node.show()
+        new_node.moveToPosition()
         self.nodes.append(new_node)
-        print(self.nodes)
