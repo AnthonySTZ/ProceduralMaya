@@ -15,6 +15,8 @@ class NodeWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self._position = QPoint(0, 0)
+        self._is_moving = False
+        self._mouse_offset = QPoint(0, 0)
         self.buildUI()
 
     def buildUI(self):
@@ -37,13 +39,13 @@ class NodeWidget(QWidget):
         self.inputs_widget.setLayout(self.inputs_hbox)
         main_vbox.addWidget(self.inputs_widget)
 
-        main_rect = QWidget()
+        self.main_rect = QWidget()
         rect_hbox = QHBoxLayout()
         rect_hbox.setContentsMargins(0, 0, 0, 0)
-        main_rect.setLayout(rect_hbox)
-        main_rect.setFixedSize(QSize(90, 25))
-        main_vbox.addWidget(main_rect)
-        main_rect.setStyleSheet(
+        self.main_rect.setLayout(rect_hbox)
+        self.main_rect.setFixedSize(QSize(90, 25))
+        main_vbox.addWidget(self.main_rect)
+        self.main_rect.setStyleSheet(
             """
                 QWidget {
                     background-color: #c9c9c9;
@@ -96,9 +98,29 @@ class NodeWidget(QWidget):
 
     def setPosition(self, position):
         self._position = position
+        self.moveToPosition()
 
     def getPosition(self):
         return self._position
 
     def moveToPosition(self):
         self.move(self._position)
+
+    def mousePressEvent(self, event):
+        if event.buttons() == Qt.MouseButton.LeftButton and self.main_rect.underMouse():
+            self._is_moving = True
+            self._mouse_offset = event.pos()
+        return super().mousePressEvent(event)
+
+    def mouseReleaseEvent(self, a0):
+        self._is_moving = False
+        return super().mouseReleaseEvent(a0)
+
+    def mouseMoveEvent(self, event):
+        if self._is_moving:
+            position = event.pos() - self._mouse_offset
+            self.setPosition(
+                self.parent().mapFromGlobal(self.main_rect.mapToGlobal(position))
+            )
+
+        return super().mouseMoveEvent(event)
