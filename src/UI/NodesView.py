@@ -10,11 +10,13 @@ from PluginLib.CompactQt.Qt import (
 )
 from Core.Nodes.NodesInfo import NodesInfo
 from Core.Qt.QDataAction import QDataAction
+from UI.NodeWidget import NodeWidget
 
 
 class NodesView(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.nodes = []
         self.buildUI()
 
     def buildUI(self):
@@ -52,4 +54,12 @@ class NodesView(QWidget):
         if res:
             nodeType = res.getUserData()
             node = nodeType()
-            print(node.getOutput(0))
+            self.addNode(node, self.mapFromGlobal(QCursor.pos()))
+
+    def addNode(self, node, position):
+        new_node = NodeWidget()
+        new_node.setNode(node)
+        new_node.setPosition(position)
+
+        self.nodes.append(new_node)
+        print(self.nodes)
