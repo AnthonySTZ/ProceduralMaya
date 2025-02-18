@@ -83,3 +83,6 @@ class NodeWidget(QWidget):
 
     def getPosition(self):
         return self._position
+
+    def moveToPosition(self):
+        self.move(self._position)
