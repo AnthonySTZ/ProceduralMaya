@@ -11,4 +11,5 @@ class QRoundButton(QPushButton):
             "QPushButton{border-radius:"
             + str(size / 2)
             + ";background-color: #bdbdbd;}"
+            + "QPushButton:hover{background-color: #cfcfcf;}"
         )
