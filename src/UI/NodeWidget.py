@@ -30,7 +30,7 @@ class NodeWidget(QWidget):
         )
         main_vbox = QVBoxLayout()
         main_vbox.setContentsMargins(0, 0, 0, 0)
-        main_vbox.setSpacing(3)
+        main_vbox.setSpacing(2)
         self.setLayout(main_vbox)
 
         self.inputs_hbox = QHBoxLayout()
