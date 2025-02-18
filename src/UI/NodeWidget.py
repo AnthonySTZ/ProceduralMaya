@@ -36,7 +36,6 @@ class NodeWidget(QWidget):
         self.inputs_hbox = QHBoxLayout()
         self.inputs_hbox.setContentsMargins(0, 0, 0, 0)
         self.inputs_widget = QWidget()
-
         self.inputs_widget.setLayout(self.inputs_hbox)
         main_vbox.addWidget(self.inputs_widget)
 

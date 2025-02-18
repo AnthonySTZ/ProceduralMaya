@@ -9,7 +9,8 @@ def reloadLib():
 
     import_folder = Path(os.environ["PROCEDURAL_MAYA"]).as_posix() + "/src/"
     for src_file in glob.glob(import_folder + "**/*.py", recursive=True):
-        name = src_file[len(import_folder) :].replace("\\", ".")[:-3]
+        relative_name_to_import_folder = src_file[len(import_folder) :]
+        name = relative_name_to_import_folder.replace("\\", ".")[:-3]
 
         if name != "main" and name != "ProcCore":
             importlib.import_module(name)
