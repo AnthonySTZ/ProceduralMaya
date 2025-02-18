@@ -10,6 +10,6 @@ class QRoundButton(QPushButton):
         self.setStyleSheet(
             "QPushButton{border-radius:"
             + str(size / 2)
-            + ";background-color: #bdbdbd;}"
-            + "QPushButton:hover{background-color: #cfcfcf;}"
+            + ";background-color: #c9c9c9;}"
+            + "QPushButton:hover{background-color: #e0e0e0;}"
         )
