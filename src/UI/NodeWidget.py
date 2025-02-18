@@ -46,9 +46,12 @@ class NodeWidget(QWidget):
         main_rect.setStyleSheet(
             """
                 QWidget {
-                    background-color: #dbdbdb;
+                    background-color: #c9c9c9;
                     color: black;
                     border-radius: 7px;
+                }
+                QWidget:hover {
+                    background-color: #e0e0e0;
                 }
             """
         )
