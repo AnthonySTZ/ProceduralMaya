@@ -1,8 +1,7 @@
 def reloadLib():
     from importlib import reload
     import PluginLib.CompactQt.Qt as Qt
-    import UI.NodesView as NodesView
-    import UI.MainWindow as MainWindow
+    import UI.UILoader as UILoader
     import Core.Nodes.NodesInfo as NodesInfos
     import Core.Qt.QtInfo as QtInfo
 
@@ -11,8 +10,8 @@ def reloadLib():
     reload(NodesInfos)
     QtInfo.QtInfo.reloadQtCore()
     NodesInfos.NodesInfo.reloadNodes()
-    reload(NodesView)
-    reload(MainWindow)
+    reload(UILoader)
+    UILoader.UILoader.reloadUI()
 
 
 def createWindow():
