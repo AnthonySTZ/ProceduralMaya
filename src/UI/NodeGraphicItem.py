@@ -4,6 +4,7 @@ from PluginLib.CompactQt.Qt import (
     Qt,
     QBrush,
     QGraphicsTextItem,
+    QTextOption,
 )
 
 
@@ -28,6 +29,10 @@ class NodeGraphicItem(QGraphicsRectItem):
         title_rect.setParentItem(self)
 
         self.title_name = QGraphicsTextItem("Node")
+        self.title_name.setTextWidth(90)
+        center_option = QTextOption()
+        center_option.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.title_name.document().setDefaultTextOption(center_option)
         self.title_name.setParentItem(title_rect)
 
     def updateTitleName(self):
