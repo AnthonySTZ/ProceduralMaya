@@ -35,6 +35,7 @@ class NodeGraphicItem(QGraphicsRectItem):
         self.title_rect.setParentItem(self)
 
         self.title_name = QGraphicsTextItem("Node")
+        self.title_name.setDefaultTextColor(Qt.GlobalColor.black)
         self.title_name.setTextWidth(self.title_rect.boundingRect().width())
         center_option = QTextOption()
         center_option.setAlignment(Qt.AlignmentFlag.AlignCenter)
