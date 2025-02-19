@@ -6,6 +6,7 @@ from PluginLib.CompactQt.Qt import (
     QMenu,
     QCursor,
     QAction,
+    QPainter,
 )
 from Core.Nodes.NodesInfo import NodesInfo
 from UI.NodeGraphicItem import NodeGraphicItem
@@ -18,6 +19,8 @@ class NodesGraphicsView(QGraphicsView):
         self.buildUI()
 
     def buildUI(self):
+        self.setRenderHints(QPainter.RenderHint.Antialiasing)
+
         self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.customContextMenuRequested.connect(self.nodesContextMenu)
         tab_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Tab), self)
