@@ -5,9 +5,9 @@ from PluginLib.CompactQt.Qt import (
     QKeySequence,
     QMenu,
     QCursor,
+    QAction,
 )
 from Core.Nodes.NodesInfo import NodesInfo
-from Core.Qt.QDataAction import QDataAction
 
 
 class NodesGraphicsView(QGraphicsView):
@@ -26,8 +26,8 @@ class NodesGraphicsView(QGraphicsView):
         menu = QMenu()
         nodes = NodesInfo.getNodes()
         for node in nodes:
-            action = QDataAction(node.__name__, self)
-            action.setUserData(node)
+            action = QAction(node.__name__, self)
+            action.setData(node)
             menu.addAction(action)
         try:
             res = menu.exec(QCursor.pos())
@@ -35,6 +35,6 @@ class NodesGraphicsView(QGraphicsView):
             res = menu.exec_(QCursor.pos())
 
         if res:
-            nodeType = res.getUserData()
+            nodeType = res.data()
             node = nodeType()
             print(node)  # TODO: add Node to the scene
