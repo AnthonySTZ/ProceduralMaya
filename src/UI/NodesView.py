@@ -1,6 +1,6 @@
 from PluginLib.CompactQt.Qt import (
     QWidget,
-    QSize,
+    QAction,
     Qt,
     QMenu,
     QCursor,
@@ -8,7 +8,6 @@ from PluginLib.CompactQt.Qt import (
     QKeySequence,
 )
 from Core.Nodes.NodesInfo import NodesInfo
-from Core.Qt.QDataAction import QDataAction
 from UI.NodeWidget import NodeWidget
 
 
@@ -37,8 +36,8 @@ class NodesView(QWidget):
         menu = QMenu()
         nodes = NodesInfo.getNodes()
         for node in nodes:
-            action = QDataAction(node.__name__, self)
-            action.setUserData(node)
+            action = QAction(node.__name__, self)
+            action.setData(node)
             menu.addAction(action)
         try:
             res = menu.exec(QCursor.pos())
@@ -46,7 +45,7 @@ class NodesView(QWidget):
             res = menu.exec_(QCursor.pos())
 
         if res:
-            nodeType = res.getUserData()
+            nodeType = res.data()
             node = nodeType()
             self.addNode(node, self.mapFromGlobal(QCursor.pos()))
 

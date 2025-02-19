@@ -8,6 +8,7 @@ from PluginLib.CompactQt.Qt import (
     QAction,
 )
 from Core.Nodes.NodesInfo import NodesInfo
+from UI.NodeGraphicItem import NodeGraphicItem
 
 
 class NodesGraphicsView(QGraphicsView):
@@ -37,4 +38,6 @@ class NodesGraphicsView(QGraphicsView):
         if res:
             nodeType = res.data()
             node = nodeType()
+            item = NodeGraphicItem(node)
+            self._scene.addItem(item)
             print(node)  # TODO: add Node to the scene
