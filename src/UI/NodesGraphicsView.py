@@ -44,7 +44,5 @@ class NodesGraphicsView(QGraphicsView):
             nodeType = res.data()
             node = nodeType()
             item_pos = self.mapToScene(self.mapFromGlobal(QCursor.pos()))
-            print(item_pos)
             item = NodeGraphicItem(item_pos, node)
             self._scene.addItem(item)
-            print(node)  # TODO: add Node to the scene
