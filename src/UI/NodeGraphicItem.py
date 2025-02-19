@@ -52,25 +52,64 @@ class NodeGraphicItem(QGraphicsRectItem):
             return
 
         btn_radius = 9
-        btn_height_padding = 2
         btn_width_padding = 10
+        btn_height_padding = 2
 
-        width_offset = btn_width_padding - btn_radius
+        self.createInputsButtons(btn_radius, btn_width_padding, btn_height_padding)
+        self.createOutputsButtons(btn_radius, btn_width_padding, btn_height_padding)
+
+    def createInputsButtons(self, radius, width_padding, height_padding):
+        width_offset = width_padding - radius
         rect_width = self.title_rect.boundingRect().width()
-        width_with_padding = rect_width - btn_width_padding
+        width_with_padding = rect_width - width_padding
 
-        inputs_nb = self._node.getNumberOfInputs()
-        for idx in range(inputs_nb):
+        num_of_inputs = self._node.getNumberOfInputs()
+        input_pos_y = -height_padding - radius
+        for idx in range(num_of_inputs):
 
-            x_offset = (idx + 1) * (width_with_padding / (inputs_nb + 1))
-            pos_x = width_offset + x_offset
-            pos_y = -btn_height_padding - btn_radius
-            button = QGraphicsEllipseItem(
-                pos_x,
-                pos_y,
-                btn_radius,
-                btn_radius,
+            button = self.generateEllipseItemsOnLine(
+                width_with_padding,
+                input_pos_y,
+                num_of_inputs,
+                idx,
+                radius,
+                width_offset,
             )
-            brush = QBrush(Qt.GlobalColor.gray)
-            button.setBrush(brush)
             button.setParentItem(self.title_rect)
+
+    def createOutputsButtons(self, radius, width_padding, height_padding):
+        width_offset = width_padding - radius
+        rect_width = self.title_rect.boundingRect().width()
+        rect_height = self.title_rect.boundingRect().height()
+        width_with_padding = rect_width - width_padding
+
+        num_of_outputs = self._node.getNumberOfOutputs()
+        ouput_pos_y = rect_height + height_padding
+        for idx in range(num_of_outputs):
+
+            button = self.generateEllipseItemsOnLine(
+                width_with_padding,
+                ouput_pos_y,
+                num_of_outputs,
+                idx,
+                radius,
+                width_offset,
+            )
+            button.setParentItem(self.title_rect)
+
+    def generateEllipseItemsOnLine(
+        self, line_width, line_height, line_points, ellispe_num, ellipse_radius, offset
+    ):
+
+        x_offset = (ellispe_num + 1) * (line_width / (line_points + 1))
+        pos_x = offset + x_offset
+
+        button = QGraphicsEllipseItem(
+            pos_x,
+            line_height,
+            ellipse_radius,
+            ellipse_radius,
+        )
+        brush = QBrush(Qt.GlobalColor.gray)
+        button.setBrush(brush)
+        return button
