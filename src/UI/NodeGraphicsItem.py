@@ -9,7 +9,7 @@ from PluginLib.CompactQt.Qt import (
 )
 
 
-class NodeGraphicItem(QGraphicsRectItem):
+class NodeGraphicsItem(QGraphicsRectItem):
     def __init__(self, position, node, parent=None):
         self._node = node
         super().__init__(parent)

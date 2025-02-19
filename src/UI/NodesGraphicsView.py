@@ -9,7 +9,7 @@ from PluginLib.CompactQt.Qt import (
     QPainter,
 )
 from Core.Nodes.NodesInfo import NodesInfo
-from UI.NodeGraphicItem import NodeGraphicItem
+from UI.NodeGraphicsItem import NodeGraphicsItem
 
 
 class NodesGraphicsView(QGraphicsView):
@@ -44,5 +44,5 @@ class NodesGraphicsView(QGraphicsView):
             nodeType = res.data()
             node = nodeType()
             item_pos = self.mapToScene(self.mapFromGlobal(QCursor.pos()))
-            item = NodeGraphicItem(item_pos, node)
+            item = NodeGraphicsItem(item_pos, node)
             self._scene.addItem(item)
