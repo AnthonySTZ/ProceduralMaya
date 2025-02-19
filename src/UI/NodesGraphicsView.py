@@ -19,7 +19,9 @@ class NodesGraphicsView(QGraphicsView):
         self.buildUI()
 
     def buildUI(self):
-        self.setRenderHints(QPainter.RenderHint.Antialiasing)
+        self.setRenderHints(
+            QPainter.RenderHint.Antialiasing | QPainter.RenderHint.TextAntialiasing
+        )
 
         self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.customContextMenuRequested.connect(self.nodesContextMenu)
