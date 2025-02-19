@@ -56,4 +56,16 @@ class NodesView(QWidget):
 
         new_node.setParent(self)
         new_node.show()
+        new_node.inputClicked.connect(self.inputClicked)
+        new_node.outputClicked.connect(self.outputClicked)
         self.nodes.append(new_node)
+
+    def inputClicked(self, node_widget, input_id):
+        print(
+            node_widget.getNode().getName() + " Input " + str(input_id) + " clicked !"
+        )
+
+    def outputClicked(self, node_widget, output_id):
+        print(
+            node_widget.getNode().getName() + " Output " + str(output_id) + " clicked !"
+        )
