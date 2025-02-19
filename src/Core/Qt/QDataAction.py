@@ -2,8 +2,8 @@ from PluginLib.CompactQt.Qt import QAction
 
 
 class QDataAction(QAction):
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self, name, parent=None):
+        super().__init__(name, parent)
         self._data = None
 
     def setUserData(self, data):
