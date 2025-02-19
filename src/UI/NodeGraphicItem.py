@@ -9,10 +9,14 @@ from PluginLib.CompactQt.Qt import (
 
 
 class NodeGraphicItem(QGraphicsRectItem):
-    def __init__(self, node, parent=None):
+    def __init__(self, position, node, parent=None):
         self._node = node
         super().__init__(parent)
         self.buildUI()
+        self.setPos(
+            position.x() - self.childrenBoundingRect().width() / 2,
+            position.y() - self.childrenBoundingRect().height() / 2,
+        )
 
     def buildUI(self):
         self.createTitleRect()
