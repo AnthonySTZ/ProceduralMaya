@@ -36,7 +36,7 @@ class NodesView(QWidget):
         menu = QMenu()
         nodes = NodesInfo.getNodes()
         for node in nodes:
-            action = QDataAction(node.__name__)
+            action = QDataAction(node.__name__, self)
             action.setUserData(node)
             menu.addAction(action)
         try:
