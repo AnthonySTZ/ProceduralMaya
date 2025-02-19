@@ -1,7 +1,7 @@
 from PluginLib.CompactQt.Qt import QGraphicsItem, QGraphicsRectItem
 
 
-class NodeGraphicScene(QGraphicsItem):
+class NodeGraphicItem(QGraphicsItem):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.buildUI()
