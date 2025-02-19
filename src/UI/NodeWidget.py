@@ -7,14 +7,14 @@ from PluginLib.CompactQt.Qt import (
     SIGNAL,
 )
 
-from Core.Qt.QRoundButton import QRoundButton
+from UI.IOButton import IOButton
 from UI.NodeTitleWidget import NodeTitleWidget
 
 
 class NodeWidget(QWidget):
 
-    inputClicked = SIGNAL(QWidget, int)
-    outputClicked = SIGNAL(QWidget, int)
+    inputClicked = SIGNAL(IOButton, int)
+    outputClicked = SIGNAL(IOButton, int)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -70,9 +70,9 @@ class NodeWidget(QWidget):
             self.inputs_widget.setHidden(False)
 
         for idx in range(inputs_number):
-            input_btn = QRoundButton()
+            input_btn = IOButton()
             input_btn.setButtonSize(8)
-            input_btn.clicked.connect(lambda _: self.inputClicked.emit(self, idx))
+            input_btn.clicked.connect(lambda _: self.inputClicked.emit(input_btn, idx))
             self.inputs_hbox.addWidget(input_btn)
 
     def setOutputButtons(self, node):
@@ -81,9 +81,11 @@ class NodeWidget(QWidget):
             self.outputs_widget.setHidden(False)
 
         for idx in range(outputs_number):
-            output_btn = QRoundButton()
+            output_btn = IOButton()
             output_btn.setButtonSize(8)
-            output_btn.clicked.connect(lambda _: self.outputClicked.emit(self, idx))
+            output_btn.clicked.connect(
+                lambda _: self.outputClicked.emit(output_btn, idx)
+            )
             self.outputs_hbox.addWidget(output_btn)
 
     def setPosition(self, position):
