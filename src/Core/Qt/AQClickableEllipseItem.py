@@ -9,6 +9,13 @@ class AQClickableEllipseItem(QGraphicsObject):
         self._rect = QRectF(x, y, width, height)
         self._brush = QBrush()
         self._pen = QPen()
+        self._user_data = {}
+
+    def setUserData(self, key, value):
+        self._user_data[key] = value
+
+    def getUserData(self, key):
+        return self._user_data[key]
 
     def setBrush(self, brush):
         self._brush = brush
