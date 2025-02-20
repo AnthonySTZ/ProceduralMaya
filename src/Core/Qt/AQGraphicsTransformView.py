@@ -11,13 +11,19 @@ class AQGraphicsTransformView(QGraphicsView):
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.MiddleButton:
             self._is_scrolling = True
-            self._scroll_pos = event.position()
+            try:
+                self._scroll_pos = event.position()
+            except:
+                self._scroll_pos = event.pos()
         else:
             super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event):
         if self._is_scrolling:
-            new_pos = event.position()
+            try:
+                new_pos = event.position()
+            except:
+                new_pos = event.pos()
             offset = new_pos - self._scroll_pos
             transform = self.transform()
             self.translate(offset.x() / transform.m11(), offset.y() / transform.m22())
