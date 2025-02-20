@@ -7,6 +7,7 @@ from PluginLib.CompactQt.Qt import (
     QTextOption,
     QGraphicsEllipseItem,
 )
+from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
 
 
 class NodeGraphicsItem(QGraphicsRectItem):
@@ -105,7 +106,7 @@ class NodeGraphicsItem(QGraphicsRectItem):
         x_offset = (ellispe_num + 1) * (line_width / (line_points + 1))
         pos_x = offset + x_offset
 
-        button = QGraphicsEllipseItem(
+        button = AQClickableEllipseItem(
             pos_x,
             line_height,
             ellipse_radius,
