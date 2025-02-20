@@ -29,3 +29,30 @@ class AQGraphicsTransformView(QGraphicsView):
         if self._is_scrolling:
             self._is_scrolling = False
         super().mouseReleaseEvent(event)
+
+    def wheelEvent(self, event):
+        zoom_in_factor = 1.25
+        zoom_out_factor = 1 / zoom_in_factor
+
+        # Save the scene pos
+        try:
+            old_pos = self.mapToScene(event.pos())
+        except:
+            old_pos = self.mapToScene(event.position().toPoint())  # PyQt6
+
+        # Zoom
+        if event.angleDelta().y() > 0:
+            zoom_factor = zoom_in_factor
+        else:
+            zoom_factor = zoom_out_factor
+        self.scale(zoom_factor, zoom_factor)
+
+        # Get the new position
+        try:
+            new_pos = self.mapToScene(event.pos())
+        except:
+            new_pos = self.mapToScene(event.position().toPoint())  # PyQt6
+
+        # Move scene to old position
+        offset = new_pos - old_pos
+        self.translate(offset.x(), offset.y())
