@@ -8,6 +8,7 @@ from PluginLib.CompactQt.Qt import (
     QAction,
     QPainter,
     QPoint,
+    QFrame,
 )
 from Core.Nodes.NodesInfo import NodesInfo
 from UI.NodeGraphicsItem import NodeGraphicsItem
@@ -25,7 +26,7 @@ class NodesGraphicsView(QGraphicsView):
         self.setRenderHints(
             QPainter.RenderHint.Antialiasing | QPainter.RenderHint.TextAntialiasing
         )
-
+        self.setFrameStyle(QFrame.Shape.NoFrame)
         self.setTransformationAnchor(self.ViewportAnchor.NoAnchor)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
