@@ -61,45 +61,44 @@ class NodeGraphicsItem(QGraphicsRectItem):
         self.createOutputsButtons(btn_radius, btn_width_padding, btn_height_padding)
 
     def createInputsButtons(self, radius, width_padding, height_padding):
-        width_offset = width_padding - radius
-        rect_width = self.title_rect.boundingRect().width()
-        width_with_padding = rect_width - width_padding
 
         num_of_inputs = self._node.getNumberOfInputs()
         input_pos_y = -height_padding - radius
-        for idx in range(num_of_inputs):
-
-            button = self.generateEllipseItemsOnLine(
-                width_with_padding,
-                input_pos_y,
-                num_of_inputs,
-                idx,
-                radius,
-                width_offset,
-            )
-            button.setParentItem(self.title_rect)
+        input_buttons = self.createIOButtonsAtHeight(
+            radius, width_padding, input_pos_y, num_of_inputs
+        )
+        for idx, button in enumerate(input_buttons):
             button.clicked.connect(lambda _: print("Input " + str(idx) + " pressed !"))
 
     def createOutputsButtons(self, radius, width_padding, height_padding):
-        width_offset = width_padding - radius
-        rect_width = self.title_rect.boundingRect().width()
-        rect_height = self.title_rect.boundingRect().height()
-        width_with_padding = rect_width - width_padding
 
         num_of_outputs = self._node.getNumberOfOutputs()
-        ouput_pos_y = rect_height + height_padding
-        for idx in range(num_of_outputs):
+        ouput_pos_y = self.title_rect.boundingRect().height() + height_padding
+        output_buttons = self.createIOButtonsAtHeight(
+            radius, width_padding, ouput_pos_y, num_of_outputs
+        )
+        for idx, button in enumerate(output_buttons):
+            button.clicked.connect(lambda _: print("Output " + str(idx) + " pressed !"))
+
+    def createIOButtonsAtHeight(self, radius, width_padding, height, num_of_buttons):
+        width_offset = width_padding - radius
+        rect_width = self.title_rect.boundingRect().width()
+        width_with_padding = rect_width - width_padding
+
+        buttons = []
+        for idx in range(num_of_buttons):
 
             button = self.generateEllipseItemsOnLine(
                 width_with_padding,
-                ouput_pos_y,
-                num_of_outputs,
+                height,
+                num_of_buttons,
                 idx,
                 radius,
                 width_offset,
             )
             button.setParentItem(self.title_rect)
-            button.clicked.connect(lambda _: print("Output " + str(idx) + " pressed !"))
+            buttons.append(button)
+        return buttons
 
     def generateEllipseItemsOnLine(
         self, line_width, line_height, line_points, ellispe_num, ellipse_radius, offset
