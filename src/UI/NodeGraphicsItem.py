@@ -68,7 +68,7 @@ class NodeGraphicsItem(QGraphicsRectItem):
             radius, width_padding, input_pos_y, num_of_inputs
         )
         for idx, button in enumerate(input_buttons):
-            button.clicked.connect(lambda _: print("Input " + str(idx) + " pressed !"))
+            button.clicked.connect(lambda btn: print(btn.getUserData("index")))
 
     def createOutputsButtons(self, radius, width_padding, height_padding):
 
@@ -78,7 +78,7 @@ class NodeGraphicsItem(QGraphicsRectItem):
             radius, width_padding, ouput_pos_y, num_of_outputs
         )
         for idx, button in enumerate(output_buttons):
-            button.clicked.connect(lambda _: print("Output " + str(idx) + " pressed !"))
+            button.clicked.connect(lambda btn: print(btn.getUserData("index")))
 
     def createIOButtonsAtHeight(self, radius, width_padding, height, num_of_buttons):
         width_offset = width_padding - radius
@@ -97,6 +97,7 @@ class NodeGraphicsItem(QGraphicsRectItem):
                 width_offset,
             )
             button.setParentItem(self.title_rect)
+            button.setUserData("index", idx)
             buttons.append(button)
         return buttons
 
