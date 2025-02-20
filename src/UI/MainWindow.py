@@ -15,7 +15,7 @@ class MainWindow(QDialog):
         self.setLayout(vbox)
 
         scene = NodesGraphicsScene()
-        scene.setSceneRect(0, 0, 10000, 10000)
+        scene.setSceneRect(-32000, -32000, 64000, 64000)
         nodes_viewer = NodesGraphicsView(scene)
 
         vbox.addWidget(nodes_viewer)
