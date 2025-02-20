@@ -5,7 +5,7 @@ from PluginLib.CompactQt.Qt import (
     QBrush,
     QGraphicsTextItem,
     QTextOption,
-    QGraphicsEllipseItem,
+    QPen,
 )
 from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
 
@@ -78,6 +78,7 @@ class NodeGraphicsItem(QGraphicsRectItem):
                 width_offset,
             )
             button.setParentItem(self.title_rect)
+            button.clicked.connect(lambda _: print("Input " + str(idx) + " pressed !"))
 
     def createOutputsButtons(self, radius, width_padding, height_padding):
         width_offset = width_padding - radius
@@ -98,6 +99,7 @@ class NodeGraphicsItem(QGraphicsRectItem):
                 width_offset,
             )
             button.setParentItem(self.title_rect)
+            button.clicked.connect(lambda _: print("Output " + str(idx) + " pressed !"))
 
     def generateEllipseItemsOnLine(
         self, line_width, line_height, line_points, ellispe_num, ellipse_radius, offset
@@ -112,6 +114,6 @@ class NodeGraphicsItem(QGraphicsRectItem):
             ellipse_radius,
             ellipse_radius,
         )
-        brush = QBrush(Qt.GlobalColor.gray)
-        button.setBrush(brush)
+        button.setBrush(QBrush(Qt.GlobalColor.gray))
+        button.setPen(QPen(Qt.GlobalColor.black))
         return button
