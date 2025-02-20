@@ -12,6 +12,7 @@ class MainWindow(QDialog):
         self.resize(1200, 800)
         self.setWindowTitle("Maya Procedural")
         vbox = QVBoxLayout()
+        vbox.setContentsMargins(0, 0, 0, 0)
         self.setLayout(vbox)
 
         scene = NodesGraphicsScene()
