@@ -27,10 +27,7 @@ class NodeGraphicsItem(QGraphicsRectItem):
 
     def createTitleRect(self):
         self.title_rect = QGraphicsRectItem(0, 0, 90, 25)
-        self.title_rect.setFlags(
-            QGraphicsItem.GraphicsItemFlag.ItemIsMovable
-            | QGraphicsItem.GraphicsItemFlag.ItemIsSelectable
-        )
+        self.title_rect.setFlags(QGraphicsItem.GraphicsItemFlag.ItemIsMovable)
         brush = QBrush(Qt.GlobalColor.gray)
         self.title_rect.setBrush(brush)
         self.title_rect.setParentItem(self)
