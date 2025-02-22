@@ -15,9 +15,6 @@ class NodesGraphicsScene(QGraphicsScene):
         node.ioClicked.connect(lambda io_item: self.ioClicked(io_item))
 
     def ioClicked(self, io_item):
-        print(io_item.getNodeItem())
-        print(io_item.getType())
-
         if self._current_io_item is None:  # First Click
             self._current_io_item = io_item
             self.createMouseConnection()
