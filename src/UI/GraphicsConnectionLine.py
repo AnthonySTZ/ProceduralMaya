@@ -1,4 +1,4 @@
-from PluginLib.CompactQt.Qt import QGraphicsLineItem
+from PluginLib.CompactQt.Qt import QGraphicsLineItem, QPen, Qt
 
 
 class GraphicsConnectionLine(QGraphicsLineItem):
@@ -7,20 +7,21 @@ class GraphicsConnectionLine(QGraphicsLineItem):
 
         self._first_item = None
         self._last_item = None
+        self.setPen(QPen(Qt.GlobalColor.white))
 
     def setFirstItem(self, item):
         self._first_item = item
-        self._first_item.xChanged.connect(self.updateLine)
-        self._first_item.yChanged.connect(self.updateLine)
+        self._first_item.getNodeItem().moved.connect(self.updateLine)
+        self._first_item.getNodeItem().moved.connect(self.updateLine)
 
     def setLastItem(self, item):
         self._last_item = item
-        self._last_item.xChanged.connect(self.updateLine)
-        self._last_item.yChanged.connect(self.updateLine)
+        self._last_item.getNodeItem().moved.connect(self.updateLine)
+        self._last_item.getNodeItem().moved.connect(self.updateLine)
 
     def updateLine(self):
-        first_item_pos = self._first_item.centerPos()
-        last_item_pos = self._last_item.centerPos()
+        first_item_pos = self._first_item.getIO().centerPos()
+        last_item_pos = self._last_item.getIO().centerPos()
         self.setLine(
             first_item_pos.x(),
             first_item_pos.y(),

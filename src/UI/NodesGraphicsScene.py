@@ -1,5 +1,6 @@
 from PluginLib.CompactQt.Qt import QGraphicsScene, Qt
 from UI.GraphicsMouseLine import GraphicsMouseLine
+from UI.GraphicsConnectionLine import GraphicsConnectionLine
 
 
 class NodesGraphicsScene(QGraphicsScene):
@@ -29,6 +30,10 @@ class NodesGraphicsScene(QGraphicsScene):
             return
 
         # TODO: Create connection between input and output
+        self.createConnection(io_item)
+        self.resetSelection()
+
+    def createConnection(self, io_item):
         print(
             "Connection between "
             + self._current_io_item.getNodeItem().title_name.toPlainText()
@@ -36,11 +41,15 @@ class NodesGraphicsScene(QGraphicsScene):
             + io_item.getNodeItem().title_name.toPlainText()
         )
 
-        self.resetSelection()
+        connection = GraphicsConnectionLine()
+        connection.setFirstItem(self._current_io_item)
+        connection.setLastItem(io_item)
+        connection.updateLine()
+        self.addItem(connection)
 
     def createMouseConnection(self):
         self._temp_connection = GraphicsMouseLine()
-        self._temp_connection.setItem(self._current_io_item.getIO())
+        self._temp_connection.setItem(self._current_io_item)
         self.addItem(self._temp_connection)
 
     def moveEvent(self, mouse_pos):

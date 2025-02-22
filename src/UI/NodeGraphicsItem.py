@@ -11,11 +11,13 @@ from PluginLib.CompactQt.Qt import (
 )
 from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
 from UI.IOItem import IOItem
+from Core.Qt.AQMovableRectItem import AQMovableRectItem
 
 
 class NodeGraphicsItem(QGraphicsObject):
 
     ioClicked = SIGNAL(IOItem)
+    moved = SIGNAL()
 
     def __init__(self, position, node, parent=None):
         self._node = node
@@ -32,8 +34,8 @@ class NodeGraphicsItem(QGraphicsObject):
         self.createButtons()
 
     def createTitleRect(self):
-        self.title_rect = QGraphicsRectItem(0, 0, 90, 25)
-        self.title_rect.setFlags(QGraphicsItem.GraphicsItemFlag.ItemIsMovable)
+        self.title_rect = AQMovableRectItem(0, 0, 90, 25)
+        self.title_rect.moved.connect(self.moved.emit)
         brush = QBrush(Qt.GlobalColor.gray)
         self.title_rect.setBrush(brush)
         self.title_rect.setParentItem(self)
