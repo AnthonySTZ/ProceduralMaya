@@ -19,13 +19,11 @@ class GraphicsConnectionLine(QGraphicsLineItem):
         self._last_item.yChanged.connect(self.updateLine)
 
     def updateLine(self):
-        if self._first_item is None or self._last_item is None:
-            print("Line pos should not be None")
-            return
-
+        first_item_pos = self._first_item.centerPos()
+        last_item_pos = self._last_item.centerPos()
         self.setLine(
-            self._first_item.x(),
-            self._first_item.y(),
-            self._last_item.x(),
-            self._last_item.y(),
+            first_item_pos.x(),
+            first_item_pos.y(),
+            last_item_pos.x(),
+            last_item_pos.y(),
         )
