@@ -18,10 +18,9 @@ class AQMovableRectItem(QGraphicsObject):
         self._brush = QBrush()
         self._pen = QPen()
         self._user_data = {}
-        self.setFlag(
+        self.setFlags(
             QGraphicsItem.GraphicsItemFlag.ItemSendsGeometryChanges
-            | QGraphicsItem.GraphicsItemFlag.ItemIsMovable,
-            True,
+            | QGraphicsItem.GraphicsItemFlag.ItemIsMovable
         )
 
     def setUserData(self, key, value):
