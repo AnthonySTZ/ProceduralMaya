@@ -6,11 +6,17 @@ from PluginLib.CompactQt.Qt import (
     QGraphicsTextItem,
     QTextOption,
     QPen,
+    QGraphicsObject,
+    SIGNAL,
 )
 from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
 
 
-class NodeGraphicsItem(QGraphicsRectItem):
+class NodeGraphicsItem(QGraphicsObject):
+
+    inputClicked = SIGNAL(AQClickableEllipseItem)
+    outputClicked = SIGNAL(AQClickableEllipseItem)
+
     def __init__(self, position, node, parent=None):
         self._node = node
         super().__init__(parent)
@@ -64,8 +70,8 @@ class NodeGraphicsItem(QGraphicsRectItem):
         input_buttons = self.createIOButtonsAtHeight(
             radius, width_padding, input_pos_y, num_of_inputs
         )
-        for idx, button in enumerate(input_buttons):
-            button.clicked.connect(lambda btn: print(btn.getUserData("index")))
+        for button in input_buttons:
+            button.clicked.connect(lambda _: self.inputClicked.emit(button))
 
     def createOutputsButtons(self, radius, width_padding, height_padding):
 
@@ -74,8 +80,8 @@ class NodeGraphicsItem(QGraphicsRectItem):
         output_buttons = self.createIOButtonsAtHeight(
             radius, width_padding, ouput_pos_y, num_of_outputs
         )
-        for idx, button in enumerate(output_buttons):
-            button.clicked.connect(lambda btn: print(btn.getUserData("index")))
+        for button in output_buttons:
+            button.clicked.connect(lambda _: self.outputClicked.emit(button))
 
     def createIOButtonsAtHeight(self, radius, width_padding, height, num_of_buttons):
         width_offset = width_padding - radius
@@ -114,3 +120,9 @@ class NodeGraphicsItem(QGraphicsRectItem):
         button.setBrush(QBrush(Qt.GlobalColor.gray))
         button.setPen(QPen(Qt.GlobalColor.black))
         return button
+
+    def boundingRect(self):
+        return self.childrenBoundingRect()
+
+    def paint(self, painter, option, widget=None):
+        return
