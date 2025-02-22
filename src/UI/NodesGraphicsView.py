@@ -51,4 +51,4 @@ class NodesGraphicsView(AQGraphicsTransformView):
             node = nodeType()
             item_pos = self.mapToScene(self.mapFromGlobal(QCursor.pos()))
             item = NodeGraphicsItem(item_pos, node)
-            self._scene.addItem(item)
+            self._scene.addNode(item)
