@@ -4,15 +4,9 @@ from UI.GraphicsConnectionLine import GraphicsConnectionLine
 
 class NodesGraphicsScene(QGraphicsScene):
 
-    INPUT = 0
-    OUTPUT = 1
-
     def __init__(self, parent=None):
         super().__init__(parent)
-        self._selecting = None
-        self._io_selected = None
-        self._selected_node = None
-        self._current_connection = None
+        self._current_io = None
 
     def addNode(self, node):
         self.addItem(node)
