@@ -20,7 +20,8 @@ class GraphicsConnectionLine(QGraphicsLineItem):
 
     def updateLine(self):
         if self._first_item is None or self._last_item is None:
-            raise ValueError("Line pos should not be None")
+            print("Line pos should not be None")
+            return
 
         self.setLine(
             self._first_item.x(),

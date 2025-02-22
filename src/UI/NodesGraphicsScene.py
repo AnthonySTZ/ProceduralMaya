@@ -11,6 +11,7 @@ class NodesGraphicsScene(QGraphicsScene):
         super().__init__(parent)
         self._selecting = None
         self._io_selected = None
+        self._current_connection = None
 
     def addNode(self, node):
         self.addItem(node)
@@ -22,12 +23,23 @@ class NodesGraphicsScene(QGraphicsScene):
         )
 
     def inputClicked(self, input):
-        if self._selecting == self.INPUT:  # Cannot link input to another input
+        self.ioClicked(input, self.INPUT)
+
+    def ioClicked(self, io, iotype):
+        if self._selecting == iotype:  # Cannot link io type to the same type
+            self._current_connection.setParentItem(None)
+            self._current_connection = None
             self._selecting = None
             return
 
-        if self._selecting is None:  # First click on an input
-            self._selecting = self.INPUT
-            self._io_selected = input
-            print("Selected Input")
+        if self._selecting is None:  # First click on io
+            self.createConnection()
+            self._selecting = iotype
+            self._current_connection.setFirstItem(io)
             return
+
+        self._current_connection.setLastItem(io)
+
+    def createConnection(self):
+        self._current_connection = GraphicsConnectionLine()
+        self.addItem(self._current_connection)
