@@ -6,7 +6,8 @@ class AQClickableEllipseItem(QGraphicsObject):
 
     def __init__(self, x, y, width, height):
         super().__init__()
-        self._rect = QRectF(x, y, width, height)
+        self._rect = QRectF(0, 0, width, height)
+        self.setPos(x, y)
         self._brush = QBrush()
         self._pen = QPen()
         self._user_data = {}
@@ -24,6 +25,11 @@ class AQClickableEllipseItem(QGraphicsObject):
     def setPen(self, pen):
         self._pen = pen
         self.update()
+
+    def centerPos(self):
+        center_local = self._rect.center()
+        center_scene = self.mapToScene(center_local)
+        return center_scene
 
     def boundingRect(self):
         return self._rect
