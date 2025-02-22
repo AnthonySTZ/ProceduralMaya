@@ -39,6 +39,7 @@ class AQGraphicsTransformView(QGraphicsView):
     def wheelEvent(self, event):
         zoom_in_factor = 1.25
         zoom_out_factor = 1 / zoom_in_factor
+        max_zoom = 3.0
 
         # Save the scene pos
         try:
@@ -49,8 +50,11 @@ class AQGraphicsTransformView(QGraphicsView):
         # Zoom
         if event.angleDelta().y() > 0:
             zoom_factor = zoom_in_factor
+            if self._prev_scale >= max_zoom:
+                return
         else:
             zoom_factor = zoom_out_factor
+        self._prev_scale *= zoom_factor
         self.scale(zoom_factor, zoom_factor)
 
         # Get the new position
