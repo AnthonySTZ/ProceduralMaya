@@ -10,12 +10,12 @@ from PluginLib.CompactQt.Qt import (
     SIGNAL,
 )
 from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
+from UI.IOItem import IOItem
 
 
 class NodeGraphicsItem(QGraphicsObject):
 
-    inputClicked = SIGNAL(AQClickableEllipseItem)
-    outputClicked = SIGNAL(AQClickableEllipseItem)
+    ioClicked = SIGNAL(IOItem)
 
     def __init__(self, position, node, parent=None):
         self._node = node
@@ -71,7 +71,9 @@ class NodeGraphicsItem(QGraphicsObject):
             radius, width_padding, input_pos_y, num_of_inputs
         )
         for button in input_buttons:
-            button.clicked.connect(lambda _: self.inputClicked.emit(button))
+            button.clicked.connect(
+                lambda _: self.ioClicked.emit(IOItem(self, button, IOItem.INPUT))
+            )
 
     def createOutputsButtons(self, radius, width_padding, height_padding):
 
@@ -81,7 +83,9 @@ class NodeGraphicsItem(QGraphicsObject):
             radius, width_padding, ouput_pos_y, num_of_outputs
         )
         for button in output_buttons:
-            button.clicked.connect(lambda _: self.outputClicked.emit(button))
+            button.clicked.connect(
+                lambda _: self.ioClicked.emit(IOItem(self, button, IOItem.OUTPUT))
+            )
 
     def createIOButtonsAtHeight(self, radius, width_padding, height, num_of_buttons):
         width_offset = width_padding - radius
