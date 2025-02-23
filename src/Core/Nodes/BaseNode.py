@@ -17,17 +17,19 @@ class BaseNode:
     def setName(self, name):
         self._name = name
 
-    def getNumberOfInputs(self):
-        return self._num_inputs
-
-    def getNumberOfOutputs(self):
-        return self._num_outputs
-
     def getParameters(self):
         return self._parameters
 
     def setParameters(self, key, value):
         self._parameters[key] = value
+
+    """ INPUTS AND OUTPUTS """
+
+    def getNumberOfInputs(self):
+        return self._num_inputs
+
+    def getNumberOfOutputs(self):
+        return self._num_outputs
 
     def setInput(self, input_index, input_node, output_index=0):
         """
