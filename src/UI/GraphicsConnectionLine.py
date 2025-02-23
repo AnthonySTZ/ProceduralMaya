@@ -8,6 +8,7 @@ class GraphicsConnectionLine(QGraphicsLineItem):
         self._first_item = None
         self._last_item = None
         self.setPen(QPen(Qt.GlobalColor.white))
+        self.setZValue(-1)
 
     def setFirstItem(self, item):
         self._first_item = item

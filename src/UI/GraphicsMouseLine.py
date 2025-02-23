@@ -8,6 +8,7 @@ class GraphicsMouseLine(QGraphicsLineItem):
         self._item = None
         self._mouse_pos = QPoint(0, 0)
         self.setPen(QPen(Qt.GlobalColor.white))
+        self.setZValue(-1)
 
     def setItem(self, item):
         self._item = item
