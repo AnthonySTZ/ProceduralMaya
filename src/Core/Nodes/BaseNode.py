@@ -47,3 +47,9 @@ class BaseNode:
             return None
 
         return self._inputs[index]
+
+    def input(self, index):
+        if index not in self._inputs:
+            return None
+
+        return self._inputs[index].inputNode()

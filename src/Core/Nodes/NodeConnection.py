@@ -5,3 +5,15 @@ class NodeConnection:
         self._input_index = input_index
         self._output_node = output_node
         self._output_index = output_index
+
+    def inputNode(self):
+        return self._input_node
+
+    def inputIndex(self):
+        return self._input_index
+
+    def outputNode(self):
+        return self._output_node
+
+    def outputIndex(self):
+        return self._output_index
