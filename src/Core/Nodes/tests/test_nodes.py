@@ -19,4 +19,4 @@ transform_01 = Transform()
 
 transform_01.setInput(0, cube_01)
 
-# print(cube_01.input(0))
+print(transform_01.inputConnection(0))

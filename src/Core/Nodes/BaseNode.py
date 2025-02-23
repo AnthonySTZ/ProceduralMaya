@@ -29,19 +29,21 @@ class BaseNode:
     def setParameters(self, key, value):
         self._parameters[key] = value
 
-    def setInput(self, input_index, output_node, output_index=0):
+    def setInput(self, input_index, input_node, output_index=0):
         if input_index >= self._num_inputs:
             print("Not enough inputs for " + self.getName() + " !")
             return
 
-        if output_index >= output_node.getNumberOfOutputs():
-            print("Not enough outputs for " + output_node.getName() + " !")
+        if output_index >= input_node.getNumberOfOutputs():
+            print("Not enough outputs for " + input_node.getName() + " !")
             return
 
         self._inputs[input_index] = NodeConnection(
-            self, input_index, output_node, output_index
+            self, input_index, input_node, output_index
         )
 
-    @abc.abstractmethod
-    def getOutput(self, output_index):
-        raise NotImplementedError("Output not implemented")
+    def inputConnection(self, index):
+        if index not in self._inputs:
+            return None
+
+        return self._inputs[index]
