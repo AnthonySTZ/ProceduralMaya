@@ -1,3 +1,6 @@
+from Core.Nodes.IO import IO
+
+
 class NodeConnections:
     """
     Store all connections using a dictionary
@@ -10,6 +13,9 @@ class NodeConnections:
         self._connections = {}
 
     def addConnection(self, input, output):
+        if input.getType() != IO.INPUT:
+            print("Wrong IO type, expected 'INPUT'")
+            return
         if input in self._connections:
             print(
                 "Input is already connected"
