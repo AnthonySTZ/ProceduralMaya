@@ -8,3 +8,12 @@ class NodeConnections:
 
     def __init__(self):
         self._connections = {}
+
+    def addConnection(self, input, output):
+        if input in self._connections:
+            print(
+                "Input is already connected"
+            )  # TODO: handle this by overiding connection
+            return
+
+        self._connections[input] = output
