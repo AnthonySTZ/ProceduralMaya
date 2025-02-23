@@ -12,7 +12,7 @@ class NodesGraphicsScene(QGraphicsScene):
 
     def addNode(self, node):
         self.addItem(node)
-        node.ioClicked.connect(lambda io_item: self.ioClicked(io_item))
+        node.ioClicked.connect(self.ioClicked)
 
     def ioClicked(self, io_item):
         if self._current_io_item is None:  # First Click
