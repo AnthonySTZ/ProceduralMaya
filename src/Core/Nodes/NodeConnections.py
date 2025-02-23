@@ -1,4 +1,4 @@
-from Core.Nodes.IO import IO
+from Core.Nodes.NodeConnection import NodeConnection
 
 
 class NodeConnections:
@@ -13,7 +13,7 @@ class NodeConnections:
         self._connections = {}
 
     def addConnection(self, input, output):
-        if input.getType() != IO.INPUT:
+        if input.getType() != NodeConnection.INPUT:
             print("Wrong IO type, expected 'INPUT'")
             return
         if input in self._connections:

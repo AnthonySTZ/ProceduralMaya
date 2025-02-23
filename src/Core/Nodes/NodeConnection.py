@@ -1,4 +1,4 @@
-class IO:
+class NodeConnection:
     INPUT = 0
     OUTPUT = 1
 
