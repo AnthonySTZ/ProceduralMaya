@@ -8,8 +8,3 @@ class Transform(BaseNode):
         self._num_inputs = 1
         self._num_outputs = 1
         self._parameters = {"Translate": 0.0, "Rotate": 0.0, "Scale": 1.0}
-
-    def getOutput(self, output_index):
-        if not (0 <= output_index < self._num_outputs):
-            raise NotImplementedError("Invalid output index " + str(output_index))
-        return "Transform command with : " + str(self._parameters)
