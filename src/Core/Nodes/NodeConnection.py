@@ -1,4 +1,10 @@
 class NodeConnection:
+    """
+    Connection between two nodes.
+
+    Input node is the node that the connection comes from. In a vertical flow, this is the top node.
+    Output node is the node that the connection goes to. In a vertical flow, this is the bottom node.
+    """
 
     def __init__(self, input_node, input_index, output_node, output_index):
         self._input_node = input_node
