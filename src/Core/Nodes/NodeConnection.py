@@ -1,11 +1,7 @@
 class NodeConnection:
-    INPUT = 0
-    OUTPUT = 1
 
-    def __init__(self, node, index, type):
-        self._node = node
-        self._index = index
-        self._type = type
-
-    def getType(self):
-        return self._type
+    def __init__(self, input_node, input_index, output_node, output_index):
+        self._input_node = input_node
+        self._input_index = input_index
+        self._output_node = output_node
+        self._output_index = output_index
