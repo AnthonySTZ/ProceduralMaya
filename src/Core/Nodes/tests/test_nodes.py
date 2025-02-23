@@ -1,16 +1,6 @@
-import os
+from load_plugin import load_plugin
 
-os.system("cls")
-import sys
-
-from dotenv import load_dotenv
-
-load_dotenv()
-
-plugin_path = os.path.join(os.environ["PROCEDURAL_MAYA"], "src")
-
-sys.path.insert(0, plugin_path)
-
+load_plugin()
 from Core.Nodes.Cube import Cube
 from Core.Nodes.Transform import Transform
 
