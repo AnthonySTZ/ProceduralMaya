@@ -15,6 +15,7 @@ from Core.Nodes.Cube import Cube
 from Core.Nodes.Transform import Transform
 
 cube_01 = Cube()
+cube_02 = Cube()
 transform_01 = Transform()
 
 transform_01.setInput(0, cube_01)

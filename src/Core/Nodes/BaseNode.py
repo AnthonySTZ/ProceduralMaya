@@ -39,7 +39,7 @@ class BaseNode:
             return
 
         self._inputs[input_index] = NodeConnection(
-            self, input_index, input_node, output_index
+            input_node, output_index, self, input_index
         )
 
     def inputConnection(self, index):
