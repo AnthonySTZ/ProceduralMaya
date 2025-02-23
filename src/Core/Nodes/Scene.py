@@ -23,3 +23,6 @@ class Scene:
         while name + str(i) in self._nodes:
             i += 1
         return name + str(i)
+
+    def getNodes(self):
+        return self._nodes.values()

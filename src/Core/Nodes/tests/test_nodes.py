@@ -9,16 +9,14 @@ scene = Scene()
 
 cube_01 = Cube()
 cube_02 = Cube()
-cube_03 = Cube()
 transform_01 = Transform()
 
 scene.addNode(cube_01)
 scene.addNode(cube_02)
-scene.addNode(cube_03)
 scene.addNode(transform_01)
 
 print(cube_02.getName())
-print(cube_03.getName())
+print(scene.getNodes())
 
 # transform_01.setInput(0, cube_01)
 
