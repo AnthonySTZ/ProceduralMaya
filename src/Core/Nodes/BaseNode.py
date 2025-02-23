@@ -48,9 +48,8 @@ class BaseNode:
             print("Not enough outputs for " + input_node.getName() + " !")
             return
 
-        self._inputs[input_index] = NodeConnection(
-            input_node, output_index, self, input_index
-        )
+        connection = NodeConnection(input_node, output_index, self, input_index)
+        self._inputs[input_index] = connection
 
     def inputConnection(self, index):
         """
