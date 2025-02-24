@@ -13,3 +13,10 @@ def test_cube_inputs_number_should_be_zero():
 def test_cube_outputs_number_should_be_one():
     node = Cube()
     assert node.getNumberOfOutputs() == 1
+
+
+def test_should_return_the_correct_input_node():
+    cube = Cube()
+    transform = Transform()
+    transform.setInput(0, cube)
+    assert transform.input(0) == cube
