@@ -1,7 +1,8 @@
-from PluginLib.CompactQt.Qt import QGraphicsObject, QRectF, QPen, QBrush, Qt
+from PluginLib.CompactQt.Qt import QGraphicsObject, QRectF, QPen, QBrush, Qt, SIGNAL
 from Core.Logic import logics
 from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
 from UI.Elements.NodeRect import NodeRect
+from UI.Elements.IOItem import IOItem
 
 
 class InputsOutputs(QGraphicsObject):
@@ -10,6 +11,8 @@ class InputsOutputs(QGraphicsObject):
     PADDING = 2
 
     RADIUS = 9
+
+    clicked = SIGNAL(IOItem)
 
     def __init__(self, parent, type, amount):
         super().__init__()
@@ -32,11 +35,11 @@ class InputsOutputs(QGraphicsObject):
         points_offsets = logics.evenly_distribute_point_on_line(
             NodeRect.WIDTH, self._amount
         )
-        for offset in points_offsets:
-            ellipse = AQClickableEllipseItem(offset, height, self.RADIUS, self.RADIUS)
-            ellipse.setBrush(QBrush(Qt.GlobalColor.gray))
-            ellipse.setPen(QPen(Qt.GlobalColor.black))
-            ellipse.setParentItem(self)
+        for index, offset in enumerate(points_offsets):
+            io = IOItem(offset, height, self.RADIUS, self.RADIUS)
+            io.setUserData("index", index)
+            io.setParentItem(self)
+            io.clicked.connect(lambda io=io: self.clicked.emit(io))
 
     def boundingRect(self):
         return self._rect

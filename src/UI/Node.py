@@ -43,10 +43,12 @@ class Node(QGraphicsObject):
         self._inputs = InputsOutputs(
             self.title_rect, InputsOutputs.INPUT, self._node.getNumberOfInputs()
         )
+        self._inputs.clicked.connect(lambda io: print(io))
 
         self._outputs = InputsOutputs(
             self.title_rect, InputsOutputs.OUTPUT, self._node.getNumberOfOutputs()
         )
+        self._outputs.clicked.connect(lambda io: print(io))
 
     def boundingRect(self):
         return self.childrenBoundingRect()
