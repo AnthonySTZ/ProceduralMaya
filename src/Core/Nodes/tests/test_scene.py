@@ -13,3 +13,13 @@ def test_should_return_list_of_nodes_in_scene():
     scene.addNode(cube)
     scene.addNode(transform)
     assert scene.getNodes() == [cube, transform]
+
+
+def test_should_return_an_untaken_name_for_new_node():
+    cube = Cube()  # name: "Cube"
+    cube2 = Cube()
+    cube2.setName("Cube1")  # name: "Cube1"
+    scene = Scene()
+    scene.addNode(cube)
+    scene.addNode(cube2)
+    assert scene.getUntakenName("Cube") == "Cube2"
