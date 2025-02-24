@@ -9,9 +9,10 @@ class InputsOutputs(QGraphicsObject):
 
     RADIUS = 9
 
-    def __init__(self, type, amount, width):
+    def __init__(self, parent, type, amount, width):
         super().__init__()
         self._rect = QRectF(0, 0, width, self.RADIUS * 2)
+        self.setParentItem(parent)
         self._type = type
         self._amount = amount
         self._width = width
@@ -21,6 +22,9 @@ class InputsOutputs(QGraphicsObject):
         points_offsets = logics.evenly_distribute_point_on_line(
             self._width, self._amount
         )
+        for offset in points_offsets:
+            ellipse = AQClickableEllipseItem(offset, 0, self.RADIUS, self.RADIUS)
+            ellipse.setParentItem(self._rect)
 
     def boundingRect(self):
         return self._rect
