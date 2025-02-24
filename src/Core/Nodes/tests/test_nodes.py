@@ -20,3 +20,8 @@ def test_should_return_the_correct_input_node():
     transform = Transform()
     transform.setInput(0, cube)
     assert transform.input(0) == cube
+
+
+def test_should_return_None_when_getting_empty_input():
+    cube = Cube()
+    assert cube.input(0) == None
