@@ -1,8 +1,6 @@
 from PluginLib.CompactQt.Qt import (
     Qt,
     QBrush,
-    QGraphicsTextItem,
-    QTextOption,
     QPen,
     QGraphicsObject,
     SIGNAL,
@@ -28,7 +26,7 @@ class Node(QGraphicsObject):
 
     def buildUI(self):
         self.createTitleRect()
-        self.createButtons()
+        # self.createButtons()
 
     def createTitleRect(self):
         title_name = "Node"
