@@ -1,5 +1,4 @@
 from PluginLib.CompactQt.Qt import (
-    QGraphicsView,
     Qt,
     QShortcut,
     QKeySequence,
@@ -10,11 +9,11 @@ from PluginLib.CompactQt.Qt import (
     QFrame,
 )
 from Core.Nodes.NodesInfo import NodesInfo
-from UI.NodeGraphicsItem import NodeGraphicsItem
+from UI.Node import Node
 from Core.Qt.AQGraphicsTransformView import AQGraphicsTransformView
 
 
-class NodesGraphicsView(AQGraphicsTransformView):
+class View(AQGraphicsTransformView):
     def __init__(self, scene, parent=None):
         self._scene = scene
         super().__init__(scene, parent)
@@ -50,7 +49,7 @@ class NodesGraphicsView(AQGraphicsTransformView):
             nodeType = res.data()
             node = nodeType()
             item_pos = self.mapToScene(self.mapFromGlobal(QCursor.pos()))
-            item = NodeGraphicsItem(item_pos, node)
+            item = Node(item_pos, node)
             self._scene.addNode(item)
 
     def mouseMoveEvent(self, event):

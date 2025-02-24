@@ -3,7 +3,7 @@ from UI.GraphicsMouseLine import GraphicsMouseLine
 from UI.GraphicsConnectionLine import GraphicsConnectionLine
 
 
-class NodesGraphicsScene(QGraphicsScene):
+class Scene(QGraphicsScene):
 
     def __init__(self, parent=None):
         super().__init__(parent)

@@ -1,6 +1,6 @@
 from PluginLib.CompactQt.Qt import QVBoxLayout, QDialog
-from UI.NodesGraphicsView import NodesGraphicsView
-from UI.NodesGraphicsScene import NodesGraphicsScene
+from UI.View import View
+from UI.Scene import Scene
 
 
 class MainWindow(QDialog):
@@ -15,8 +15,8 @@ class MainWindow(QDialog):
         vbox.setContentsMargins(0, 0, 0, 0)
         self.setLayout(vbox)
 
-        scene = NodesGraphicsScene()
+        scene = Scene()
         scene.setSceneRect(-32000, -32000, 64000, 64000)
-        nodes_viewer = NodesGraphicsView(scene)
+        nodes_viewer = View(scene)
 
         vbox.addWidget(nodes_viewer)
