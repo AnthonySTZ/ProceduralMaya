@@ -1,4 +1,3 @@
-import abc
 from Core.Nodes.NodeConnection import NodeConnection
 
 
