@@ -25,4 +25,4 @@ class Scene:
         return name + str(i)
 
     def getNodes(self):
-        return self._nodes.values()
+        return list(self._nodes.values())
