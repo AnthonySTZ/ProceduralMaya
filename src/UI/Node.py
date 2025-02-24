@@ -9,7 +9,7 @@ from PluginLib.CompactQt.Qt import (
 )
 from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
 from UI.IOItem import IOItem
-from Core.Qt.AQMovableRectItem import AQMovableRectItem
+from UI.Elements.NodeRect import NodeRect
 
 
 class Node(QGraphicsObject):
@@ -32,11 +32,8 @@ class Node(QGraphicsObject):
         self.createButtons()
 
     def createTitleRect(self):
-        self.title_rect = AQMovableRectItem(0, 0, 90, 25)
+        self.title_rect = NodeRect(self)
         self.title_rect.moved.connect(self.moved.emit)
-        brush = QBrush(Qt.GlobalColor.gray)
-        self.title_rect.setBrush(brush)
-        self.title_rect.setParentItem(self)
 
         self.title_name = QGraphicsTextItem("Node")
         self.title_name.setDefaultTextColor(Qt.GlobalColor.black)
