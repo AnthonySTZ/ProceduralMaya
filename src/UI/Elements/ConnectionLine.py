@@ -1,11 +1,17 @@
-from PluginLib.CompactQt.Qt import QGraphicsLineItem, QPen, Qt
+from PluginLib.CompactQt.Qt import (
+    QGraphicsLineItem,
+    QPen,
+    Qt,
+    QPainterPath,
+    QPainterPathStroker,
+)
 from UI.Elements.InputsOutputs import InputsOutputs
 
 
 class ConnectionLine(QGraphicsLineItem):
     def __init__(self):
         super().__init__()
-        self.setPen(QPen(Qt.GlobalColor.white))
+        self.setPen(QPen(Qt.GlobalColor.white, 2))
         self.setZValue(-1)
         self._node_item = None
 
@@ -89,3 +95,16 @@ class ConnectionLine(QGraphicsLineItem):
 
         if event.button() == Qt.MouseButton.LeftButton:
             self.deleteConnection()
+
+    def shape(self):
+        """
+        Returns a thicker shape for better mouse detection
+        """
+
+        path = QPainterPath()
+        path.moveTo(self.line().p1())
+        path.lineTo(self.line().p2())
+
+        strocker = QPainterPathStroker()
+        strocker.setWidth(5)
+        return strocker.createStroke(path)
