@@ -1,6 +1,5 @@
 from PluginLib.CompactQt.Qt import QGraphicsScene, Qt
 from UI.GraphicsMouseLine import GraphicsMouseLine
-from UI.GraphicsConnectionLine import GraphicsConnectionLine
 from UI.Elements.ConnectionLine import ConnectionLine
 
 
