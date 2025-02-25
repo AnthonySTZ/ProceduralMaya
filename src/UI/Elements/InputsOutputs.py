@@ -26,11 +26,7 @@ class InputsOutputs(QGraphicsObject):
         if self._amount == 0:
             return
 
-        height = 0
-        if self._type == self.INPUT:
-            height = -self.PADDING - self.RADIUS
-        else:
-            height = NodeRect.HEIGHT + self.PADDING
+        height = self.calcHeightByType()
 
         points_offsets = logics.evenly_distribute_point_on_line(
             NodeRect.WIDTH, self._amount
@@ -42,6 +38,12 @@ class InputsOutputs(QGraphicsObject):
             io.setUserData("index", index)
             io.setParentItem(self)
             io.clicked.connect(lambda io=io: self.clicked.emit(io))
+
+    def calcHeightByType(self):
+        if self._type == self.INPUT:
+            return -self.PADDING - self.RADIUS
+
+        return NodeRect.HEIGHT + self.PADDING
 
     def boundingRect(self):
         return self._rect
