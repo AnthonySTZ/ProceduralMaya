@@ -40,12 +40,13 @@ class Scene:
         self.update()
 
     def update(self):
-        if self._current_render_node is None:
-            return
         try:
             mc.delete(self._last_mesh)
         except:
             pass
+
+        if self._current_render_node is None:
+            return
 
         print("Set Render to " + self._current_render_node.getName())
         self._last_mesh = self._current_render_node.commandAtIndex(0)
