@@ -5,9 +5,12 @@ def load_plugin():
     os.system("cls")
     import sys
 
-    from dotenv import load_dotenv
+    try:
+        from dotenv import load_dotenv
 
-    load_dotenv()
+        load_dotenv()
+    except:
+        return
 
     plugin_path = os.path.join(os.environ["PROCEDURAL_MAYA"], "src")
 
