@@ -1,4 +1,11 @@
-from PluginLib.CompactQt.Qt import QWidget, QVBoxLayout, QLabel, Qt
+from PluginLib.CompactQt.Qt import (
+    QWidget,
+    QVBoxLayout,
+    QLabel,
+    QLineEdit,
+    QHBoxLayout,
+    Qt,
+)
 
 
 class Parameters(QWidget):
@@ -9,19 +16,12 @@ class Parameters(QWidget):
         self.buildUI()
 
     def buildUI(self):
-        self._hbox = QVBoxLayout()
-        self._hbox.setSpacing(0)
-        self._hbox.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(self._hbox)
+        self._vbox = QVBoxLayout()
+        self._vbox.setSpacing(0)
+        self._vbox.setContentsMargins(0, 50, 0, 0)
+        self.setLayout(self._vbox)
 
-        self.setMinimumWidth(200)
-        self.setStyleSheet(
-            """
-            QWidget {
-                background-color: #4d4d4d;
-            }
-            """
-        )
+        self.setMinimumWidth(300)
 
         self._scene.nodeClicked.connect(self.setNode)
 
@@ -36,9 +36,28 @@ class Parameters(QWidget):
             return
 
         for param, value in self._node.getParameters().items():
-            label = QLabel(param)
-            self._hbox.addWidget(label)
+            param_widget = self.createParamWidget(param, value)
+            self._vbox.addWidget(param_widget)
+
+        self._vbox.addStretch()
+
+    def createParamWidget(self, param, value):
+        hbox = QHBoxLayout()
+        widget = QWidget()
+        widget.setLayout(hbox)
+
+        label = QLabel(param)
+        label.setFixedWidth(100)
+        label.setAlignment(Qt.AlignmentFlag.AlignRight)
+
+        line_edit = QLineEdit()
+
+        hbox.addWidget(label)
+        hbox.addWidget(line_edit)
+
+        return widget
 
     def clearParams(self):
-        for i in reversed(range(self._hbox.count())):
-            self._hbox.itemAt(i).widget().setParent(None)
+        for i in reversed(range(self._vbox.count())):
+            item = self._vbox.itemAt(i)
+            self._vbox.removeItem(item)
