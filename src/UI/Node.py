@@ -34,6 +34,9 @@ class Node(QGraphicsObject):
         self.title_rect.moved.connect(self.moved.emit)
         self.title_rect.renderClicked.connect(self.renderClicked)
 
+    def updateName(self):
+        self.title_rect.setName(self._node.getName())
+
     def renderClicked(self):
         self._render = True
         self.scene().setRenderTo(self)

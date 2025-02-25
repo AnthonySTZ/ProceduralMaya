@@ -17,6 +17,7 @@ class Scene(QGraphicsScene):
         self.addItem(node_item)
         self._node_items.append(node_item)
         self._node_scene.addNode(node_item.getNode())
+        node_item.updateName()
         node_item.ioClicked.connect(self.ioClicked)
 
     def nodeScene(self):
