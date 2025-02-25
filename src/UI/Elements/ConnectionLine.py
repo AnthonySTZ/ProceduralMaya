@@ -23,6 +23,11 @@ class ConnectionLine(QGraphicsLineItem):
     def createMovableConnectionFromOneNode(self, io_item):
         self._node_item = io_item
 
+    def updateMousePos(self, mouse_pos):
+        if self._node_item:
+            self._mouse_pos = mouse_pos
+            self.updateLine(self._node_item.centerPos(), mouse_pos)
+
     def updateLine(self, pos_1, pos_2):
         self.setLine(
             pos_1.x(),

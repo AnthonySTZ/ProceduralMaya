@@ -1,5 +1,4 @@
 from PluginLib.CompactQt.Qt import QGraphicsScene, Qt
-from UI.GraphicsMouseLine import GraphicsMouseLine
 from UI.Elements.ConnectionLine import ConnectionLine
 
 
@@ -42,8 +41,8 @@ class Scene(QGraphicsScene):
         self.addItem(connection)
 
     def createMouseConnection(self):
-        self._temp_connection = GraphicsMouseLine()
-        self._temp_connection.setItem(self._current_io_item)
+        self._temp_connection = ConnectionLine()
+        self._temp_connection.createMovableConnectionFromOneNode(self._current_io_item)
         self.addItem(self._temp_connection)
 
     def moveEvent(self, mouse_pos):
