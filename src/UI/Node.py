@@ -14,6 +14,7 @@ class Node(QGraphicsObject):
 
     def __init__(self, position, node, parent=None):
         self._node = node
+        self._render = False
         super().__init__(parent)
         self.buildUI()
         self.setPos(
@@ -31,7 +32,16 @@ class Node(QGraphicsObject):
             title_name = self._node.getName()
         self.title_rect = NodeRect(self, title_name)
         self.title_rect.moved.connect(self.moved.emit)
-        self.title_rect.toogleRender.connect(lambda: print("Render toogled"))
+        self.title_rect.renderClicked.connect(self.renderClicked)
+
+    def renderClicked(self):
+        self._render = True
+        self.scene().setRenderTo(self)
+        self.title_rect.setRenderActive(True)
+
+    def setRender(self, should_render):
+        self._render = should_render
+        self.title_rect.setRenderActive(should_render)
 
     def getName(self):
         return self.title_rect.getName()

@@ -14,7 +14,7 @@ class NodeRect(AQMovableRectItem):
     WIDTH = 90
     HEIGHT = 25
 
-    toogleRender = SIGNAL()
+    renderClicked = SIGNAL()
 
     def __init__(self, parent, name):
         super().__init__(0, 0, self.WIDTH, self.HEIGHT)
@@ -49,7 +49,14 @@ class NodeRect(AQMovableRectItem):
         )
         self._render_rect.setBrush(QBrush(Qt.GlobalColor.lightGray))
         self._render_rect.setParentItem(self)
-        self._render_rect.clicked.connect(self.toogleRender.emit)
+        self._render_rect.clicked.connect(self.renderClicked.emit)
+
+    def setRenderActive(self, should_render):
+        if should_render:
+            self._render_rect.setBrush(QBrush(Qt.GlobalColor.blue))
+        else:
+            self._render_rect.setBrush(QBrush(Qt.GlobalColor.lightGray))
+        self._render_rect.update()
 
     def setName(self, name):
         self._name = name
