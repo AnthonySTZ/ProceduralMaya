@@ -3,3 +3,6 @@ class Float3:
         self.x = x
         self.y = y
         self.z = z
+
+    def toList(self):
+        return [self.x, self.y, self.z]
