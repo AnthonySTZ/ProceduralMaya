@@ -1,6 +1,13 @@
+try:
+    import maya.cmds as mc  # type: ignore
+except:
+    pass
+
+
 class Scene:
     def __init__(self):
         self._nodes = {}
+        self._last_mesh = ""
 
     def addNode(self, node):
         """
@@ -28,4 +35,9 @@ class Scene:
         return list(self._nodes.values())
 
     def setRenderNode(self, node):
+        try:
+            mc.delete(self._last_mesh)
+        except:
+            pass
         print("Set Render to " + node.getName())
+        self._last_mesh = node.commandAtIndex(0)
