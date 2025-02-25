@@ -1,6 +1,11 @@
 from .BaseNode import BaseNode
 from Core.Field.Float3 import Float3
 
+try:
+    import maya.cmds as mc  # type: ignore
+except:
+    pass
+
 
 class Transform(BaseNode):
     def __init__(self):
@@ -9,7 +14,25 @@ class Transform(BaseNode):
         self._num_inputs = 1
         self._num_outputs = 1
         self._parameters = {
-            "Translate": Float3(),
+            "Translate": Float3(0, 2, 0),
             "Rotate": Float3(),
-            "Scale": Float3(),
+            "Scale": Float3(1, 1, 1),
         }
+
+    def commandAtIndex(self, index):
+        if index != 0:
+            print("Index out of range !")
+            return
+
+        if self.input(0) is None:
+            print("No connection !")
+            return
+
+        current_mesh = self.input(0).commandAtIndex(0)
+
+        translate = self._parameters["Translate"].toList()
+        rotate = self._parameters["Rotate"].toList()
+        scale = self._parameters["Scale"].toList()
+
+        mc.xform(current_mesh, t=translate, ro=rotate, s=scale)
+        return current_mesh

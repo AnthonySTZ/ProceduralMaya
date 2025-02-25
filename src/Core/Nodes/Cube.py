@@ -15,7 +15,7 @@ class Cube(BaseNode):
         self._num_outputs = 1
         self._parameters = {"width": Float(), "height": Float(), "depth": Float()}
 
-    def commandAtIndex(self, index, previous_command=None):
+    def commandAtIndex(self, index):
         if index != 0:
             print("Index out of range !")
             return

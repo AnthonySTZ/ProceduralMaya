@@ -79,5 +79,5 @@ class BaseNode:
 
     """ CORE """
 
-    def commandAtIndex(self, index, previous_command=None):
+    def commandAtIndex(self, index):
         raise NotImplementedError("Command not implemented")
