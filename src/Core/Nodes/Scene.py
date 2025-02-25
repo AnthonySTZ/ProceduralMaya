@@ -26,3 +26,6 @@ class Scene:
 
     def getNodes(self):
         return list(self._nodes.values())
+
+    def setRenderNode(self, node):
+        print("Set Render to " + node.getName())

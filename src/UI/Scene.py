@@ -74,3 +74,4 @@ class Scene(QGraphicsScene):
         for node in self._node_items:
             if node_item != node:
                 node.setRender(False)
+        self._node_scene.setRenderNode(node_item.getNode())
