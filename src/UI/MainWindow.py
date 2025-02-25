@@ -1,4 +1,4 @@
-from PluginLib.CompactQt.Qt import QHBoxLayout, QDialog
+from PluginLib.CompactQt.Qt import QHBoxLayout, QDialog, QSplitter
 from UI.View import View
 from UI.Scene import Scene
 from UI.Parameters import Parameters
@@ -16,10 +16,14 @@ class MainWindow(QDialog):
         vbox.setContentsMargins(0, 0, 0, 0)
         self.setLayout(vbox)
 
+        splitter = QSplitter()
+
         scene = Scene()
         scene.setSceneRect(-32000, -32000, 64000, 64000)
         nodes_viewer = View(scene)
         parameters_view = Parameters(scene)
 
-        vbox.addWidget(nodes_viewer)
-        vbox.addWidget(parameters_view)
+        splitter.addWidget(nodes_viewer)
+        splitter.addWidget(parameters_view)
+
+        vbox.addWidget(splitter)
