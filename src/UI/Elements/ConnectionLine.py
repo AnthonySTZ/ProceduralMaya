@@ -14,6 +14,7 @@ class ConnectionLine(QGraphicsLineItem):
         """
 
         self.defineInputAndOutputNodes(io_item_1, io_item_2)
+        self.showConnectionInfos()
         self._input_io.getNodeItem().moved.connect(self.updateWhenNodesMove)
         self._output_io.getNodeItem().moved.connect(self.updateWhenNodesMove)
         self.updateLine(io_item_1.centerPos(), io_item_2.centerPos())
@@ -28,17 +29,24 @@ class ConnectionLine(QGraphicsLineItem):
             self._input_io = io_item_1
             self._output_io = io_item_2
 
-        input_node = self._input_io.getNodeItem().getNode()
-        input_index = self._input_io.getUserData("index")
-        output_node = self._output_io.getNodeItem().getNode()
-        output_index = self._output_io.getUserData("index")
+        self.input_node = self._input_io.getNodeItem().getNode()
+        self.input_index = self._input_io.getUserData("index")
+        self.output_node = self._output_io.getNodeItem().getNode()
+        self.output_index = self._output_io.getUserData("index")
 
-        print("Top node : " + input_node.getName() + " at index : " + str(input_index))
+    def showConnectionInfos(self):
+
+        print(
+            "Top node : "
+            + self.input_node.getName()
+            + " at index : "
+            + str(self.input_index)
+        )
         print(
             "Bottom node : "
-            + output_node.getName()
+            + self.output_node.getName()
             + " at index : "
-            + str(output_index)
+            + str(self.output_index)
         )
 
     def updateWhenNodesMove(self):
