@@ -1,6 +1,5 @@
-from PluginLib.CompactQt.Qt import QGraphicsObject, QRectF, QPen, QBrush, Qt, SIGNAL
+from PluginLib.CompactQt.Qt import QGraphicsObject, QRectF, SIGNAL
 from Core.Logic import logics
-from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
 from UI.Elements.NodeRect import NodeRect
 from UI.Elements.IOItem import IOItem
 
