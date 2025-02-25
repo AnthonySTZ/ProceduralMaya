@@ -1,10 +1,19 @@
-from PluginLib.CompactQt.Qt import QBrush, Qt, QGraphicsTextItem, QTextOption
+from PluginLib.CompactQt.Qt import (
+    QBrush,
+    Qt,
+    QGraphicsTextItem,
+    QTextOption,
+    QGraphicsRectItem,
+    SIGNAL,
+)
 from Core.Qt.AQMovableRectItem import AQMovableRectItem
 
 
 class NodeRect(AQMovableRectItem):
     WIDTH = 90
     HEIGHT = 25
+
+    toogleRender = SIGNAL()
 
     def __init__(self, parent, name):
         super().__init__(0, 0, self.WIDTH, self.HEIGHT)
@@ -17,6 +26,7 @@ class NodeRect(AQMovableRectItem):
         self.setBrush(brush)
 
         self.createTitle()
+        self.createRenderRect()
 
     def createTitle(self):
         """
@@ -30,6 +40,14 @@ class NodeRect(AQMovableRectItem):
         center_option.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.title.document().setDefaultTextOption(center_option)
         self.title.setParentItem(self)
+
+    def createRenderRect(self):
+        render_width = 10
+        self._render_rect = QGraphicsRectItem(
+            self.WIDTH - render_width, 0, render_width, self.HEIGHT
+        )
+        self._render_rect.setBrush(QBrush(Qt.GlobalColor.lightGray))
+        self._render_rect.setParentItem(self)
 
     def setName(self, name):
         self._name = name
