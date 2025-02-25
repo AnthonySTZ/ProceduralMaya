@@ -1,6 +1,7 @@
 from PluginLib.CompactQt.Qt import QGraphicsScene, Qt
 from UI.GraphicsMouseLine import GraphicsMouseLine
 from UI.GraphicsConnectionLine import GraphicsConnectionLine
+from UI.Elements.ConnectionLine import ConnectionLine
 
 
 class Scene(QGraphicsScene):
@@ -37,10 +38,8 @@ class Scene(QGraphicsScene):
             + io_item.getNodeItem().getName()
         )
 
-        connection = GraphicsConnectionLine()
-        connection.setFirstItem(self._current_io_item)
-        connection.setLastItem(io_item)
-        connection.updateLine()
+        connection = ConnectionLine()
+        connection.createConnectionBetweenNodes(self._current_io_item, io_item)
         self.addItem(connection)
 
     def createMouseConnection(self):
