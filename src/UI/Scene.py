@@ -1,16 +1,19 @@
 from PluginLib.CompactQt.Qt import QGraphicsScene, Qt
 from UI.Elements.ConnectionLine import ConnectionLine
+from Core.Nodes.Scene import Scene as NodeScene
 
 
 class Scene(QGraphicsScene):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._node_scene = NodeScene()
         self._current_io_item = None
         self._temp_connection = None
 
     def addNode(self, node):
         self.addItem(node)
+        self._node_scene.addNode(node)
         node.ioClicked.connect(self.ioClicked)
 
     def ioClicked(self, io_item):
