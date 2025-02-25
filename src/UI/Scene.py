@@ -1,10 +1,12 @@
-from PluginLib.CompactQt.Qt import QGraphicsScene, Qt
+from PluginLib.CompactQt.Qt import QGraphicsScene, Qt, SIGNAL
 from UI.Elements.ConnectionLine import ConnectionLine
 from Core.Nodes.Scene import Scene as NodeScene
-from UI.Node import Node
+from Core.Nodes.BaseNode import BaseNode
 
 
 class Scene(QGraphicsScene):
+
+    nodeClicked = SIGNAL(BaseNode)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -19,6 +21,9 @@ class Scene(QGraphicsScene):
         self._node_scene.addNode(node_item.getNode())
         node_item.updateName()
         node_item.ioClicked.connect(self.ioClicked)
+        node_item.nodeClicked.connect(
+            lambda nodeItem: self.nodeClicked.emit(nodeItem.getNode())
+        )
 
     def nodeScene(self):
         return self._node_scene

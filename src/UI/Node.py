@@ -11,6 +11,7 @@ class Node(QGraphicsObject):
 
     ioClicked = SIGNAL(IOItem)
     moved = SIGNAL()
+    nodeClicked = SIGNAL(QGraphicsObject)
 
     def __init__(self, position, node, parent=None):
         self._node = node
@@ -33,6 +34,7 @@ class Node(QGraphicsObject):
         self.title_rect = NodeRect(self, title_name)
         self.title_rect.moved.connect(self.moved.emit)
         self.title_rect.renderClicked.connect(self.renderClicked)
+        self.title_rect.clicked.connect(lambda: self.nodeClicked.emit(self))
 
     def updateName(self):
         self.title_rect.setName(self._node.getName())
