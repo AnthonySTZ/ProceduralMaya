@@ -14,9 +14,9 @@ class Transform(BaseNode):
         self._num_inputs = 1
         self._num_outputs = 1
         self._parameters = {
-            "Translate": Float3(0, 1, 0),
-            "Rotate": Float3(0, 0, 0),
-            "Scale": Float3(1, 1, 1),
+            "Translate": Float3(0.0, 0.0, 0.0),
+            "Rotate": Float3(0.0, 0.0, 0.0),
+            "Scale": Float3(1.0, 1.0, 1.0),
         }
 
     def commandAtIndex(self, index):
