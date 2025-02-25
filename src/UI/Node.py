@@ -1,11 +1,7 @@
 from PluginLib.CompactQt.Qt import (
-    Qt,
-    QBrush,
-    QPen,
     QGraphicsObject,
     SIGNAL,
 )
-from Core.Qt.AQClickableEllipseItem import AQClickableEllipseItem
 from UI.IOItem import IOItem
 from UI.Elements.NodeRect import NodeRect
 from UI.Elements.InputsOutputs import InputsOutputs
