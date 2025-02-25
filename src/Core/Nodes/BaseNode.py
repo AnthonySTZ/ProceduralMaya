@@ -43,6 +43,11 @@ class BaseNode:
             print("Not enough inputs for " + self.getName() + " !")
             return
 
+        if input_node is None:
+            if input_index in self._inputs:
+                del self._inputs[input_index]
+            return
+
         if output_index >= input_node.getNumberOfOutputs():  # input out of range
             print("Not enough outputs for " + input_node.getName() + " !")
             return

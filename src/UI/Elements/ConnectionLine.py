@@ -7,6 +7,7 @@ class ConnectionLine(QGraphicsLineItem):
         super().__init__()
         self.setPen(QPen(Qt.GlobalColor.white))
         self.setZValue(-1)
+        self._node_item = None
 
     def createConnectionBetweenNodes(self, io_item_1, io_item_2):
         """
@@ -76,3 +77,15 @@ class ConnectionLine(QGraphicsLineItem):
             pos_2.x(),
             pos_2.y(),
         )
+
+    def deleteConnection(self):
+        print("Delete Connection")
+        self._output_node.setInput(self._output_index, None)
+        self.setParentItem(None)
+
+    def mousePressEvent(self, event):
+        if self._node_item is not None:
+            return
+
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.deleteConnection()
