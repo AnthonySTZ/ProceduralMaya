@@ -34,3 +34,6 @@ class NodeRect(AQMovableRectItem):
     def setName(self, name):
         self._name = name
         self.title.setPlainText(name)
+
+    def getName(self):
+        return self._name

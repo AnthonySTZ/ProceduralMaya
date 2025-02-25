@@ -2,7 +2,7 @@ from PluginLib.CompactQt.Qt import (
     QGraphicsObject,
     SIGNAL,
 )
-from UI.IOItem import IOItem
+from UI.Elements.IOItem import IOItem
 from UI.Elements.NodeRect import NodeRect
 from UI.Elements.InputsOutputs import InputsOutputs
 
@@ -32,6 +32,9 @@ class Node(QGraphicsObject):
         self.title_rect = NodeRect(self, title_name)
         self.title_rect.moved.connect(self.moved.emit)
 
+    def getName(self):
+        return self.title_rect.getName()
+
     def createButtons(self):
         if not self._node:
             return
@@ -39,12 +42,12 @@ class Node(QGraphicsObject):
         self._inputs = InputsOutputs(
             self.title_rect, InputsOutputs.INPUT, self._node.getNumberOfInputs(), self
         )
-        self._inputs.clicked.connect(lambda io: print(io))
+        self._inputs.clicked.connect(self.ioClicked.emit)
 
         self._outputs = InputsOutputs(
             self.title_rect, InputsOutputs.OUTPUT, self._node.getNumberOfOutputs(), self
         )
-        self._outputs.clicked.connect(lambda io: print(io))
+        self._outputs.clicked.connect(self.ioClicked.emit)
 
     def boundingRect(self):
         return self.childrenBoundingRect()
