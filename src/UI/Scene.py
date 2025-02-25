@@ -81,3 +81,6 @@ class Scene(QGraphicsScene):
             if node_item != node:
                 node.setRender(False)
         self._node_scene.setRenderNode(node_item.getNode())
+
+    def updateCurrentRender(self):
+        self._node_scene.update()

@@ -58,6 +58,7 @@ class Parameters(QWidget):
         label.setAlignment(Qt.AlignmentFlag.AlignRight)
 
         parameters_edit = value.getUI()
+        value.valueChanged.connect(self._scene.updateCurrentRender)
 
         hbox.addWidget(label)
         hbox.addWidget(parameters_edit)

@@ -8,6 +8,7 @@ class Scene:
     def __init__(self):
         self._nodes = {}
         self._last_mesh = ""
+        self._current_render_node = None
 
     def addNode(self, node):
         """
@@ -35,10 +36,17 @@ class Scene:
         return list(self._nodes.values())
 
     def setRenderNode(self, node):
+        self._current_render_node = node
+        self.update()
+
+    def update(self):
+        if self._current_render_node is None:
+            return
         try:
             mc.delete(self._last_mesh)
         except:
             pass
-        print("Set Render to " + node.getName())
-        self._last_mesh = node.commandAtIndex(0)
+
+        print("Set Render to " + self._current_render_node.getName())
+        self._last_mesh = self._current_render_node.commandAtIndex(0)
         mc.select(clear=True)
