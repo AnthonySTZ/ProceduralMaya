@@ -26,16 +26,15 @@ class Scene(QGraphicsScene):
             print("Same type clicked !")
             return
 
-        # TODO: Create connection between input and output
         self.createConnection(io_item)
         self.resetSelection()
 
     def createConnection(self, io_item):
         print(
             "Connection between "
-            + self._current_io_item.getNodeItem().title_name.toPlainText()
+            + self._current_io_item.getNodeItem().getName()
             + " and "
-            + io_item.getNodeItem().title_name.toPlainText()
+            + io_item.getNodeItem().getName()
         )
 
         connection = GraphicsConnectionLine()

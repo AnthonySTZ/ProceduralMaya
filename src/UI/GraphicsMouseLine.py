@@ -16,7 +16,7 @@ class GraphicsMouseLine(QGraphicsLineItem):
         self._item.getNodeItem().moved.connect(self.updateLine)
 
     def updateLine(self):
-        item_pos = self._item.getIO().centerPos()
+        item_pos = self._item.centerPos()
         self.setLine(
             item_pos.x(),
             item_pos.y(),

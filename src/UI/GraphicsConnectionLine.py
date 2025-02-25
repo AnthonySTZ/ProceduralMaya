@@ -21,8 +21,8 @@ class GraphicsConnectionLine(QGraphicsLineItem):
         self._last_item.getNodeItem().moved.connect(self.updateLine)
 
     def updateLine(self):
-        first_item_pos = self._first_item.getIO().centerPos()
-        last_item_pos = self._last_item.getIO().centerPos()
+        first_item_pos = self._first_item.centerPos()
+        last_item_pos = self._last_item.centerPos()
         self.setLine(
             first_item_pos.x(),
             first_item_pos.y(),
