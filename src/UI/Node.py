@@ -37,12 +37,12 @@ class Node(QGraphicsObject):
             return
 
         self._inputs = InputsOutputs(
-            self.title_rect, InputsOutputs.INPUT, self._node.getNumberOfInputs()
+            self.title_rect, InputsOutputs.INPUT, self._node.getNumberOfInputs(), self
         )
         self._inputs.clicked.connect(lambda io: print(io))
 
         self._outputs = InputsOutputs(
-            self.title_rect, InputsOutputs.OUTPUT, self._node.getNumberOfOutputs()
+            self.title_rect, InputsOutputs.OUTPUT, self._node.getNumberOfOutputs(), self
         )
         self._outputs.clicked.connect(lambda io: print(io))
 

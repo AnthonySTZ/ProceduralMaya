@@ -13,12 +13,13 @@ class InputsOutputs(QGraphicsObject):
 
     clicked = SIGNAL(IOItem)
 
-    def __init__(self, parent, type, amount):
+    def __init__(self, parent, type, amount, node_item):
         super().__init__()
         self._rect = QRectF(0, 0, NodeRect.WIDTH, self.RADIUS * 2)
         self.setParentItem(parent)
         self._type = type
         self._amount = amount
+        self._node_item = node_item
         self.buildUI()
 
     def buildUI(self):
@@ -35,7 +36,9 @@ class InputsOutputs(QGraphicsObject):
             NodeRect.WIDTH, self._amount
         )
         for index, offset in enumerate(points_offsets):
-            io = IOItem(offset, height, self.RADIUS, self.RADIUS)
+            io = IOItem(
+                offset, height, self.RADIUS, self.RADIUS, self._type, self._node_item
+            )
             io.setUserData("index", index)
             io.setParentItem(self)
             io.clicked.connect(lambda io=io: self.clicked.emit(io))
