@@ -67,4 +67,7 @@ class Parameters(QWidget):
     def clearParams(self):
         for i in reversed(range(self._vbox.count())):
             item = self._vbox.itemAt(i)
-            self._vbox.removeItem(item)
+            if item.spacerItem():
+                self._vbox.removeItem(item)
+            else:
+                item.widget().setParent(None)
