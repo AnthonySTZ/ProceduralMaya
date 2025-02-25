@@ -59,7 +59,8 @@ class Scene(QGraphicsScene):
 
     def resetSelection(self):
         self._current_io_item = None
-        self._temp_connection.setParentItem(None)
+        if self._temp_connection:
+            self._temp_connection.setParentItem(None)
         self._temp_connection = None
 
     def keyPressEvent(self, event):
