@@ -14,6 +14,7 @@ class Scene(QGraphicsScene):
         self._node_items = []
         self._current_io_item = None
         self._temp_connection = None
+        self._current_selected_node = None
 
     def addNodeItem(self, node_item):
         self.addItem(node_item)
@@ -21,9 +22,11 @@ class Scene(QGraphicsScene):
         self._node_scene.addNode(node_item.getNode())
         node_item.updateName()
         node_item.ioClicked.connect(self.ioClicked)
-        node_item.nodeClicked.connect(
-            lambda nodeItem: self.nodeClicked.emit(nodeItem.getNode())
-        )
+        node_item.nodeClicked.connect(self.selectNode)
+
+    def selectNode(self, node_item):
+        self.nodeClicked.emit(node_item.getNode())
+        self._current_selected_node = node_item
 
     def nodeScene(self):
         return self._node_scene
@@ -76,6 +79,15 @@ class Scene(QGraphicsScene):
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Escape:
             self.resetSelection()
+        elif event.key() == Qt.Key.Key_R:
+            self.renderCurrentNode()
+
+    def renderCurrentNode(self):
+        if self._current_selected_node is None:
+            return
+
+        self._current_selected_node.setRender(True)
+        self.setRenderTo(self._current_selected_node)
 
     def setRenderTo(self, node_item):
         for node in self._node_items:
