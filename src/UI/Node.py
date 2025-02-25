@@ -31,6 +31,7 @@ class Node(QGraphicsObject):
             title_name = self._node.getName()
         self.title_rect = NodeRect(self, title_name)
         self.title_rect.moved.connect(self.moved.emit)
+        self.title_rect.toogleRender.connect(lambda: print("Render toogled"))
 
     def getName(self):
         return self.title_rect.getName()

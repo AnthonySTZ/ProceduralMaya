@@ -7,6 +7,7 @@ from PluginLib.CompactQt.Qt import (
     SIGNAL,
 )
 from Core.Qt.AQMovableRectItem import AQMovableRectItem
+from Core.Qt.AQClickableRectItem import AQClickableRectItem
 
 
 class NodeRect(AQMovableRectItem):
@@ -43,11 +44,12 @@ class NodeRect(AQMovableRectItem):
 
     def createRenderRect(self):
         render_width = 10
-        self._render_rect = QGraphicsRectItem(
+        self._render_rect = AQClickableRectItem(
             self.WIDTH - render_width, 0, render_width, self.HEIGHT
         )
         self._render_rect.setBrush(QBrush(Qt.GlobalColor.lightGray))
         self._render_rect.setParentItem(self)
+        self._render_rect.clicked.connect(self.toogleRender.emit)
 
     def setName(self, name):
         self._name = name

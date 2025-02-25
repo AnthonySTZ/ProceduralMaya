@@ -4,12 +4,10 @@ from PluginLib.CompactQt.Qt import (
     QBrush,
     QRectF,
     QGraphicsObject,
-    QGraphicsItem,
 )
 
 
-class AQMovableRectItem(QGraphicsObject):
-    moved = SIGNAL()
+class AQClickableRectItem(QGraphicsObject):
     clicked = SIGNAL()
 
     def __init__(self, x, y, width, height):
@@ -19,10 +17,6 @@ class AQMovableRectItem(QGraphicsObject):
         self._brush = QBrush()
         self._pen = QPen()
         self._user_data = {}
-        self.setFlags(
-            QGraphicsItem.GraphicsItemFlag.ItemSendsGeometryChanges
-            | QGraphicsItem.GraphicsItemFlag.ItemIsMovable
-        )
 
     def setUserData(self, key, value):
         self._user_data[key] = value
@@ -50,11 +44,6 @@ class AQMovableRectItem(QGraphicsObject):
         painter.setBrush(self._brush)
         painter.setPen(self._pen)
         painter.drawRect(self._rect)
-
-    def itemChange(self, change, value):
-        if change == QGraphicsItem.GraphicsItemChange.ItemPositionChange:
-            self.moved.emit()
-        return super().itemChange(change, value)
 
     def mousePressEvent(self, event):
         self.clicked.emit()
