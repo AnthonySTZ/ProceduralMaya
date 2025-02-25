@@ -41,3 +41,4 @@ class Scene:
             pass
         print("Set Render to " + node.getName())
         self._last_mesh = node.commandAtIndex(0)
+        mc.select(clear=True)

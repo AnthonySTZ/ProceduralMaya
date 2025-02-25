@@ -14,8 +14,8 @@ class Transform(BaseNode):
         self._num_inputs = 1
         self._num_outputs = 1
         self._parameters = {
-            "Translate": Float3(0, 2, 0),
-            "Rotate": Float3(),
+            "Translate": Float3(0, 1, 0),
+            "Rotate": Float3(0, 0, 0),
             "Scale": Float3(1, 1, 1),
         }
 
@@ -28,11 +28,12 @@ class Transform(BaseNode):
             print("No connection !")
             return
 
-        current_mesh = self.input(0).commandAtIndex(0)
+        current_xform = self.input(0).commandAtIndex(0)
+        shapes = mc.listRelatives(current_xform, shapes=True)
 
         translate = self._parameters["Translate"].toList()
         rotate = self._parameters["Rotate"].toList()
         scale = self._parameters["Scale"].toList()
 
-        mc.xform(current_mesh, t=translate, ro=rotate, s=scale)
-        return current_mesh
+        mc.polyMoveVertex(shapes, t=translate, ro=rotate, s=scale)
+        return current_xform
