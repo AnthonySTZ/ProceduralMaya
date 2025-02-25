@@ -14,6 +14,15 @@ class ConnectionLine(QGraphicsLineItem):
         """
 
         self.defineInputAndOutputNodes(io_item_1, io_item_2)
+
+        # Input of the outputNode already connected
+        if self._output_node.input(self._output_index) is not None:
+            return False
+
+        self._output_node.setInput(
+            self._output_index, self._input_node, self._input_index
+        )
+
         self.showConnectionInfos()
         self._input_io.getNodeItem().moved.connect(self.updateWhenNodesMove)
         self._output_io.getNodeItem().moved.connect(self.updateWhenNodesMove)
@@ -29,28 +38,28 @@ class ConnectionLine(QGraphicsLineItem):
             self._input_io = io_item_1
             self._output_io = io_item_2
 
-        self.input_node = self._input_io.getNodeItem().getNode()
-        self.input_index = self._input_io.getUserData("index")
-        self.output_node = self._output_io.getNodeItem().getNode()
-        self.output_index = self._output_io.getUserData("index")
+        self._input_node = self._input_io.getNodeItem().getNode()
+        self._input_index = self._input_io.getUserData("index")
+        self._output_node = self._output_io.getNodeItem().getNode()
+        self._output_index = self._output_io.getUserData("index")
 
     def showConnectionInfos(self):
 
         print(
             "Top node : "
-            + self.input_node.getName()
+            + self._input_node.getName()
             + " at index : "
-            + str(self.input_index)
+            + str(self._input_index)
         )
         print(
             "Bottom node : "
-            + self.output_node.getName()
+            + self._output_node.getName()
             + " at index : "
-            + str(self.output_index)
+            + str(self._output_index)
         )
 
     def updateWhenNodesMove(self):
-        self.updateLine(self._first_item.centerPos(), self._last_item.centerPos())
+        self.updateLine(self._input_io.centerPos(), self._output_io.centerPos())
 
     def createMovableConnectionFromOneNode(self, io_item):
         self._node_item = io_item
