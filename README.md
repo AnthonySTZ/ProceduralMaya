@@ -9,4 +9,4 @@ You can open a dropdown of all the available nodes by right-clicking on the scen
 
 You can link nodes and delete a connection by left-clicking on it.
 
-[interface](./readme/interface.jpg)
+![interface](./readme/interface.jpg)
