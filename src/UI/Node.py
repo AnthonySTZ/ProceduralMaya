@@ -49,6 +49,9 @@ class Node(QGraphicsObject):
         )
         self._outputs.clicked.connect(self.ioClicked.emit)
 
+    def getNode(self):
+        return self._node
+
     def boundingRect(self):
         return self.childrenBoundingRect()
 

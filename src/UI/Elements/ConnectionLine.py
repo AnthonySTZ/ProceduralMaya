@@ -1,4 +1,5 @@
 from PluginLib.CompactQt.Qt import QGraphicsLineItem, QPen, Qt
+from UI.Elements.InputsOutputs import InputsOutputs
 
 
 class ConnectionLine(QGraphicsLineItem):
@@ -11,11 +12,27 @@ class ConnectionLine(QGraphicsLineItem):
         """
         Create a connection line between two IO of two Nodes. Update when nodes move.
         """
+        if io_item_1.getType() == InputsOutputs.INPUT:
+            output_node = io_item_1.getNodeItem().getNode()
+            output_index = io_item_1.getUserData("index")
+            input_node = io_item_2.getNodeItem().getNode()
+            input_index = io_item_2.getUserData("index")
+        else:
+            input_node = io_item_1.getNodeItem().getNode()
+            input_index = io_item_1.getUserData("index")
+            output_node = io_item_2.getNodeItem().getNode()
+            input_index = io_item_2.getUserData("index")
+
+        print("Top node : " + input_node.getName())
+        print("Bottom node : " + output_node.getName())
+
         self._first_item = io_item_1
         self._last_item = io_item_2
         self._first_item.getNodeItem().moved.connect(self.updateWhenNodesMove)
         self._last_item.getNodeItem().moved.connect(self.updateWhenNodesMove)
         self.updateLine(io_item_1.centerPos(), io_item_2.centerPos())
+
+        return True
 
     def updateWhenNodesMove(self):
         self.updateLine(self._first_item.centerPos(), self._last_item.centerPos())

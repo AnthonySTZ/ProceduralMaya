@@ -37,8 +37,9 @@ class Scene(QGraphicsScene):
         )
 
         connection = ConnectionLine()
-        connection.createConnectionBetweenNodes(self._current_io_item, io_item)
-        self.addItem(connection)
+        res = connection.createConnectionBetweenNodes(self._current_io_item, io_item)
+        if res:
+            self.addItem(connection)
 
     def createMouseConnection(self):
         self._temp_connection = ConnectionLine()
