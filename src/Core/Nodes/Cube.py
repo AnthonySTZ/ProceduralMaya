@@ -13,7 +13,11 @@ class Cube(BaseNode):
         self._name = "Cube"
         self._num_inputs = 0
         self._num_outputs = 1
-        self._parameters = {"width": Float(), "height": Float(), "depth": Float()}
+        self._parameters = {
+            "width": Float(1.0),
+            "height": Float(1.0),
+            "depth": Float(1.0),
+        }
 
     def commandAtIndex(self, index):
         if index != 0:
