@@ -11,10 +11,14 @@ class Scene(QGraphicsScene):
         self._current_io_item = None
         self._temp_connection = None
 
-    def addNode(self, node):
-        self.addItem(node)
-        self._node_scene.addNode(node)
-        node.ioClicked.connect(self.ioClicked)
+    def addNodeItem(self, node_item):
+        self.addItem(node_item)
+        self._node_scene.addNode(node_item.getNode())
+        print(self._node_scene.getNodes())
+        node_item.ioClicked.connect(self.ioClicked)
+
+    def nodeScene(self):
+        return self._node_scene
 
     def ioClicked(self, io_item):
         if self._current_io_item is None:  # First Click

@@ -50,7 +50,7 @@ class View(AQGraphicsTransformView):
             node = nodeType()
             item_pos = self.mapToScene(self.mapFromGlobal(QCursor.pos()))
             item = Node(item_pos, node)
-            self._scene.addNode(item)
+            self._scene.addNodeItem(item)
 
     def mouseMoveEvent(self, event):
         self._scene.moveEvent(self.mapToScene(event.pos()))
