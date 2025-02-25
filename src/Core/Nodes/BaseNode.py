@@ -76,3 +76,8 @@ class BaseNode:
             return None
 
         return self._inputs[index].inputNode()
+
+    """ CORE """
+
+    def commandAtIndex(self, index):
+        raise NotImplementedError("Command not implemented")
