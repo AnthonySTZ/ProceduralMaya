@@ -41,6 +41,7 @@ class Scene(QGraphicsScene):
             return
 
         if self.createConnection(io_item):
+            self._node_scene.update()
             self.resetSelection()
 
     def createConnection(self, io_item):
