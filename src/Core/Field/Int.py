@@ -1,8 +1,18 @@
-from PluginLib.CompactQt.Qt import QHBoxLayout, QWidget, QLineEdit, QIntValidator
+from PluginLib.CompactQt.Qt import (
+    QHBoxLayout,
+    QWidget,
+    QLineEdit,
+    QIntValidator,
+    QObject,
+    SIGNAL,
+)
 
 
-class Int:
+class Int(QObject):
+    valueChanged = SIGNAL()
+
     def __init__(self, value=0):
+        super().__init__()
         self.value = value
 
     def getUI(self):
@@ -13,6 +23,11 @@ class Int:
 
         line_edit = QLineEdit(str(self.value))
         line_edit.setValidator(QIntValidator())
+        line_edit.returnPressed.connect(lambda le=line_edit: self.setValue(le.text()))
         hbox.addWidget(line_edit)
 
         return widget
+
+    def setValue(self, value):
+        self.value = int(value)
+        self.valueChanged.emit()

@@ -1,8 +1,18 @@
-from PluginLib.CompactQt.Qt import QHBoxLayout, QWidget, QLineEdit, QDoubleValidator
+from PluginLib.CompactQt.Qt import (
+    QHBoxLayout,
+    QWidget,
+    QLineEdit,
+    QDoubleValidator,
+    QObject,
+    SIGNAL,
+)
 
 
-class Float:
+class Float(QObject):
+    valueChanged = SIGNAL()
+
     def __init__(self, value=0.0):
+        super().__init__()
         self.value = value
 
     def getUI(self):
@@ -13,6 +23,12 @@ class Float:
 
         line_edit = QLineEdit(str(self.value))
         line_edit.setValidator(QDoubleValidator())
+        line_edit.returnPressed.connect(lambda le=line_edit: self.setValue(le.text()))
         hbox.addWidget(line_edit)
 
         return widget
+
+    def setValue(self, value):
+        self.value = float(value)
+        print(value)
+        self.valueChanged.emit()
