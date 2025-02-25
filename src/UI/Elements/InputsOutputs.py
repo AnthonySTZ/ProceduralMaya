@@ -8,6 +8,7 @@ class InputsOutputs(QGraphicsObject):
     INPUT = 0
     OUTPUT = 1
     PADDING = 2
+    PADDING_WIDTH = 10
 
     RADIUS = 9
 
@@ -15,7 +16,9 @@ class InputsOutputs(QGraphicsObject):
 
     def __init__(self, parent, type, amount, node_item):
         super().__init__()
-        self._rect = QRectF(0, 0, NodeRect.WIDTH, self.RADIUS * 2)
+        self._rect = QRectF(
+            0, 0, NodeRect.WIDTH - self.PADDING_WIDTH * 2, self.RADIUS * 2
+        )
         self.setParentItem(parent)
         self._type = type
         self._amount = amount
@@ -28,11 +31,9 @@ class InputsOutputs(QGraphicsObject):
 
         height = self.calcHeightByType()
 
-        points_offsets = logics.evenly_distribute_point_on_line(
-            NodeRect.WIDTH, self._amount
-        )
-        for index, offset in enumerate(points_offsets):
-            io = self.createIOItem(offset, height)
+        points_pos_x = self.calcPointsHorizontalPosition()
+        for index, pos_x in enumerate(points_pos_x):
+            io = self.createIOItem(self.PADDING_WIDTH + pos_x, height)
             io.setUserData("index", index)
             io.setParentItem(self)
             io.clicked.connect(lambda io=io: self.clicked.emit(io))
@@ -45,6 +46,10 @@ class InputsOutputs(QGraphicsObject):
             return -self.PADDING - self.RADIUS
 
         return NodeRect.HEIGHT + self.PADDING
+
+    def calcPointsHorizontalPosition(self):
+        line_with = NodeRect.WIDTH - self.PADDING_WIDTH * 2 - self.RADIUS
+        return logics.evenly_distribute_point_on_line(line_with, self._amount)
 
     def boundingRect(self):
         return self._rect
