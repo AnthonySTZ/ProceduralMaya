@@ -21,10 +21,15 @@ class ConnectionLine(QGraphicsLineItem):
             input_node = io_item_1.getNodeItem().getNode()
             input_index = io_item_1.getUserData("index")
             output_node = io_item_2.getNodeItem().getNode()
-            input_index = io_item_2.getUserData("index")
+            output_index = io_item_2.getUserData("index")
 
-        print("Top node : " + input_node.getName())
-        print("Bottom node : " + output_node.getName())
+        print("Top node : " + input_node.getName() + " at index : " + str(input_index))
+        print(
+            "Bottom node : "
+            + output_node.getName()
+            + " at index : "
+            + str(output_index)
+        )
 
         self._first_item = io_item_1
         self._last_item = io_item_2
