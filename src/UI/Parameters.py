@@ -43,6 +43,7 @@ class Parameters(QWidget):
 
     def createParamWidget(self, param, value):
         hbox = QHBoxLayout()
+        hbox.setSpacing(10)
         widget = QWidget()
         widget.setLayout(hbox)
 
