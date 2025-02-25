@@ -12,16 +12,26 @@ class ConnectionLine(QGraphicsLineItem):
         """
         Create a connection line between two IO of two Nodes. Update when nodes move.
         """
+
+        self.defineInputAndOutputNodes(io_item_1, io_item_2)
+        self._input_io.getNodeItem().moved.connect(self.updateWhenNodesMove)
+        self._output_io.getNodeItem().moved.connect(self.updateWhenNodesMove)
+        self.updateLine(io_item_1.centerPos(), io_item_2.centerPos())
+
+        return True
+
+    def defineInputAndOutputNodes(self, io_item_1, io_item_2):
         if io_item_1.getType() == InputsOutputs.INPUT:
-            output_node = io_item_1.getNodeItem().getNode()
-            output_index = io_item_1.getUserData("index")
-            input_node = io_item_2.getNodeItem().getNode()
-            input_index = io_item_2.getUserData("index")
+            self._input_io = io_item_2
+            self._output_io = io_item_1
         else:
-            input_node = io_item_1.getNodeItem().getNode()
-            input_index = io_item_1.getUserData("index")
-            output_node = io_item_2.getNodeItem().getNode()
-            output_index = io_item_2.getUserData("index")
+            self._input_io = io_item_1
+            self._output_io = io_item_2
+
+        input_node = self._input_io.getNodeItem().getNode()
+        input_index = self._input_io.getUserData("index")
+        output_node = self._output_io.getNodeItem().getNode()
+        output_index = self._output_io.getUserData("index")
 
         print("Top node : " + input_node.getName() + " at index : " + str(input_index))
         print(
@@ -30,14 +40,6 @@ class ConnectionLine(QGraphicsLineItem):
             + " at index : "
             + str(output_index)
         )
-
-        self._first_item = io_item_1
-        self._last_item = io_item_2
-        self._first_item.getNodeItem().moved.connect(self.updateWhenNodesMove)
-        self._last_item.getNodeItem().moved.connect(self.updateWhenNodesMove)
-        self.updateLine(io_item_1.centerPos(), io_item_2.centerPos())
-
-        return True
 
     def updateWhenNodesMove(self):
         self.updateLine(self._first_item.centerPos(), self._last_item.centerPos())
