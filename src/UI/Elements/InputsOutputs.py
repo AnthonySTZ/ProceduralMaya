@@ -32,12 +32,13 @@ class InputsOutputs(QGraphicsObject):
             NodeRect.WIDTH, self._amount
         )
         for index, offset in enumerate(points_offsets):
-            io = IOItem(
-                offset, height, self.RADIUS, self.RADIUS, self._type, self._node_item
-            )
+            io = self.createIOItem(offset, height)
             io.setUserData("index", index)
             io.setParentItem(self)
             io.clicked.connect(lambda io=io: self.clicked.emit(io))
+
+    def createIOItem(self, x, y):
+        return IOItem(x, y, self.RADIUS, self.RADIUS, self._type, self._node_item)
 
     def calcHeightByType(self):
         if self._type == self.INPUT:
