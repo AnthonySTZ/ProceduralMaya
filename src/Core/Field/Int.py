@@ -23,11 +23,13 @@ class Int(QObject):
 
         line_edit = QLineEdit(str(self.value))
         line_edit.setValidator(QIntValidator())
-        line_edit.returnPressed.connect(lambda le=line_edit: self.setValue(le.text()))
+        line_edit.textEdited.connect(lambda text: self.setValue(text))
         hbox.addWidget(line_edit)
 
         return widget
 
     def setValue(self, value):
+        if value == "":
+            value = 0
         self.value = int(value)
         self.valueChanged.emit()

@@ -35,9 +35,9 @@ class Float3(QObject):
         line_edit_y.setValidator(QDoubleValidator())
         line_edit_z.setValidator(QDoubleValidator())
 
-        line_edit_x.returnPressed.connect(lambda le=line_edit_x: self.setX(le.text()))
-        line_edit_y.returnPressed.connect(lambda le=line_edit_y: self.setY(le.text()))
-        line_edit_z.returnPressed.connect(lambda le=line_edit_z: self.setZ(le.text()))
+        line_edit_x.textEdited.connect(lambda text: self.setX(text))
+        line_edit_y.textEdited.connect(lambda text: self.setY(text))
+        line_edit_z.textEdited.connect(lambda text: self.setZ(text))
 
         hbox.addWidget(line_edit_x)
         hbox.addWidget(line_edit_y)
@@ -46,16 +46,19 @@ class Float3(QObject):
         return widget
 
     def setX(self, value):
+        if value == "":
+            value = 0
         self.x = float(value)
-        print(value)
         self.valueChanged.emit()
 
     def setY(self, value):
+        if value == "":
+            value = 0
         self.y = float(value)
-        print(value)
         self.valueChanged.emit()
 
     def setZ(self, value):
+        if value == "":
+            value = 0
         self.z = float(value)
-        print(value)
         self.valueChanged.emit()
