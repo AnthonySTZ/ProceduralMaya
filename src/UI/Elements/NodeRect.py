@@ -16,8 +16,9 @@ class NodeRect(AQMovableRectItem):
 
     renderClicked = SIGNAL()
 
-    def __init__(self, parent, name):
+    def __init__(self, parent, name, node):
         super().__init__(0, 0, self.WIDTH, self.HEIGHT)
+        self._node = node
         self._name = name
         self.setParentItem(parent)
         self.buildUI()
@@ -30,14 +31,16 @@ class NodeRect(AQMovableRectItem):
         self.createRenderRect()
 
     def createTitle(self):
-        """
-        Create a title that is centered to the nodeRect.
-        """
-
         self.title = QGraphicsTextItem(self._name)
         self.title.setDefaultTextColor(Qt.GlobalColor.lightGray)
         self.title.setPos(self.WIDTH, 2)
         self.title.setParentItem(self)
+
+        node_type = type(self._node).__name__
+        self._node_type = QGraphicsTextItem(node_type)
+        self._node_type.setDefaultTextColor(Qt.GlobalColor.gray)
+        self._node_type.setPos(self.WIDTH, -self.HEIGHT + 8)
+        self._node_type.setParentItem(self)
 
     def createRenderRect(self):
         render_width = 10

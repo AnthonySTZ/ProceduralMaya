@@ -27,24 +27,16 @@ class Node(QGraphicsObject):
 
     def buildUI(self):
         self.createTitleRect()
-        self.createNodeTypeName()
         self.createButtons()
 
     def createTitleRect(self):
         title_name = "Node"
         if self._node:
             title_name = self._node.getName()
-        self.title_rect = NodeRect(self, title_name)
-        self.title_rect.moved.connect(self.moved.emit)
+        self.title_rect = NodeRect(self, title_name, self._node)
+        self.title_rect.moved.connect(self.moved.emit)  # Used for connection line
         self.title_rect.renderClicked.connect(self.renderClicked)
         self.title_rect.clicked.connect(lambda: self.nodeClicked.emit(self))
-
-    def createNodeTypeName(self):
-        node_type = type(self._node).__name__
-        self._node_type = QGraphicsTextItem(node_type)
-        self._node_type.setDefaultTextColor(Qt.GlobalColor.gray)
-        self._node_type.setPos(self.title_rect.WIDTH - 2, -self.title_rect.HEIGHT + 8)
-        self._node_type.setParentItem(self.title_rect)
 
     def updateName(self):
         self.title_rect.setName(self._node.getName())
