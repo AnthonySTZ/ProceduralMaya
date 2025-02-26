@@ -6,6 +6,7 @@ class Null(BaseNode):
     def __init__(self):
         super().__init__()
         self._name = "Null"
+        self._icon = "null.png"
         self._num_inputs = 1
         self._num_outputs = 1
 
