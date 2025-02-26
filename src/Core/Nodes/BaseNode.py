@@ -9,7 +9,7 @@ class BaseNode(QObject):
     def __init__(self):
         super().__init__()
         self._name = "Node"
-        self._icon = "no_icon.jpg"
+        self._icon = "no_icon.png"
         self._num_inputs = 0
         self._num_outputs = 0
         self._inputs = {}

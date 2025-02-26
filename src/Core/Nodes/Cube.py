@@ -11,7 +11,7 @@ class Cube(BaseNode):
     def __init__(self):
         super().__init__()
         self._name = "Cube"
-        self._icon = "cube_icon.jpg"
+        self._icon = "cube_icon.png"
         self._num_inputs = 0
         self._num_outputs = 1
         self._parameters = {
