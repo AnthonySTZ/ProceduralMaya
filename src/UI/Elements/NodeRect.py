@@ -8,6 +8,7 @@ from PluginLib.CompactQt.Qt import (
 )
 from Core.Qt.AQMovableRectItem import AQMovableRectItem
 from Core.Qt.AQClickableRectItem import AQClickableRectItem
+from UI.Elements.NodeIcon import NodeIcon
 
 
 class NodeRect(AQMovableRectItem):
@@ -25,9 +26,17 @@ class NodeRect(AQMovableRectItem):
     def buildUI(self):
         brush = QBrush(Qt.GlobalColor.gray)
         self.setBrush(brush)
-
+        self.addIcon()
         self.createTitle()
         self.createRenderRect()
+
+    def addIcon(self):
+        height_padding = 2
+        icon_size = self.HEIGHT - height_padding * 2
+        icon_pos_x = self.WIDTH / 2 - icon_size / 2
+        icon = NodeIcon(self._node.getIcon(), icon_size)
+        icon.setPos(icon_pos_x, height_padding)
+        icon.setParentItem(self)
 
     def createTitle(self):
         self.title = QGraphicsTextItem(self._node.getName())
