@@ -18,14 +18,6 @@ class View(AQGraphicsTransformView):
         self.buildUI()
 
     def buildUI(self):
-        self.setRenderHints(
-            QPainter.RenderHint.Antialiasing | QPainter.RenderHint.TextAntialiasing
-        )
-        self.setFrameStyle(QFrame.Shape.NoFrame)
-        self.setTransformationAnchor(self.ViewportAnchor.NoAnchor)
-        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-
         self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.customContextMenuRequested.connect(self.nodesContextMenu)
         tab_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Tab), self)

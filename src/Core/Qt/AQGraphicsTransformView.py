@@ -1,4 +1,4 @@
-from PluginLib.CompactQt.Qt import QGraphicsView, QPoint, Qt
+from PluginLib.CompactQt.Qt import QGraphicsView, QPoint, Qt, QPainter, QFrame
 
 
 class AQGraphicsTransformView(QGraphicsView):
@@ -7,6 +7,16 @@ class AQGraphicsTransformView(QGraphicsView):
         self._is_scrolling = False
         self._scroll_pos = QPoint(0, 0)
         self._prev_scale = 1.0
+        self.setDefaultFlags()
+
+    def setDefaultFlags(self):
+        self.setRenderHints(
+            QPainter.RenderHint.Antialiasing | QPainter.RenderHint.TextAntialiasing
+        )
+        self.setFrameStyle(QFrame.Shape.NoFrame)
+        self.setTransformationAnchor(self.ViewportAnchor.NoAnchor)
+        self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.MiddleButton:
