@@ -2,12 +2,12 @@ from PluginLib.CompactQt.Qt import (
     QHBoxLayout,
     QWidget,
     QComboBox,
-    QObject,
     SIGNAL,
 )
+from Core.Field.Field import Field
 
 
-class Types(QObject):
+class Types(Field):
     valueChanged = SIGNAL()
 
     def __init__(self, current=0, types={}):

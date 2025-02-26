@@ -3,12 +3,12 @@ from PluginLib.CompactQt.Qt import (
     QWidget,
     QLineEdit,
     QDoubleValidator,
-    QObject,
     SIGNAL,
 )
+from Core.Field.Field import Field
 
 
-class Float3(QObject):
+class Float3(Field):
 
     valueChanged = SIGNAL()
 

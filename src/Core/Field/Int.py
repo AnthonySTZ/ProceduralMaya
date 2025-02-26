@@ -3,12 +3,12 @@ from PluginLib.CompactQt.Qt import (
     QWidget,
     QLineEdit,
     QIntValidator,
-    QObject,
     SIGNAL,
 )
+from Core.Field.Field import Field
 
 
-class Int(QObject):
+class Int(Field):
     valueChanged = SIGNAL()
 
     def __init__(self, value=0):
