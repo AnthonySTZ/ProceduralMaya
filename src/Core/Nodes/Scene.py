@@ -58,6 +58,5 @@ class Scene:
         if self._current_render_node is None:
             return
 
-        print("Set Render to " + self._current_render_node.getName())
         self._last_mesh = self._current_render_node.commandAtIndex(0)
         mc.select(clear=True)
