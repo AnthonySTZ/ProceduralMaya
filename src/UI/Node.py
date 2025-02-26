@@ -30,10 +30,7 @@ class Node(QGraphicsObject):
         self.createButtons()
 
     def createTitleRect(self):
-        title_name = "Node"
-        if self._node:
-            title_name = self._node.getName()
-        self.title_rect = NodeRect(self, title_name, self._node)
+        self.title_rect = NodeRect(self, self._node)
         self.title_rect.moved.connect(self.moved.emit)  # Used for connection line
         self.title_rect.renderClicked.connect(self.renderClicked)
         self.title_rect.clicked.connect(lambda: self.nodeClicked.emit(self))

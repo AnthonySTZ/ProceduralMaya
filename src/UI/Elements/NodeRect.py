@@ -16,10 +16,9 @@ class NodeRect(AQMovableRectItem):
 
     renderClicked = SIGNAL()
 
-    def __init__(self, parent, name, node):
+    def __init__(self, parent, node):
         super().__init__(0, 0, self.WIDTH, self.HEIGHT)
         self._node = node
-        self._name = name
         self.setParentItem(parent)
         self.buildUI()
 
