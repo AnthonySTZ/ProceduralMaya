@@ -37,10 +37,8 @@ class Scene(QGraphicsScene):
             self.createMouseConnection()
             return
 
-        if (
-            self._current_io_item.getType() == io_item.getType()
-        ):  # Click on same type as current selected
-            print("Same type clicked !")
+        # Click on same type as current selected
+        if self._current_io_item.getType() == io_item.getType():
             return
 
         if self.createConnection(io_item):
@@ -53,12 +51,7 @@ class Scene(QGraphicsScene):
         res = connection.createConnectionBetweenNodes(self._current_io_item, io_item)
         if res:
             self.addItem(connection)
-            print(
-                "Connection between "
-                + self._current_io_item.getNodeItem().getName()
-                + " and "
-                + io_item.getNodeItem().getName()
-            )
+
         return res
 
     def createMouseConnection(self):
