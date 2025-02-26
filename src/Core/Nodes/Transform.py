@@ -24,7 +24,7 @@ class Transform(BaseNode):
         self._num_outputs = 1
         self._parameters = {
             "Transform Order": Types(
-                "TslRotSca",
+                "Scale Rot Trans",
                 {
                     "Scale Rot Trans": self.ScaRotTsl,
                     "Scale Trans Rot": self.ScaTslRot,
@@ -48,14 +48,51 @@ class Transform(BaseNode):
             print("No connection !")
             return
 
-        print(self._parameters["Transform Order"].getValue())
-
         current_xform = self.input(0).commandAtIndex(0)
-        shapes = mc.listRelatives(current_xform, shapes=True)
 
+        shapes = mc.listRelatives(current_xform, shapes=True)
+        order = self._parameters["Transform Order"].getValue()
+        self.transformBaseOnOrder(shapes, order)
+
+        return current_xform
+
+    def transformBaseOnOrder(self, shapes, order):
         translate = self._parameters["Translate"].toList()
         rotate = self._parameters["Rotate"].toList()
         scale = self._parameters["Scale"].toList()
 
-        mc.polyMoveVertex(shapes, t=translate, ro=rotate, s=scale)
-        return current_xform
+        if order == self.ScaRotTsl:
+            mc.polyMoveVertex(shapes, s=scale)
+            mc.polyMoveVertex(shapes, ro=rotate)
+            mc.polyMoveVertex(shapes, t=translate)
+            return
+
+        if order == self.ScaTslRot:
+            mc.polyMoveVertex(shapes, s=scale)
+            mc.polyMoveVertex(shapes, t=translate)
+            mc.polyMoveVertex(shapes, ro=rotate)
+            return
+
+        if order == self.RotScaTsl:
+            mc.polyMoveVertex(shapes, ro=rotate)
+            mc.polyMoveVertex(shapes, s=scale)
+            mc.polyMoveVertex(shapes, t=translate)
+            return
+
+        if order == self.RotTslSca:
+            mc.polyMoveVertex(shapes, ro=rotate)
+            mc.polyMoveVertex(shapes, t=translate)
+            mc.polyMoveVertex(shapes, s=scale)
+            return
+
+        if order == self.TslScaRot:
+            mc.polyMoveVertex(shapes, t=translate)
+            mc.polyMoveVertex(shapes, s=scale)
+            mc.polyMoveVertex(shapes, ro=rotate)
+            return
+
+        if order == self.TslRotSca:
+            mc.polyMoveVertex(shapes, t=translate)
+            mc.polyMoveVertex(shapes, ro=rotate)
+            mc.polyMoveVertex(shapes, s=scale)
+            return
