@@ -5,13 +5,7 @@ from PluginLib.CompactQt.Qt import (
     QLineEdit,
     QHBoxLayout,
     Qt,
-    QDoubleValidator,
-    QIntValidator,
 )
-
-from Core.Field.Float import Float
-from Core.Field.Float3 import Float3
-from Core.Field.Int import Int
 
 
 class Parameters(QWidget):
