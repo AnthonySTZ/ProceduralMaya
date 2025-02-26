@@ -20,6 +20,7 @@ class Transform(BaseNode):
     def __init__(self):
         super().__init__()
         self._name = "Transform"
+        self._icon = "transform_icon.png"
         self._num_inputs = 1
         self._num_outputs = 1
         self._parameters = {
