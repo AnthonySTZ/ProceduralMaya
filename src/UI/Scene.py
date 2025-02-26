@@ -20,7 +20,6 @@ class Scene(QGraphicsScene):
         self.addItem(node_item)
         self._node_items.append(node_item)
         self._node_scene.addNode(node_item.getNode())
-        node_item.updateName()
         node_item.ioClicked.connect(self.ioClicked)
         node_item.nodeClicked.connect(self.selectNode)
 
@@ -87,10 +86,6 @@ class Scene(QGraphicsScene):
             if node_item != node:
                 node.setRender(False)
         self._node_scene.setRenderNode(node_item.getNode())
-
-    # def updateNodesName(self):
-    #     for node_item in self._node_items:
-    #         node_item.updateName()
 
     def updateCurrentRender(self):
         self._node_scene.update()
