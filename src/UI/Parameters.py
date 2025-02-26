@@ -6,6 +6,7 @@ from PluginLib.CompactQt.Qt import (
     QHBoxLayout,
     Qt,
 )
+from UI.Elements.ParameterWidget import ParameterWidget
 
 
 class Parameters(QWidget):
@@ -55,36 +56,11 @@ class Parameters(QWidget):
         self._vbox.addWidget(self._node_name)
 
         for param, value in self._node.getParameters().items():
-            param_widget = self.createParamWidget(param, value)
+            param_widget = ParameterWidget(param, value)
+            param_widget.valueChanged.connect(self._scene.updateCurrentRender)
             self._vbox.addWidget(param_widget)
 
         self._vbox.addStretch()
-
-    def createParamWidget(self, param, value):
-        hbox = QHBoxLayout()
-        hbox.setContentsMargins(0, 5, 0, 0)
-        hbox.setSpacing(10)
-        widget = QWidget()
-        widget.setStyleSheet(
-            """
-            QLineEdit {
-                padding: 4px;
-            }            
-            """
-        )
-        widget.setLayout(hbox)
-
-        label = QLabel(param)
-        label.setFixedWidth(100)
-        label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignCenter)
-
-        parameters_edit = value.getUI()
-        value.valueChanged.connect(self._scene.updateCurrentRender)
-
-        hbox.addWidget(label)
-        hbox.addWidget(parameters_edit)
-
-        return widget
 
     def changeNodeName(self, name):
         self._scene.getNodeScene().renameNode(self._node.getName(), name)
