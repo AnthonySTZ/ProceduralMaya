@@ -16,6 +16,11 @@ class Parameters(QWidget):
         self.buildUI()
 
     def buildUI(self):
+        self.setStyleSheet(
+            """
+            font-size: 9pt;
+            """
+        )
         self._vbox = QVBoxLayout()
         self._vbox.setSpacing(0)
         self._vbox.setContentsMargins(0, 50, 0, 0)
@@ -39,6 +44,13 @@ class Parameters(QWidget):
         self._node_name.returnPressed.connect(
             lambda node_name=self._node_name: self.changeNodeName(node_name.text())
         )
+        self._node_name.setStyleSheet(
+            """
+            QLineEdit {
+                padding: 4px;
+            }            
+            """
+        )
         self._vbox.addWidget(self._node_name)
 
         for param, value in self._node.getParameters().items():
@@ -51,6 +63,13 @@ class Parameters(QWidget):
         hbox = QHBoxLayout()
         hbox.setSpacing(10)
         widget = QWidget()
+        widget.setStyleSheet(
+            """
+            QLineEdit {
+                padding: 4px;
+            }            
+            """
+        )
         widget.setLayout(hbox)
 
         label = QLabel(param)
