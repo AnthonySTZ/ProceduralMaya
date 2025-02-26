@@ -1,5 +1,7 @@
 from PluginLib.CompactQt.Qt import (
     QGraphicsObject,
+    QGraphicsTextItem,
+    Qt,
     SIGNAL,
 )
 from UI.Elements.IOItem import IOItem
@@ -25,6 +27,7 @@ class Node(QGraphicsObject):
 
     def buildUI(self):
         self.createTitleRect()
+        self.createNodeTypeName()
         self.createButtons()
 
     def createTitleRect(self):
@@ -35,6 +38,13 @@ class Node(QGraphicsObject):
         self.title_rect.moved.connect(self.moved.emit)
         self.title_rect.renderClicked.connect(self.renderClicked)
         self.title_rect.clicked.connect(lambda: self.nodeClicked.emit(self))
+
+    def createNodeTypeName(self):
+        node_type = type(self._node).__name__
+        self._node_type = QGraphicsTextItem(node_type)
+        self._node_type.setDefaultTextColor(Qt.GlobalColor.gray)
+        self._node_type.setPos(self.title_rect.WIDTH, -self.title_rect.HEIGHT)
+        self._node_type.setParentItem(self.title_rect)
 
     def updateName(self):
         self.title_rect.setName(self._node.getName())
