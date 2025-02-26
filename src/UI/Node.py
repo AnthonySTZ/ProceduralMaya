@@ -43,7 +43,7 @@ class Node(QGraphicsObject):
         node_type = type(self._node).__name__
         self._node_type = QGraphicsTextItem(node_type)
         self._node_type.setDefaultTextColor(Qt.GlobalColor.gray)
-        self._node_type.setPos(self.title_rect.WIDTH, -self.title_rect.HEIGHT)
+        self._node_type.setPos(self.title_rect.WIDTH - 2, -self.title_rect.HEIGHT + 8)
         self._node_type.setParentItem(self.title_rect)
 
     def updateName(self):
