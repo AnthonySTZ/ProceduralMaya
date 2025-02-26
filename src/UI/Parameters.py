@@ -41,6 +41,12 @@ class Parameters(QWidget):
         if self._node is None:
             return
 
+        self._node_name = QLineEdit(self._node.getName())
+        self._node_name.returnPressed.connect(
+            lambda node_name=self._node_name: self.changeNodeName(node_name.text())
+        )
+        self._vbox.addWidget(self._node_name)
+
         for param, value in self._node.getParameters().items():
             param_widget = self.createParamWidget(param, value)
             self._vbox.addWidget(param_widget)
@@ -64,6 +70,12 @@ class Parameters(QWidget):
         hbox.addWidget(parameters_edit)
 
         return widget
+
+    def changeNodeName(self, name):
+        new_name = self._scene.getNodeScene().getUntakenName(name)
+        self._node.setName(new_name)
+        self._scene.updateNodesName()
+        self._node_name.setText(new_name)
 
     def clearParams(self):
         for i in reversed(range(self._vbox.count())):

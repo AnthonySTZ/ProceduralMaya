@@ -95,5 +95,12 @@ class Scene(QGraphicsScene):
                 node.setRender(False)
         self._node_scene.setRenderNode(node_item.getNode())
 
+    def updateNodesName(self):
+        for node_item in self._node_items:
+            node_item.updateName()
+
     def updateCurrentRender(self):
         self._node_scene.update()
+
+    def getNodeScene(self):
+        return self._node_scene
