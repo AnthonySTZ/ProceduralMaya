@@ -27,6 +27,8 @@ class Scene:
         """
         Tries every possibilites of name (pattern: name1, name2,...) and return the first that not exists in the scene.
         """
+        if name not in self._nodes:
+            return name
         i = 1
         while name + str(i) in self._nodes:
             i += 1
