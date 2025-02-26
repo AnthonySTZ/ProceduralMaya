@@ -34,6 +34,14 @@ class Scene:
             i += 1
         return name + str(i)
 
+    def renameNode(self, old_name, new_name):
+        if old_name not in self._nodes:
+            return
+        new_name = self.getUntakenName(new_name)
+        self._nodes[new_name] = self._nodes.pop(old_name)
+        self._nodes[new_name].setName(new_name)
+        return new_name
+
     def getNodes(self):
         return list(self._nodes.values())
 

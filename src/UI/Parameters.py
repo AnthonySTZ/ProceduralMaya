@@ -85,8 +85,7 @@ class Parameters(QWidget):
         return widget
 
     def changeNodeName(self, name):
-        new_name = self._scene.getNodeScene().getUntakenName(name)
-        self._node.setName(new_name)
+        new_name = self._scene.getNodeScene().renameNode(self._node.getName(), name)
         self._scene.updateNodesName()
         self._node_name.setText(new_name)
 
