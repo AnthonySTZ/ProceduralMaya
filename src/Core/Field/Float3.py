@@ -46,19 +46,22 @@ class Float3(QObject):
         return widget
 
     def setX(self, value):
-        if value == "":
-            value = 0
-        self.x = float(value)
+        try:
+            self.x = float(value)
+        except:
+            self.x = 0
         self.valueChanged.emit()
 
     def setY(self, value):
-        if value == "":
-            value = 0
-        self.y = float(value)
+        try:
+            self.y = float(value)
+        except:
+            self.y = 0
         self.valueChanged.emit()
 
     def setZ(self, value):
-        if value == "":
-            value = 0
-        self.z = float(value)
+        try:
+            self.z = float(value)
+        except:
+            self.z = 0
         self.valueChanged.emit()

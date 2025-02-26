@@ -29,7 +29,8 @@ class Float(QObject):
         return widget
 
     def setValue(self, value):
-        if value == "":
-            value = 0
-        self.value = float(value)
+        try:
+            self.value = float(value)
+        except:
+            self.value = 0
         self.valueChanged.emit()

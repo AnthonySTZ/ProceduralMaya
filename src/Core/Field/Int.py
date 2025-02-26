@@ -29,7 +29,8 @@ class Int(QObject):
         return widget
 
     def setValue(self, value):
-        if value == "":
-            value = 0
-        self.value = int(value)
+        try:
+            self.value = int(value)
+        except:
+            self.value = 0
         self.valueChanged.emit()
