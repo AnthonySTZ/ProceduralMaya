@@ -32,17 +32,12 @@ class View(AQGraphicsTransformView):
         tab_shortcut.activated.connect(self.nodesContextMenu)
 
     def nodesContextMenu(self):
-        menu = NodesMenu(self)
-        try:
-            res = menu.exec(QCursor.pos())
-        except:
-            res = menu.exec_(QCursor.pos())
+        menu = NodesMenu(QCursor.pos(), self)
+        user_node = menu.getUserNode()
 
-        if res:
-            nodeType = res.data()
-            node = nodeType()
+        if user_node:
             item_pos = self.mapToScene(self.mapFromGlobal(QCursor.pos()))
-            item = Node(item_pos, node)
+            item = Node(item_pos, user_node)
             self._scene.addNodeItem(item)
 
     def mouseMoveEvent(self, event):
