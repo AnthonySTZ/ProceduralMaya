@@ -12,6 +12,7 @@ You can link nodes and delete a connection by left-clicking on it.
 For now, all the available nodes are working:
 - Cube
 - Transform
+- Null
 
 I will continue to add more nodes to the list.
 
