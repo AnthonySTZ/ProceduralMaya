@@ -35,11 +35,8 @@ class NodeRect(AQMovableRectItem):
         """
 
         self.title = QGraphicsTextItem(self._name)
-        self.title.setDefaultTextColor(Qt.GlobalColor.black)
-        self.title.setTextWidth(self.boundingRect().width())
-        center_option = QTextOption()
-        center_option.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.title.document().setDefaultTextOption(center_option)
+        self.title.setDefaultTextColor(Qt.GlobalColor.lightGray)
+        self.title.setPos(self.WIDTH, 2)
         self.title.setParentItem(self)
 
     def createRenderRect(self):
