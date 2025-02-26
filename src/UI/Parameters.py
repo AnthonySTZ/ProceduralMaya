@@ -33,6 +33,7 @@ class Parameters(QWidget):
     def setNode(self, node):
         self._node = node
         self.updateParameters()
+        self._node.nameChanged.connect(self._node_name.setText)
 
     def updateParameters(self):
         self.clearParams()
@@ -86,9 +87,7 @@ class Parameters(QWidget):
         return widget
 
     def changeNodeName(self, name):
-        new_name = self._scene.getNodeScene().renameNode(self._node.getName(), name)
-        self._scene.updateNodesName()
-        self._node_name.setText(new_name)
+        self._scene.getNodeScene().renameNode(self._node.getName(), name)
 
     def clearParams(self):
         for i in reversed(range(self._vbox.count())):

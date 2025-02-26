@@ -1,8 +1,13 @@
 from Core.Nodes.NodeConnection import NodeConnection
+from PluginLib.CompactQt.Qt import QObject, SIGNAL
 
 
-class BaseNode:
+class BaseNode(QObject):
+
+    nameChanged = SIGNAL(str)
+
     def __init__(self):
+        super().__init__()
         self._name = "Node"
         self._num_inputs = 0
         self._num_outputs = 0
@@ -15,6 +20,7 @@ class BaseNode:
 
     def setName(self, name):
         self._name = name
+        self.nameChanged.emit(name)
 
     def getParameters(self):
         return self._parameters

@@ -31,10 +31,13 @@ class NodeRect(AQMovableRectItem):
         self.createRenderRect()
 
     def createTitle(self):
-        self.title = QGraphicsTextItem(self._name)
+        self.title = QGraphicsTextItem(self._node.getName())
         self.title.setDefaultTextColor(Qt.GlobalColor.lightGray)
         self.title.setPos(self.WIDTH, 2)
         self.title.setParentItem(self)
+
+        # update title when name changed
+        self._node.nameChanged.connect(self.title.setPlainText)
 
         node_type = type(self._node).__name__
         self._node_type = QGraphicsTextItem(node_type)
