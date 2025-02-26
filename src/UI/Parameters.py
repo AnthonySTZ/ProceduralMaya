@@ -23,7 +23,7 @@ class Parameters(QWidget):
         )
         self._vbox = QVBoxLayout()
         self._vbox.setSpacing(0)
-        self._vbox.setContentsMargins(0, 50, 0, 0)
+        self._vbox.setContentsMargins(0, 5, 0, 0)
         self.setLayout(self._vbox)
 
         self.setMinimumWidth(300)
@@ -61,6 +61,7 @@ class Parameters(QWidget):
 
     def createParamWidget(self, param, value):
         hbox = QHBoxLayout()
+        hbox.setContentsMargins(0, 5, 0, 0)
         hbox.setSpacing(10)
         widget = QWidget()
         widget.setStyleSheet(
@@ -74,7 +75,7 @@ class Parameters(QWidget):
 
         label = QLabel(param)
         label.setFixedWidth(100)
-        label.setAlignment(Qt.AlignmentFlag.AlignRight)
+        label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignCenter)
 
         parameters_edit = value.getUI()
         value.valueChanged.connect(self._scene.updateCurrentRender)
