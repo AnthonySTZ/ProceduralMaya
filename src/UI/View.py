@@ -3,8 +3,6 @@ from PluginLib.CompactQt.Qt import (
     QShortcut,
     QKeySequence,
     QCursor,
-    QPainter,
-    QFrame,
 )
 from UI.Node import Node
 from UI.Elements.NodesMenu import NodesMenu
