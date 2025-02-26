@@ -24,7 +24,7 @@ class Parameters(QWidget):
         )
         self._vbox = QVBoxLayout()
         self._vbox.setSpacing(0)
-        self._vbox.setContentsMargins(0, 5, 0, 0)
+        self._vbox.setContentsMargins(0, 8, 8, 0)
         self.setLayout(self._vbox)
 
         self.setMinimumWidth(300)
@@ -38,10 +38,14 @@ class Parameters(QWidget):
 
     def updateParameters(self):
         self.clearParams()
-
         if self._node is None:
             return
 
+        self.createTitle()
+        self.createParameters()
+        self._vbox.addStretch()
+
+    def createTitle(self):
         self._node_name = QLineEdit(self._node.getName())
         self._node_name.returnPressed.connect(
             lambda node_name=self._node_name: self.changeNodeName(node_name.text())
@@ -55,12 +59,11 @@ class Parameters(QWidget):
         )
         self._vbox.addWidget(self._node_name)
 
+    def createParameters(self):
         for param, value in self._node.getParameters().items():
             param_widget = ParameterWidget(param, value)
             param_widget.valueChanged.connect(self._scene.updateCurrentRender)
             self._vbox.addWidget(param_widget)
-
-        self._vbox.addStretch()
 
     def changeNodeName(self, name):
         self._scene.getNodeScene().renameNode(self._node.getName(), name)
