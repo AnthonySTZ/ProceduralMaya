@@ -2,14 +2,12 @@ from PluginLib.CompactQt.Qt import (
     Qt,
     QShortcut,
     QKeySequence,
-    QMenu,
     QCursor,
-    QAction,
     QPainter,
     QFrame,
 )
-from Core.Nodes.NodesInfo import NodesInfo
 from UI.Node import Node
+from UI.Elements.NodesMenu import NodesMenu
 from Core.Qt.AQGraphicsTransformView import AQGraphicsTransformView
 
 
@@ -34,12 +32,7 @@ class View(AQGraphicsTransformView):
         tab_shortcut.activated.connect(self.nodesContextMenu)
 
     def nodesContextMenu(self):
-        menu = QMenu()
-        nodes = NodesInfo.getNodes()
-        for node in nodes:
-            action = QAction(node.__name__, self)
-            action.setData(node)
-            menu.addAction(action)
+        menu = NodesMenu(self)
         try:
             res = menu.exec(QCursor.pos())
         except:
