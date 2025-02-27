@@ -22,6 +22,7 @@ class Parameters(QWidget):
         self._vbox = QVBoxLayout()
         self._vbox.setSpacing(0)
         self._vbox.setContentsMargins(0, 8, 8, 0)
+        self.setMinimumWidth(300)
         self.setLayout(self._vbox)
         self._scene.nodeClicked.connect(self.setNode)
 
