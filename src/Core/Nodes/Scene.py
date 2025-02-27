@@ -52,11 +52,14 @@ class Scene:
     def update(self):
         try:
             mc.delete(self._last_mesh)
-        except:
-            pass
+        except Exception as e:
+            print(e)
 
         if self._current_render_node is None:
             return
 
-        self._last_mesh = self._current_render_node.commandAtIndex(0)
+        try:
+            self._last_mesh = self._current_render_node.commandAtIndex(0)
+        except Exception as e:
+            print(e)
         mc.select(clear=True)
