@@ -25,7 +25,11 @@ class Merge(BaseNode):
             first_xform = self.input(0).commandAtIndex(0)
             second_xform = self.input(1).commandAtIndex(0)
             command = self.createMergeCommand(first_xform, second_xform)
-            return mel.eval(command)
+            merged_obj = mel.eval(command)
+            mel.eval("select -r " + " ".join(merged_obj) + ";")
+            mel.eval("DeleteHistory")
+            print("Merged : " + str(merged_obj[0]))
+            return [merged_obj[0]]
 
         if self.input(0):
             return self.input(0).commandAtIndex(0)
@@ -33,5 +37,5 @@ class Merge(BaseNode):
             return self.input(1).commandAtIndex(0)
 
     def createMergeCommand(self, xform_1, xform_2):
-        command = "polyUnite " + " ".join(xform_1) + " ".join(xform_2) + ";"
+        command = "polyUnite " + " ".join(xform_1) + " " + " ".join(xform_2) + ";"
         return command
