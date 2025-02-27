@@ -14,6 +14,17 @@ class ParametersWidget(QWidget):
         layout = QGridLayout(self)
         self.setLayout(layout)
 
+        self.setStyleSheet(
+            """
+            QLabel {
+                padding-right: 5px;
+            }
+            QLineEdit {
+                padding-left: 3px;
+            }
+            """
+        )
+
         i = 0
         for param, value in self._parameters.items():
             label = QLabel(param)
