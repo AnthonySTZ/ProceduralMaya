@@ -1,10 +1,7 @@
 from PluginLib.CompactQt.Qt import (
     QWidget,
     QVBoxLayout,
-    QLabel,
     QLineEdit,
-    QHBoxLayout,
-    Qt,
 )
 from UI.Elements.ParameterWidget import ParameterWidget
 
