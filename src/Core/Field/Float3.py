@@ -35,9 +35,9 @@ class Float3(Field):
         line_edit_y.setValidator(QDoubleValidator())
         line_edit_z.setValidator(QDoubleValidator())
 
-        line_edit_x.textEdited.connect(lambda text: self.setX(text))
-        line_edit_y.textEdited.connect(lambda text: self.setY(text))
-        line_edit_z.textEdited.connect(lambda text: self.setZ(text))
+        line_edit_x.returnPressed.connect(lambda text: self.setX(text))
+        line_edit_y.returnPressed.connect(lambda text: self.setY(text))
+        line_edit_z.returnPressed.connect(lambda text: self.setZ(text))
 
         hbox.addWidget(line_edit_x)
         hbox.addWidget(line_edit_y)
