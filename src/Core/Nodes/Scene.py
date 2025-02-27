@@ -1,5 +1,5 @@
 try:
-    import maya.cmds as mc  # type: ignore
+    import maya.mel as mel  # type: ignore
 except:
     pass
 
@@ -51,7 +51,7 @@ class Scene:
 
     def update(self):
         try:
-            mc.delete(self._last_mesh)
+            mel.eval("delete " + self._last_mesh + ";")
         except Exception as e:
             print(e)
 
@@ -62,4 +62,4 @@ class Scene:
             self._last_mesh = self._current_render_node.commandAtIndex(0)
         except Exception as e:
             print(e)
-        mc.select(clear=True)
+        mel.eval("select -clear;")
