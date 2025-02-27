@@ -4,6 +4,7 @@ from Core.Field.Types import Types
 
 try:
     import maya.cmds as mc  # type: ignore
+    import maya.mel as mel  # type: ignore
 except:
     pass
 
@@ -58,42 +59,57 @@ class Transform(BaseNode):
         return current_xform
 
     def transformBaseOnOrder(self, shapes, order):
-        translate = self._parameters["Translate"].toList()
-        rotate = self._parameters["Rotate"].toList()
-        scale = self._parameters["Scale"].toList()
+        translate_command = self.createTranslateCommand()
+        rotate_command = self.createRotateCommand()
+        scale_command = self.createScaleCommand()
 
         if order == self.ScaRotTsl:
-            mc.polyMoveVertex(shapes, s=scale)
-            mc.polyMoveVertex(shapes, ro=rotate)
-            mc.polyMoveVertex(shapes, t=translate)
+            mel.eval(scale_command)
+            mel.eval(rotate_command)
+            mel.eval(translate_command)
             return
 
         if order == self.ScaTslRot:
-            mc.polyMoveVertex(shapes, s=scale)
-            mc.polyMoveVertex(shapes, t=translate)
-            mc.polyMoveVertex(shapes, ro=rotate)
+            mel.eval(scale_command)
+            mel.eval(translate_command)
+            mel.eval(rotate_command)
             return
 
         if order == self.RotScaTsl:
-            mc.polyMoveVertex(shapes, ro=rotate)
-            mc.polyMoveVertex(shapes, s=scale)
-            mc.polyMoveVertex(shapes, t=translate)
+            mel.eval(rotate_command)
+            mel.eval(scale_command)
+            mel.eval(translate_command)
             return
 
         if order == self.RotTslSca:
-            mc.polyMoveVertex(shapes, ro=rotate)
-            mc.polyMoveVertex(shapes, t=translate)
-            mc.polyMoveVertex(shapes, s=scale)
+            mel.eval(rotate_command)
+            mel.eval(translate_command)
+            mel.eval(scale_command)
             return
 
         if order == self.TslScaRot:
-            mc.polyMoveVertex(shapes, t=translate)
-            mc.polyMoveVertex(shapes, s=scale)
-            mc.polyMoveVertex(shapes, ro=rotate)
+            mel.eval(translate_command)
+            mel.eval(scale_command)
+            mel.eval(rotate_command)
             return
 
         if order == self.TslRotSca:
-            mc.polyMoveVertex(shapes, t=translate)
-            mc.polyMoveVertex(shapes, ro=rotate)
-            mc.polyMoveVertex(shapes, s=scale)
+            mel.eval(translate_command)
+            mel.eval(rotate_command)
+            mel.eval(scale_command)
             return
+
+    def createTranslateCommand(self):
+        translate = " -t " + self._parameters["Translate"].toStr()
+        command = "polyMoveVertex" + translate + ";"
+        return command
+
+    def createRotateCommand(self):
+        rotate = " -ro " + self._parameters["Rotate"].toStr()
+        command = "polyMoveVertex" + rotate + ";"
+        return command
+
+    def createScaleCommand(self):
+        scale = " -s " + self._parameters["Scale"].toStr()
+        command = "polyMoveVertex" + scale + ";"
+        return command
