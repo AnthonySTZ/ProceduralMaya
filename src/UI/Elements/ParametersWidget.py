@@ -1,4 +1,4 @@
-from PluginLib.CompactQt.Qt import QWidget, QLabel, SIGNAL, QGridLayout
+from PluginLib.CompactQt.Qt import QWidget, QLabel, SIGNAL, QGridLayout, Qt
 
 
 class ParametersWidget(QWidget):
@@ -17,6 +17,9 @@ class ParametersWidget(QWidget):
         i = 0
         for param, value in self._parameters.items():
             label = QLabel(param)
+            label.setAlignment(
+                Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignCenter
+            )
             field_widget = value.getUI()
             value.valueChanged.connect(self.valueChanged.emit)
             layout.addWidget(label, i, 0)
