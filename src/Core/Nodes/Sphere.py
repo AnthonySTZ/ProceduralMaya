@@ -33,4 +33,6 @@ class Sphere(BaseNode):
         sub_a = self._parameters["Subdivisions Axis"].value
         sub_h = self._parameters["Subdivisions Height"].value
 
-        return mc.sphere(ax=axis, r=radius, s=sub_a, nsp=sub_h)
+        mc.nurbsToPolygonsPref()
+
+        return mc.polySphere(ax=axis, r=radius, sx=sub_a, sy=sub_h)
