@@ -2,10 +2,8 @@ from PluginLib.CompactQt.Qt import (
     QWidget,
     QVBoxLayout,
     QLineEdit,
-    QTableWidget,
-    QLabel,
 )
-from UI.Elements.ParametersTableWidget import ParametersTableWidget
+from UI.Elements.ParametersWidget import ParametersWidget
 
 
 class Parameters(QWidget):
@@ -25,9 +23,6 @@ class Parameters(QWidget):
         self._vbox.setSpacing(0)
         self._vbox.setContentsMargins(0, 8, 8, 0)
         self.setLayout(self._vbox)
-
-        self.setMinimumWidth(300)
-
         self._scene.nodeClicked.connect(self.setNode)
 
     def setNode(self, node):
@@ -59,7 +54,7 @@ class Parameters(QWidget):
         self._vbox.addWidget(self._node_name)
 
     def createParameters(self):
-        field_table = ParametersTableWidget(self._node.getParameters())
+        field_table = ParametersWidget(self._node.getParameters())
         self._vbox.addWidget(field_table)
         field_table.valueChanged.connect(self._scene.updateCurrentRender)
 
