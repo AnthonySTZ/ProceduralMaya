@@ -2,7 +2,7 @@ from .BaseNode import BaseNode
 from Core.Field.Float import Float
 
 try:
-    import maya.cmds as mc  # type: ignore
+    import maya.mel as mel  # type: ignore
 except:
     pass
 
@@ -25,8 +25,13 @@ class Cube(BaseNode):
             print("Index out of range !")
             return
 
-        width = self._parameters["width"].value
-        height = self._parameters["height"].value
-        depth = self._parameters["depth"].value
+        command = self.createCubeMelCommand()
+        return mel.eval(command)
 
-        return mc.polyCube(w=width, h=height, d=depth)
+    def createCubeMelCommand(self):
+        width = " -w " + self._parameters["width"].toStr()
+        height = " -h " + self._parameters["height"].toStr()
+        depth = " -d " + self._parameters["depth"].toStr()
+
+        command = "polyCube" + width + height + depth + ";"
+        return command
