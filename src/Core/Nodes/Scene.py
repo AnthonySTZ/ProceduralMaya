@@ -50,16 +50,21 @@ class Scene:
         self.update()
 
     def update(self):
-        try:
-            mel.eval("delete " + self._last_mesh + ";")
-        except Exception as e:
-            print(e)
+        print(self._last_mesh)
+        if self._last_mesh:
+            try:
+                delete_command = "delete " + " ".join(self._last_mesh) + ";"
+                mel.eval(delete_command)
+            except Exception as e:
+                print(e)
 
         if self._current_render_node is None:
             return
 
+        print("Rendering")
         try:
             self._last_mesh = self._current_render_node.commandAtIndex(0)
         except Exception as e:
             print(e)
+        print("Rendered " + str(self._last_mesh))
         mel.eval("select -clear;")

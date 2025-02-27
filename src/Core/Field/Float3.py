@@ -52,19 +52,19 @@ class Float3(Field):
         try:
             self.x = float(value)
         except:
-            self.x = 0
+            self.x = 0.0
         self.valueChanged.emit()
 
     def setY(self, value):
         try:
             self.y = float(value)
         except:
-            self.y = 0
+            self.y = 0.0
         self.valueChanged.emit()
 
     def setZ(self, value):
         try:
             self.z = float(value)
         except:
-            self.z = 0
+            self.z = 0.0
         self.valueChanged.emit()
