@@ -23,7 +23,7 @@ class Float(Field):
 
         line_edit = QLineEdit(str(self.value))
         line_edit.setValidator(QDoubleValidator())
-        line_edit.returnPressed.connect(lambda text: self.setValue(text))
+        line_edit.returnPressed.connect(lambda le=line_edit: self.setValue(le.text()))
         hbox.addWidget(line_edit)
 
         return widget
