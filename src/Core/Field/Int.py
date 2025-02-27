@@ -28,6 +28,9 @@ class Int(Field):
 
         return widget
 
+    def toStr(self):
+        return str(self.value)
+
     def setValue(self, value):
         try:
             self.value = int(value)

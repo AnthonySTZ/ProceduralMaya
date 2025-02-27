@@ -28,6 +28,9 @@ class Float(Field):
 
         return widget
 
+    def toStr(self):
+        return str(self.value)
+
     def setValue(self, value):
         try:
             self.value = float(value)

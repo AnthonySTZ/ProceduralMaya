@@ -21,6 +21,9 @@ class Float3(Field):
     def toList(self):
         return [self.x, self.y, self.z]
 
+    def toStr(self):
+        return str(self.x) + " " + str(self.y) + " " + str(self.z)
+
     def getUI(self):
         hbox = QHBoxLayout()
         hbox.setContentsMargins(0, 0, 0, 0)
