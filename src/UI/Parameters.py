@@ -2,8 +2,10 @@ from PluginLib.CompactQt.Qt import (
     QWidget,
     QVBoxLayout,
     QLineEdit,
+    QTableWidget,
+    QLabel,
 )
-from UI.Elements.ParameterWidget import ParameterWidget
+from UI.Elements.ParametersTableWidget import ParametersTableWidget
 
 
 class Parameters(QWidget):
@@ -57,10 +59,9 @@ class Parameters(QWidget):
         self._vbox.addWidget(self._node_name)
 
     def createParameters(self):
-        for param, value in self._node.getParameters().items():
-            param_widget = ParameterWidget(param, value)
-            param_widget.valueChanged.connect(self._scene.updateCurrentRender)
-            self._vbox.addWidget(param_widget)
+        field_table = ParametersTableWidget(self._node.getParameters())
+        self._vbox.addWidget(field_table)
+        field_table.valueChanged.connect(self._scene.updateCurrentRender)
 
     def changeNodeName(self, name):
         self._scene.getNodeScene().renameNode(self._node.getName(), name)
