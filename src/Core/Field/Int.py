@@ -11,10 +11,9 @@ from Core.Field.Field import Field
 class Int(Field):
     valueChanged = SIGNAL()
 
-    def __init__(self, value=0, signed=True):
+    def __init__(self, value=0):
         super().__init__()
         self.value = value
-        self.signed = signed
 
     def getUI(self):
         hbox = QHBoxLayout()
@@ -35,8 +34,6 @@ class Int(Field):
     def setValue(self, value):
         try:
             self.value = int(value)
-            if self.signed:
-                self.value = abs(value)
         except:
             self.value = 0
         self.valueChanged.emit()
