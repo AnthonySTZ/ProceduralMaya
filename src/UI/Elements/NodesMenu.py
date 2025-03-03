@@ -1,26 +1,30 @@
-from PluginLib.CompactQt.Qt import QMenu, QAction
+from PluginLib.CompactQt.Qt import QDialog, Qt, QListWidget, QVBoxLayout, QSizePolicy
 from Core.Nodes.NodesInfo import NodesInfo
 
 
-class NodesMenu(QMenu):
+class NodesMenu(QDialog):
     def __init__(self, position, parent=None):
-        self._parent = parent
-        self._position = position
-        super().__init__()
+        super().__init__(parent)
+        self.move(position)
         self.buildUI()
 
     def buildUI(self):
-        nodes = NodesInfo.getNodes()
-        for node in nodes:
-            action = QAction(node.__name__, self._parent)
-            action.setData(node)
-            self.addAction(action)
+        self.setWindowFlags(Qt.WindowType.Popup | Qt.WindowType.FramelessWindowHint)
+        vbox = QVBoxLayout()
+        vbox.setContentsMargins(0, 0, 0, 0)
+        self.setLayout(vbox)
+
+        node_list = QListWidget()
+        vbox.addWidget(node_list)
+
+        nodes = map(lambda node: node.__name__, NodesInfo.getNodes())
+        node_list.addItems(nodes)
 
     def getUserNode(self):
         try:
-            res = self.exec(self._position)
+            res = self.exec()
         except:
-            res = self.exec_(self._position)
+            res = self.exec_()
 
         if not res:
             return None
