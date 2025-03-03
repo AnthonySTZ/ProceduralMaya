@@ -17,7 +17,7 @@ class NodesMenu(QDialog):
         self.buildUI()
 
     def buildUI(self):
-        self.setStyleSheet("""background-color: #545454;""")
+        self.setStyleSheet("""background-color: #545454; font-size: 10pt;""")
         self.setWindowFlags(Qt.WindowType.Popup | Qt.WindowType.FramelessWindowHint)
         vbox = QVBoxLayout()
         vbox.setContentsMargins(0, 0, 0, 0)
