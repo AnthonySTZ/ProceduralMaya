@@ -24,7 +24,6 @@ class View(AQGraphicsTransformView):
     def nodesContextMenu(self):
         menu = NodesMenu(QCursor.pos(), self)
         user_node = menu.getUserNode()
-        return
 
         if user_node:
             item_pos = self.mapToScene(self.mapFromGlobal(QCursor.pos()))

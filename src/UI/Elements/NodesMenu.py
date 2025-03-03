@@ -11,6 +11,7 @@ from Core.Nodes.NodesInfo import NodesInfo
 class NodesMenu(QDialog):
     def __init__(self, position, parent=None):
         super().__init__(parent)
+        self._usernode = None
         self.move(position)
         self.buildUI()
 
@@ -29,15 +30,21 @@ class NodesMenu(QDialog):
             node_item = QListWidgetItem(node.__name__, node_list)
             node_item.setData(Qt.ItemDataRole.UserRole, node)
 
+        node_list.itemClicked.connect(self.userClicked)
+
+    def userClicked(self, item):
+        self._usernode = item.data(
+            Qt.ItemDataRole.UserRole
+        )()  # ()() because item store only the type
+        self.close()
+
     def getUserNode(self):
         try:
-            res = self.exec()
+            self.exec()
         except:
-            res = self.exec_()
+            self.exec_()
 
-        if not res:
+        if not self._usernode:
             return None
 
-        return (
-            res.data()()
-        )  # res.data return only the type of the node thats why there is ()()
+        return self._usernode
