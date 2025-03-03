@@ -9,8 +9,9 @@ from UI.Elements.InputsOutputs import InputsOutputs
 
 
 class ConnectionLine(QGraphicsLineItem):
-    def __init__(self):
+    def __init__(self, node_scene):
         super().__init__()
+        self._node_scene = node_scene
         self.setPen(QPen(Qt.GlobalColor.white, 2))
         self.setZValue(-1)
         self._node_item = None
@@ -87,6 +88,7 @@ class ConnectionLine(QGraphicsLineItem):
     def deleteConnection(self):
         print("Delete Connection")
         self._output_node.setInput(self._output_index, None)
+        self._node_scene.update()
         self.setParentItem(None)
 
     def mousePressEvent(self, event):
