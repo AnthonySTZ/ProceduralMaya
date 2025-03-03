@@ -25,6 +25,7 @@ class NodesMenu(QDialog):
 
         search = QLineEdit()
         search.setPlaceholderText("Search...")
+        search.textEdited.connect(self.userSearching)
         vbox.addWidget(search)
 
         search.setStyleSheet(
@@ -38,10 +39,12 @@ class NodesMenu(QDialog):
             """
         )
 
-        node_list = QListWidget()
-        node_list.setSizeAdjustPolicy(QListWidget.SizeAdjustPolicy.AdjustToContents)
-        vbox.addWidget(node_list)
-        node_list.setStyleSheet(
+        self.node_list = QListWidget()
+        self.node_list.setSizeAdjustPolicy(
+            QListWidget.SizeAdjustPolicy.AdjustToContents
+        )
+        vbox.addWidget(self.node_list)
+        self.node_list.setStyleSheet(
             """
             QListView{
                 border: 0px;
@@ -60,13 +63,22 @@ class NodesMenu(QDialog):
 
         nodes = NodesInfo.getNodes()
         for node in nodes:
-            node_item = QListWidgetItem(node.__name__, node_list)
+            node_item = QListWidgetItem(node.__name__, self.node_list)
             node_item.setData(Qt.ItemDataRole.UserRole, node)
 
-        node_list.itemClicked.connect(self.userClicked)
+        self.node_list.itemClicked.connect(self.userClicked)
 
-        min_width = node_list.sizeHint().width() + 20
+        min_width = self.node_list.sizeHint().width() + 20
         self.setFixedWidth(min_width)
+
+        search.setFocus()
+
+    def userSearching(self, search_text):
+        for i in range(self.node_list.count()):
+            item = self.node_list.item(i)
+            item.setHidden(True)
+            if search_text.lower() in item.text().lower():
+                item.setHidden(False)
 
     def userClicked(self, item):
         self._usernode = item.data(
