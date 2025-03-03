@@ -16,6 +16,7 @@ class NodesMenu(QDialog):
         self.buildUI()
 
     def buildUI(self):
+        self.setStyleSheet("""background-color: #545454;""")
         self.setWindowFlags(Qt.WindowType.Popup | Qt.WindowType.FramelessWindowHint)
         vbox = QVBoxLayout()
         vbox.setContentsMargins(0, 0, 0, 0)
@@ -24,6 +25,13 @@ class NodesMenu(QDialog):
         node_list = QListWidget()
         node_list.setResizeMode(QListWidget.ResizeMode.Adjust)
         vbox.addWidget(node_list)
+        node_list.setStyleSheet(
+            """
+            QListWidget::item:hover{
+                background-color : #666666;
+            }
+            """
+        )
 
         nodes = NodesInfo.getNodes()
         for node in nodes:
