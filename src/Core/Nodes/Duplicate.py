@@ -1,5 +1,6 @@
 from .BaseNode import BaseNode
 from Core.Field.Float3 import Float3
+from Core.Field.UnsignedInt import UnsignedInt
 from Core.Field.Types import Types
 
 try:
@@ -20,11 +21,12 @@ class Duplicate(BaseNode):
 
     def __init__(self):
         super().__init__()
-        self._name = "Transform"
-        self._icon = "transform_icon.png"
+        self._name = "duplicate"
+        self._icon = "duplicate_icon.png"
         self._num_inputs = 1
         self._num_outputs = 1
         self._parameters = {
+            "Amount": UnsignedInt(0),
             "Transform Order": Types(
                 "Scale Rot Trans",
                 {
@@ -54,11 +56,35 @@ class Duplicate(BaseNode):
 
         shapes = mc.listRelatives(current_xform, shapes=True)
         order = self._parameters["Transform Order"].getValue()
-        self.transformBaseOnOrder(shapes, order)
+
+        amount = self._parameters["Amount"].value
+        duplicated_list = []
+        last_dup = shapes
+        for _ in range(amount):
+            duplicated = mel.eval("duplicate -rc -rr " + " ".join(last_dup) + ";")
+            mel.eval("select -r " + " ".join(duplicated) + ";")
+            self.transformBaseOnOrder(order)
+            duplicated_list.append(duplicated[0])
+            print("ListRelatives...")
+            print(duplicated_list)
+            last_dup = mc.listRelatives(duplicated[0], shapes=True)
+
+        if amount > 0:
+            merge_command = self.createMergeCommand(current_xform, duplicated_list)
+            merged_xform = mel.eval(merge_command)
+            mel.eval("DeleteHistory;")
+            for dup in duplicated_list:
+                if mc.objExists(dup):
+                    mel.eval("delete " + dup + ";")
+            current_xform = [merged_xform[0]]
 
         return current_xform
 
-    def transformBaseOnOrder(self, shapes, order):
+    def createMergeCommand(self, xform_1, xform_2):
+        command = "polyUnite " + " ".join(xform_1) + " " + " ".join(xform_2) + ";"
+        return command
+
+    def transformBaseOnOrder(self, order):
         translate_command = self.createTranslateCommand()
         rotate_command = self.createRotateCommand()
         scale_command = self.createScaleCommand()
