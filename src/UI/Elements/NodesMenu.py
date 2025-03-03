@@ -43,6 +43,7 @@ class NodesMenu(QDialog):
         self.node_list.setSizeAdjustPolicy(
             QListWidget.SizeAdjustPolicy.AdjustToContents
         )
+
         vbox.addWidget(self.node_list)
         self.node_list.setStyleSheet(
             """
@@ -68,7 +69,7 @@ class NodesMenu(QDialog):
 
         self.node_list.itemClicked.connect(self.userClicked)
 
-        min_width = self.node_list.sizeHint().width() + 20
+        min_width = self.node_list.sizeHint().width() + 50
         self.setFixedWidth(min_width)
 
         search.setFocus()
@@ -91,8 +92,5 @@ class NodesMenu(QDialog):
             self.exec()
         except:
             self.exec_()
-
-        if not self._usernode:
-            return None
 
         return self._usernode
