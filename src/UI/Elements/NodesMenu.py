@@ -4,6 +4,7 @@ from PluginLib.CompactQt.Qt import (
     QListWidget,
     QVBoxLayout,
     QListWidgetItem,
+    QLineEdit,
 )
 from Core.Nodes.NodesInfo import NodesInfo
 
@@ -22,11 +23,29 @@ class NodesMenu(QDialog):
         vbox.setContentsMargins(0, 0, 0, 0)
         self.setLayout(vbox)
 
+        search = QLineEdit()
+        search.setPlaceholderText("Search...")
+        vbox.addWidget(search)
+
+        search.setStyleSheet(
+            """
+            QLineEdit {
+                border: 1px solid #666666;
+                padding-left: 5px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+            }
+            """
+        )
+
         node_list = QListWidget()
         node_list.setSizeAdjustPolicy(QListWidget.SizeAdjustPolicy.AdjustToContents)
         vbox.addWidget(node_list)
         node_list.setStyleSheet(
             """
+            QListView{
+                border: 0px;
+            }
             QListView::item {
                 border: 0px;
                 padding-left: 5px;
