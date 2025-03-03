@@ -1,4 +1,10 @@
-from PluginLib.CompactQt.Qt import QDialog, Qt, QListWidget, QVBoxLayout, QSizePolicy
+from PluginLib.CompactQt.Qt import (
+    QDialog,
+    Qt,
+    QListWidget,
+    QVBoxLayout,
+    QListWidgetItem,
+)
 from Core.Nodes.NodesInfo import NodesInfo
 
 
@@ -15,10 +21,13 @@ class NodesMenu(QDialog):
         self.setLayout(vbox)
 
         node_list = QListWidget()
+        node_list.setResizeMode(QListWidget.ResizeMode.Adjust)
         vbox.addWidget(node_list)
 
-        nodes = map(lambda node: node.__name__, NodesInfo.getNodes())
-        node_list.addItems(nodes)
+        nodes = NodesInfo.getNodes()
+        for node in nodes:
+            node_item = QListWidgetItem(node.__name__, node_list)
+            node_item.setData(Qt.ItemDataRole.UserRole, node)
 
     def getUserNode(self):
         try:
