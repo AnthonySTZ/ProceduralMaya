@@ -23,10 +23,16 @@ class NodesMenu(QDialog):
         self.setLayout(vbox)
 
         node_list = QListWidget()
-        node_list.setResizeMode(QListWidget.ResizeMode.Adjust)
+        node_list.setSizeAdjustPolicy(QListWidget.SizeAdjustPolicy.AdjustToContents)
         vbox.addWidget(node_list)
         node_list.setStyleSheet(
             """
+            QListView::item {
+                border: 0px;
+                padding-left: 5px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+            }
             QListWidget::item:hover{
                 background-color : #666666;
             }
@@ -39,6 +45,9 @@ class NodesMenu(QDialog):
             node_item.setData(Qt.ItemDataRole.UserRole, node)
 
         node_list.itemClicked.connect(self.userClicked)
+
+        min_width = node_list.sizeHint().width() + 20
+        self.setFixedWidth(min_width)
 
     def userClicked(self, item):
         self._usernode = item.data(
