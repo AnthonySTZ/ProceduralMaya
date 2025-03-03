@@ -54,6 +54,7 @@ class Transform(BaseNode):
 
         shapes = mc.listRelatives(current_xform, shapes=True)
         order = self._parameters["Transform Order"].getValue()
+        mel.eval("select -r " + " ".join(shapes))
         self.transformBaseOnOrder(shapes, order)
 
         return current_xform
