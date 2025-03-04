@@ -18,7 +18,7 @@
     <ClCompile Include="pluginMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UI\GraphInterface.cpp">
+    <ClCompile Include="Core\ProcMaya.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
@@ -26,7 +26,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UI\GraphInterface.h">
+    <ClInclude Include="Core\ProcMaya.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">

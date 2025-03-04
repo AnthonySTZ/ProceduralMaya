@@ -7,6 +7,6 @@ void* Command::creator()
 
 MStatus Command::doIt(const MArgList& args) {
 
-    MStatus status = GraphInterface::OpenWindow();
+    MStatus status = ProcMaya::Render();
     return status;
 }

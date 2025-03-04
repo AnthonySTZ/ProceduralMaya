@@ -3,7 +3,7 @@
 
 #include "Command.h"
 
-const MString GraphCmd = "nodeGraph";
+const MString RenderCmd = "renderGraph";
 
 MStatus initializePlugin(MObject obj) {
 	
@@ -13,7 +13,7 @@ MStatus initializePlugin(MObject obj) {
 	MFnPlugin fnPlugin(obj, pluginVendor, pluginVersion);
 	MGlobal::displayInfo("Plugin has been initialized!");
 
-	MStatus status = fnPlugin.registerCommand(GraphCmd, Command::creator);
+	MStatus status = fnPlugin.registerCommand(RenderCmd, Command::creator);
 
 	return MS::kSuccess;
 
@@ -22,7 +22,7 @@ MStatus initializePlugin(MObject obj) {
 MStatus uninitializePlugin(MObject obj) {
 
 	MFnPlugin plugin(obj);
-	CHECK_MSTATUS(plugin.deregisterCommand(GraphCmd));
+	CHECK_MSTATUS(plugin.deregisterCommand(RenderCmd));
 	MGlobal::displayInfo("Plugin has been uninitialize!");
 
 	return MS::kSuccess;

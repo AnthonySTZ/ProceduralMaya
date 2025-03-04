@@ -2,9 +2,9 @@
 
 #include <maya/MGlobal.h>
 
-class GraphInterface {
+class ProcMaya {
 
 public:
-	static MStatus OpenWindow();
+	static MStatus Render();
 
 };

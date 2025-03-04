@@ -1,7 +1,7 @@
 #pragma once
 
 #include <maya/MpxCommand.h>
-#include "UI/GraphInterface.h"
+#include "Core/ProcMaya.h"
 
 class Command : public MPxCommand {
 
