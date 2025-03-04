@@ -4,6 +4,11 @@
 #include <maya/MGlobal.h>
 #include <maya/MArgDatabase.h>
 #include <maya/MSyntax.h>
+#include <maya/MCommandResult.h>
+#include <maya/MFloatPointArray.h>
+#include <maya/MIntArray.h>
+#include <maya/MFnMesh.h>
+#include <maya/MObject.h>
 
 class CubeNode : public MPxCommand {
 
@@ -11,6 +16,6 @@ public:
 	static void* creator();
 	static MSyntax syntax();
 	MStatus doIt(const MArgList& args) override;
-	static MStatus CreateCube(double width, double height, double depth);
+	static MObject CreateCube(double width, double height, double depth);
 
 };
