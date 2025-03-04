@@ -75,5 +75,8 @@ MObject CubeNode::CreateCube(double width, double height, double depth)
     MFnMesh fnMesh;
     MObject parent = MObject::kNullObj; // No parent for this example
     MObject cubeObj = fnMesh.create(vertices.length(), polygonCounts.length(), vertices, polygonCounts, polygonConnects, parent);
+
+    Lambert::AssignShaderTo(cubeObj);
+
 	return cubeObj;
 }

@@ -10,6 +10,8 @@
 #include <maya/MFnMesh.h>
 #include <maya/MObject.h>
 
+#include "../Shaders/Lambert.h"
+
 class CubeNode : public MPxCommand {
 
 public:
