@@ -53,7 +53,8 @@ class Scene:
         print(self._last_mesh)
         if self._last_mesh:
             try:
-                delete_command = "delete " + " ".join(self._last_mesh) + ";"
+                print("Last mesh : " + self._last_mesh)
+                delete_command = "delete " + self._last_mesh + ";"
                 mel.eval(delete_command)
             except Exception as e:
                 print(e)
