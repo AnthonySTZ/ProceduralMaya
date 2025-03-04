@@ -1,14 +1,14 @@
-from Core.Field.Int import Int
+from Core.Field.Float import Float
 
 
-class UnsignedInt(Int):
+class UnsignedFloat(Float):
 
     def __init__(self, value=0):
         super().__init__(value)
 
     def setValue(self, value):
         try:
-            self.value = abs(int(value))
+            self.value = abs(float(value))
         except:
             self.value = 0
         self.valueChanged.emit()
