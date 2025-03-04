@@ -1,9 +1,5 @@
-#include <maya/MFnPlugin.h>
-#include <maya/MGlobal.h>
+#include "Commands.h"
 
-#include "Command.h"
-
-const MString RenderCmd = "renderGraph";
 
 MStatus initializePlugin(MObject obj) {
 	
@@ -13,7 +9,7 @@ MStatus initializePlugin(MObject obj) {
 	MFnPlugin fnPlugin(obj, pluginVendor, pluginVersion);
 	MGlobal::displayInfo("Plugin has been initialized!");
 
-	MStatus status = fnPlugin.registerCommand(RenderCmd, Command::creator);
+	Commands::registerAllCommands(fnPlugin);
 
 	return MS::kSuccess;
 
@@ -22,7 +18,7 @@ MStatus initializePlugin(MObject obj) {
 MStatus uninitializePlugin(MObject obj) {
 
 	MFnPlugin plugin(obj);
-	CHECK_MSTATUS(plugin.deregisterCommand(RenderCmd));
+	Commands::deregisterAllCommands(plugin);
 	MGlobal::displayInfo("Plugin has been uninitialize!");
 
 	return MS::kSuccess;

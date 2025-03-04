@@ -145,13 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Command.cpp" />
-    <ClCompile Include="Core\ProcMaya.cpp" />
+    <ClCompile Include="Commands.cpp" />
+    <ClCompile Include="Core\Nodes\CubeNode.cpp" />
     <ClCompile Include="pluginMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="Core\ProcMaya.h" />
+    <ClInclude Include="Commands.h" />
+    <ClInclude Include="Core\Nodes\CubeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
