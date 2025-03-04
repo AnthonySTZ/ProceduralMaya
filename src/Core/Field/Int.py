@@ -28,6 +28,9 @@ class Int(Field):
 
         return widget
 
+    def userChangedValue(self, line_edit):
+        self.setValue(line_edit.text())
+
     def toStr(self):
         return str(self.value)
 

@@ -1,5 +1,5 @@
 from .BaseNode import BaseNode
-from Core.Field.Float import Float
+from Core.Field.UnsignedFloat import UnsignedFloat
 
 try:
     import maya.cmds as mc  # type: ignore
@@ -15,9 +15,9 @@ class Cube(BaseNode):
         self._num_inputs = 0
         self._num_outputs = 1
         self._parameters = {
-            "width": Float(1.0),
-            "height": Float(1.0),
-            "depth": Float(1.0),
+            "width": UnsignedFloat(1.0),
+            "height": UnsignedFloat(1.0),
+            "depth": UnsignedFloat(1.0),
         }
 
     def commandAtIndex(self, index):
