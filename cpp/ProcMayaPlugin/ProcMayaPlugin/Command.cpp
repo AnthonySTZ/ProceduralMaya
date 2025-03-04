@@ -2,7 +2,7 @@
 
 void* Command::creator()
 {
-    return new Command;
+    return new Command();
 }
 
 MStatus Command::doIt(const MArgList& args) {
