@@ -5,6 +5,6 @@
 class GraphInterface {
 
 public:
-	static void OpenWindow();
+	static MStatus OpenWindow();
 
 };

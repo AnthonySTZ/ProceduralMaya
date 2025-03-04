@@ -1,6 +1,8 @@
 #include "GraphInterface.h"
 
-void GraphInterface::OpenWindow()
+MStatus GraphInterface::OpenWindow()
 {
 	MGlobal::displayInfo("Open Window!");
+
+	return MS::kSuccess;
 }
