@@ -43,15 +43,19 @@ MStatus CubeNode::doIt(const MArgList& args)
 
 MObject CubeNode::CreateCube(double width, double height, double depth)
 {
+    double xOffset = width / 2.0f;
+    double yOffset = height / 2.0f;
+    double zOffset = depth / 2.0f;
+
     MFloatPointArray vertices;
-    vertices.append(MFloatPoint(-1.0f, -1.0f, -1.0f));  // 0
-    vertices.append(MFloatPoint(1.0f, -1.0f, -1.0f));  // 1
-    vertices.append(MFloatPoint(1.0f, 1.0f, -1.0f));  // 2
-    vertices.append(MFloatPoint(-1.0f, 1.0f, -1.0f));  // 3
-    vertices.append(MFloatPoint(-1.0f, -1.0f, 1.0f));  // 4
-    vertices.append(MFloatPoint(1.0f, -1.0f, 1.0f));  // 5
-    vertices.append(MFloatPoint(1.0f, 1.0f, 1.0f));  // 6
-    vertices.append(MFloatPoint(-1.0f, 1.0f, 1.0f));  // 7
+    vertices.append(MFloatPoint(-xOffset, -yOffset, -zOffset));  // 0
+    vertices.append(MFloatPoint(xOffset, -yOffset, -zOffset));  // 1
+    vertices.append(MFloatPoint(xOffset, yOffset, -zOffset));  // 2
+    vertices.append(MFloatPoint(-xOffset, yOffset, -zOffset));  // 3
+    vertices.append(MFloatPoint(-xOffset, -yOffset, zOffset));  // 4
+    vertices.append(MFloatPoint(xOffset, -yOffset, zOffset));  // 5
+    vertices.append(MFloatPoint(xOffset, yOffset, zOffset));  // 6
+    vertices.append(MFloatPoint(-xOffset, yOffset, zOffset));  // 7
 
     // Define the 6 faces of the cube (each face is a quad with 4 vertices)
     MIntArray polygonCounts;
