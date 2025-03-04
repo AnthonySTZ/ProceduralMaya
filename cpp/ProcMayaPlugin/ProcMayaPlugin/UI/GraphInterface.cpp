@@ -1,6 +1,6 @@
 #include "GraphInterface.h"
 
-void Interface::OpenWindow()
+void GraphInterface::OpenWindow()
 {
 	MGlobal::displayInfo("Open Window!");
 }

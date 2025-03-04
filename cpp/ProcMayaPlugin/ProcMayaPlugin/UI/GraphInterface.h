@@ -2,7 +2,7 @@
 
 #include <maya/MGlobal.h>
 
-class Interface {
+class GraphInterface {
 
 public:
 	static void OpenWindow();
