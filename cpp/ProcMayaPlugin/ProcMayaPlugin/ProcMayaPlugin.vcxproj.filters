@@ -24,7 +24,7 @@
     <ClCompile Include="Commands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Shaders\Lambert.cpp">
+    <ClCompile Include="Core\Shaders\StandardSurface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="Commands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Shaders\Lambert.h">
+    <ClInclude Include="Core\Shaders\StandardSurface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

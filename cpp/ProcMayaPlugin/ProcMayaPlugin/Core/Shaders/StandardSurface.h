@@ -5,7 +5,7 @@
 #include <maya/MFnDagNode.h>
 #include <maya/MGlobal.h>
 
-class Lambert {
+class StandardSurface {
 
 public:
 	static void AssignShaderTo(MObject fnObj);

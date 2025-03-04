@@ -1,6 +1,6 @@
-#include "Lambert.h"
+#include "StandardSurface.h"
 
-void Lambert::AssignShaderTo(MObject fnObj)
+void StandardSurface::AssignShaderTo(MObject fnObj)
 {
     MFnDagNode dagNode(fnObj);
     MString objName = dagNode.fullPathName();
@@ -8,7 +8,7 @@ void Lambert::AssignShaderTo(MObject fnObj)
     MString selectCommand = "select -r " + objName + ";";
     MGlobal::executeCommand(selectCommand, true);
 
-    MString command = "hyperShade -assign lambert1 " + objName + ";";
+    MString command = "hyperShade -assign standardSurface1 " + objName + ";";
     MGlobal::executeCommand(command, true);
 
     MString conformNormalCommand = "polyNormal -normalMode 2 -userNormalMode 0 " + objName + ";";
