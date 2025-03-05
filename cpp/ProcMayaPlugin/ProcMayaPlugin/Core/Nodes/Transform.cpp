@@ -76,5 +76,12 @@ void TransformNode::transformMesh(MObject obj, MFloatVector translate, MFloatVec
     MGlobal::displayInfo(MString("Rotate : ") + rotate.x + MString(" ") + rotate.y + MString(" ") + rotate.z);
     MGlobal::displayInfo(MString("Scale : ") + scale.x + MString(" ") + scale.y + MString(" ") + scale.z);
 
+    MItMeshVertex vert_it(obj);
+    for (; !vert_it.isDone(); vert_it.next()) {
+        MPoint position = vert_it.position(MSpace::kWorld);
+        position += translate;
+        vert_it.setPosition(position, MSpace::kObject);
+    }
+
     return;
 }

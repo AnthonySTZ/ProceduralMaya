@@ -9,6 +9,7 @@
 #include <maya/MObject.h>
 #include <maya/MSelectionList.h>
 #include <maya/MFnDependencyNode.h>
+#include <maya/MItMeshVertex.h>
 
 #include "../SyntaxParser.h"
 
