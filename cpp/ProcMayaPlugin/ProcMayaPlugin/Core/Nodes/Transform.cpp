@@ -62,8 +62,8 @@ MStatus TransformNode::doIt(const MArgList& args)
     transformMatrix.setTranslation(translate, MSpace::kWorld);
     transformMatrix.setRotation(rotate, MTransformationMatrix::RotationOrder::kXYZ);
     transformMatrix.setScale(scale, MSpace::kWorld);
-
-    transformMesh(nodeObj, transformMatrix);
+    
+    transformMesh(nodeObj, transformMatrix, SRT);
     MFnDependencyNode depNode(nodeObj);
     setResult(depNode.name());
 
@@ -71,18 +71,21 @@ MStatus TransformNode::doIt(const MArgList& args)
 }
 
 
-
-void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMatrix)
+void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMatrix, TransformOrder transformOrder)
 {
     MFnDependencyNode depNode(obj);
     MGlobal::displayInfo(MString("Transform Obj : ") + depNode.name());
 
+    MMatrix scaleMatrix = transformMatrix.asScaleMatrix();
+    MMatrix rotateMatrix = transformMatrix.asRotateMatrix();
+    MVector translateVector = transformMatrix.getTranslation(MSpace::kWorld);
+
     MItMeshVertex vert_it(obj);
     for (; !vert_it.isDone(); vert_it.next()) {
         MPoint position = vert_it.position(MSpace::kWorld);
-        position *= transformMatrix.asScaleMatrix();
-        position *= transformMatrix.asRotateMatrix();
-        position += transformMatrix.getTranslation(MSpace::kWorld);
+        position *= scaleMatrix;
+        position *= rotateMatrix;
+        position += translateVector;
         vert_it.setPosition(position, MSpace::kObject);
     }
 
