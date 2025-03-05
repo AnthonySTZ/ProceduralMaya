@@ -31,15 +31,15 @@ MStatus TransformNode::doIt(const MArgList& args)
     MArgDatabase argData(syntax(), args);
 
     MString nodeName;
-    MFloatVector translate(0.0f, 0.0f, 0.0f);
+    MVector translate(0.0f, 0.0f, 0.0f);
     double rotate[3] = { 0.0, 0.0, 0.0 };
     double scale[3] = { 1.0, 1.0, 1.0 };
 
     SyntaxParser::ParseMString(argData, "-obj", &nodeName);
 
-    SyntaxParser::ParseFloat(argData, "-tx", &translate.x);
-    SyntaxParser::ParseFloat(argData, "-ty", &translate.y);
-    SyntaxParser::ParseFloat(argData, "-tz", &translate.z);
+    SyntaxParser::ParseDouble(argData, "-tx", &translate.x);
+    SyntaxParser::ParseDouble(argData, "-ty", &translate.y);
+    SyntaxParser::ParseDouble(argData, "-tz", &translate.z);
 
     SyntaxParser::ParseDouble(argData, "-rx", &rotate[0]);
     SyntaxParser::ParseDouble(argData, "-ry", &rotate[1]);

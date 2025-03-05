@@ -5,7 +5,7 @@
 #include <maya/MArgDatabase.h>
 #include <maya/MSyntax.h>
 #include <maya/MCommandResult.h>
-#include <maya/MFloatPointArray.h>
+#include <maya/MPointArray.h>
 #include <maya/MIntArray.h>
 #include <maya/MFnMesh.h>
 #include <maya/MObject.h>
@@ -19,6 +19,6 @@ public:
 	static void* creator();
 	static MSyntax syntax();
 	MStatus doIt(const MArgList& args) override;
-	static MObject CreateCube(float width, float height, float depth);
+	static MObject CreateCube(double width, double height, double depth);
 
 };
