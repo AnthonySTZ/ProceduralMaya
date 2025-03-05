@@ -8,3 +8,10 @@ void SyntaxParser::ParseFloat(MArgDatabase argData, const char* flag, float* val
         *value = float(tmp_value);
     }
 }
+
+void SyntaxParser::ParseMString(MArgDatabase argData, const char* flag, MString* value)
+{
+    if (argData.isFlagSet(flag)) {
+        CHECK_MSTATUS(argData.getFlagArgument(flag, 0, *value));
+    }
+}
