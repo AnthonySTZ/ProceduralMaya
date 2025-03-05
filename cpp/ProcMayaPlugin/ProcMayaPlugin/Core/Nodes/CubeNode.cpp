@@ -18,19 +18,13 @@ MSyntax CubeNode::syntax()
 MStatus CubeNode::doIt(const MArgList& args)
 {
 	MArgDatabase argData(syntax(), args);
-	double width = 1.0;
-	double height = 1.0;
-	double depth = 1.0;
+	float width = 1.0;
+	float height = 1.0;
+	float depth = 1.0;
 
-	if (argData.isFlagSet("-w")) {
-		argData.getFlagArgument("-w", 0, width);
-	}
-	if (argData.isFlagSet("-h")) {
-		argData.getFlagArgument("-h", 0, height);
-	}
-	if (argData.isFlagSet("-d")) {
-		argData.getFlagArgument("-d", 0, depth);
-	}
+    SyntaxParser::ParseFloat(argData, "-w", &width);
+    SyntaxParser::ParseFloat(argData, "-h", &height);
+    SyntaxParser::ParseFloat(argData, "-d", &depth);
 
     MObject mesh = CreateCube(width, height, depth);
     MFnDependencyNode depNode(mesh);
@@ -41,7 +35,7 @@ MStatus CubeNode::doIt(const MArgList& args)
 
 
 
-MObject CubeNode::CreateCube(double width, double height, double depth)
+MObject CubeNode::CreateCube(float width, float height, float depth)
 {
     double xOffset = width / 2.0f;
     double yOffset = height / 2.0f;

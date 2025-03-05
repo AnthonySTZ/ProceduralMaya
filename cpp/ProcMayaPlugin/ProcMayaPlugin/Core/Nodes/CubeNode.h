@@ -10,6 +10,7 @@
 #include <maya/MFnMesh.h>
 #include <maya/MObject.h>
 
+#include "../SyntaxParser.h"
 #include "../Shaders/StandardSurface.h"
 
 class CubeNode : public MPxCommand {
@@ -18,6 +19,6 @@ public:
 	static void* creator();
 	static MSyntax syntax();
 	MStatus doIt(const MArgList& args) override;
-	static MObject CreateCube(double width, double height, double depth);
+	static MObject CreateCube(float width, float height, float depth);
 
 };
