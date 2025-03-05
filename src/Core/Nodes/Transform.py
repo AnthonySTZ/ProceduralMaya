@@ -51,13 +51,32 @@ class Transform(BaseNode):
             return
 
         current_xform = self.input(0).commandAtIndex(0)
+        self.transformMesh(current_xform)
 
-        shapes = mc.listRelatives(current_xform, shapes=True)
-        order = self._parameters["Transform Order"].getValue()
-        mel.eval("select -r " + " ".join(shapes))
-        self.transformBaseOnOrder(shapes, order)
+        # shapes = mc.listRelatives(current_xform, shapes=True)
+        # order = self._parameters["Transform Order"].getValue()
+        # mel.eval("select -r " + " ".join(shapes))
+        # self.transformBaseOnOrder(shapes, order)
 
         return current_xform
+
+    def transformMesh(self, xform):
+        translate = self._parameters["Translate"].toList()
+        rotate = self._parameters["Rotate"].toList()
+        scale = self._parameters["Scale"].toList()
+        cube_obj = mc.transformNode(
+            obj=xform,
+            tx=translate[0],
+            ty=translate[1],
+            tz=translate[2],
+            rx=rotate[0],
+            ry=rotate[1],
+            rz=rotate[2],
+            sx=scale[0],
+            sy=scale[1],
+            sz=scale[2],
+        )
+        return cube_obj
 
     def transformBaseOnOrder(self, shapes, order):
         translate_command = self.createTranslateCommand()

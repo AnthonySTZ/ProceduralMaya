@@ -63,6 +63,11 @@ MStatus TransformNode::doIt(const MArgList& args)
     transformMatrix.setRotation(rotate, MTransformationMatrix::RotationOrder::kXYZ);
     transformMatrix.setScale(scale, MSpace::kWorld);
     
+
+    MGlobal::displayInfo(MString("Translate : ") + translate.x + " " + translate.y + " " + translate.z);
+    MGlobal::displayInfo(MString("Rotate : ") + rotate[0] + " " + rotate[1] + " " + rotate[2]);
+    MGlobal::displayInfo(MString("Scale : ") + scale[0] + " " + scale[1] + " " + scale[2]);
+
     transformMesh(nodeObj, transformMatrix, SRT);
     MFnDependencyNode depNode(nodeObj);
     setResult(depNode.name());
