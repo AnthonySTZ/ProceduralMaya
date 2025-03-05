@@ -25,17 +25,6 @@ class Transform(BaseNode):
         self._num_inputs = 1
         self._num_outputs = 1
         self._parameters = {
-            "Transform Order": Types(
-                "Scale Rot Trans",
-                {
-                    "Scale Rot Trans": self.ScaRotTsl,
-                    "Scale Trans Rot": self.ScaTslRot,
-                    "Rot Scale Trans": self.RotScaTsl,
-                    "Rot Trans Scale": self.RotTslSca,
-                    "Trans Scale Rot": self.TslScaRot,
-                    "Trans Rot Scale": self.TslRotSca,
-                },
-            ),
             "Translate": Float3(0.0, 0.0, 0.0),
             "Rotate": Float3(0.0, 0.0, 0.0),
             "Scale": Float3(1.0, 1.0, 1.0),
@@ -52,11 +41,6 @@ class Transform(BaseNode):
 
         current_xform = self.input(0).commandAtIndex(0)
         self.transformMesh(current_xform)
-
-        # shapes = mc.listRelatives(current_xform, shapes=True)
-        # order = self._parameters["Transform Order"].getValue()
-        # mel.eval("select -r " + " ".join(shapes))
-        # self.transformBaseOnOrder(shapes, order)
 
         return current_xform
 
@@ -77,59 +61,3 @@ class Transform(BaseNode):
             sz=scale[2],
         )
         return cube_obj
-
-    def transformBaseOnOrder(self, shapes, order):
-        translate_command = self.createTranslateCommand()
-        rotate_command = self.createRotateCommand()
-        scale_command = self.createScaleCommand()
-
-        if order == self.ScaRotTsl:
-            mel.eval(scale_command)
-            mel.eval(rotate_command)
-            mel.eval(translate_command)
-            return
-
-        if order == self.ScaTslRot:
-            mel.eval(scale_command)
-            mel.eval(translate_command)
-            mel.eval(rotate_command)
-            return
-
-        if order == self.RotScaTsl:
-            mel.eval(rotate_command)
-            mel.eval(scale_command)
-            mel.eval(translate_command)
-            return
-
-        if order == self.RotTslSca:
-            mel.eval(rotate_command)
-            mel.eval(translate_command)
-            mel.eval(scale_command)
-            return
-
-        if order == self.TslScaRot:
-            mel.eval(translate_command)
-            mel.eval(scale_command)
-            mel.eval(rotate_command)
-            return
-
-        if order == self.TslRotSca:
-            mel.eval(translate_command)
-            mel.eval(rotate_command)
-            mel.eval(scale_command)
-            return
-
-    def createTranslateCommand(self):
-        translate = " -t " + self._parameters["Translate"].toStr()
-        command = "polyMoveVertex" + translate + ";"
-        return command
-
-    def createRotateCommand(self):
-        rotate = " -ro " + self._parameters["Rotate"].toStr()
-        command = "polyMoveVertex" + rotate + ";"
-        return command
-
-    def createScaleCommand(self):
-        scale = " -s " + self._parameters["Scale"].toStr()
-        command = "polyMoveVertex" + scale + ";"
-        return command
