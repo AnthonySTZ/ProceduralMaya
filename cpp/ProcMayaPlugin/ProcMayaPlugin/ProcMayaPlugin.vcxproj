@@ -147,12 +147,14 @@
   <ItemGroup>
     <ClCompile Include="Commands.cpp" />
     <ClCompile Include="Core\Nodes\CubeNode.cpp" />
+    <ClCompile Include="Core\Nodes\Transform.cpp" />
     <ClCompile Include="Core\Shaders\StandardSurface.cpp" />
     <ClCompile Include="pluginMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Commands.h" />
     <ClInclude Include="Core\Nodes\CubeNode.h" />
+    <ClInclude Include="Core\Nodes\Transform.h" />
     <ClInclude Include="Core\Shaders\StandardSurface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
