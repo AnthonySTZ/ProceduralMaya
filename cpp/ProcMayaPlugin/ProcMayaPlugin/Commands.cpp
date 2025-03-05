@@ -7,7 +7,7 @@ const std::vector<CommandEntry> commands = {
 
 MStatus Commands::registerAllCommands(MFnPlugin& fnPlugin)
 {   
-    for (const CommandEntry cmd : commands) {
+    for (const CommandEntry& cmd : commands) {
         CHECK_MSTATUS(fnPlugin.registerCommand(cmd.command, cmd.creator, cmd.syntax));
     }
     return MS::kSuccess;
@@ -15,7 +15,7 @@ MStatus Commands::registerAllCommands(MFnPlugin& fnPlugin)
 
 MStatus Commands::deregisterAllCommands(MFnPlugin& fnPlugin)
 {
-    for (const CommandEntry cmd : commands) {
+    for (const CommandEntry& cmd : commands) {
         CHECK_MSTATUS(fnPlugin.deregisterCommand(cmd.command));
     }
 
