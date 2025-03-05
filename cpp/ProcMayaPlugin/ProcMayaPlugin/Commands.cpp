@@ -1,15 +1,22 @@
 #include "Commands.h"
 
+const std::vector<CommandEntry> commands = {
+        {"cubeNode", CubeNode::creator, CubeNode::syntax}
+};
+
 MStatus Commands::registerAllCommands(MFnPlugin& fnPlugin)
 {   
-    CHECK_MSTATUS(fnPlugin.registerCommand("cubeNode", CubeNode::creator, CubeNode::syntax));
-
+    for (const CommandEntry cmd : commands) {
+        CHECK_MSTATUS(fnPlugin.registerCommand(cmd.command, cmd.creator, cmd.syntax));
+    }
     return MS::kSuccess;
 }
 
 MStatus Commands::deregisterAllCommands(MFnPlugin& fnPlugin)
 {
-    CHECK_MSTATUS(fnPlugin.deregisterCommand("cubeNode"));
+    for (const CommandEntry cmd : commands) {
+        CHECK_MSTATUS(fnPlugin.deregisterCommand(cmd.command));
+    }
 
     return MS::kSuccess;
 }
