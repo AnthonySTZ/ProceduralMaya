@@ -45,9 +45,9 @@ MStatus TransformNode::doIt(const MArgList& args)
     SyntaxParser::ParseDouble(argData, "-ry", &rotate[1]);
     SyntaxParser::ParseDouble(argData, "-rz", &rotate[2]);
 
-    SyntaxParser::ParseDouble(argData, "-sx", &rotate[0]);
-    SyntaxParser::ParseDouble(argData, "-sy", &rotate[1]);
-    SyntaxParser::ParseDouble(argData, "-sz", &rotate[2]);
+    SyntaxParser::ParseDouble(argData, "-sx", &scale[0]);
+    SyntaxParser::ParseDouble(argData, "-sy", &scale[1]);
+    SyntaxParser::ParseDouble(argData, "-sz", &scale[2]);
 
     MSelectionList sel;
     CHECK_MSTATUS(sel.add(nodeName));
@@ -80,7 +80,9 @@ void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMa
     MItMeshVertex vert_it(obj);
     for (; !vert_it.isDone(); vert_it.next()) {
         MPoint position = vert_it.position(MSpace::kWorld);
-        position *= transformMatrix.asMatrix();
+        position *= transformMatrix.asScaleMatrix();
+        position *= transformMatrix.asRotateMatrix();
+        position += transformMatrix.getTranslation(MSpace::kWorld);
         vert_it.setPosition(position, MSpace::kObject);
     }
 
