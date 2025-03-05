@@ -12,6 +12,9 @@
 #include <maya/MItMeshVertex.h>
 #include <maya/MTransformationMatrix.h>
 #include <maya/MMatrix.h>
+#include <maya/MFnMesh.h>
+#include <maya/MPointArray.h>
+#include <maya/MDagPath.h>
 
 #include "../SyntaxParser.h"
 

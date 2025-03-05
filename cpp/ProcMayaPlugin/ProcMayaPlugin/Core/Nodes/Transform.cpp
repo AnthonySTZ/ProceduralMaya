@@ -78,21 +78,24 @@ MStatus TransformNode::doIt(const MArgList& args)
 
 void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMatrix, TransformOrder transformOrder)
 {
-    MFnDependencyNode depNode(obj);
-    MGlobal::displayInfo(MString("Transform Obj : ") + depNode.name());
+    MMatrix fullTransformMatrix = transformMatrix.asMatrix();
 
-    MMatrix scaleMatrix = transformMatrix.asScaleMatrix();
-    MMatrix rotateMatrix = transformMatrix.asRotateMatrix();
-    MVector translateVector = transformMatrix.getTranslation(MSpace::kWorld);
+    MFnDagNode dagNode(obj);
+    MDagPath dagPath;
+    dagNode.getPath(dagPath);
 
-    MItMeshVertex vert_it(obj);
-    for (; !vert_it.isDone(); vert_it.next()) {
-        MPoint position = vert_it.position(MSpace::kWorld);
-        position *= scaleMatrix;
-        position *= rotateMatrix;
-        position += translateVector;
-        vert_it.setPosition(position, MSpace::kObject);
+    dagPath.extendToShape();
+    MFnMesh fnMesh(dagPath);
+    MPointArray points;
+
+    fnMesh.getPoints(points, MSpace::kWorld);
+
+    for (unsigned int i = 0; i < points.length(); i++) {
+        points[i] *= fullTransformMatrix;
     }
+
+    fnMesh.setPoints(points, MSpace::kWorld);
+    MGlobal::displayInfo("Mesh transformed successfully.");
 
     return;
 }
