@@ -9,6 +9,15 @@ void SyntaxParser::ParseFloat(MArgDatabase argData, const char* flag, float* val
     }
 }
 
+void SyntaxParser::ParseDouble(MArgDatabase argData, const char* flag, double* value)
+{
+    if (argData.isFlagSet(flag)) {
+        double tmp_value;
+        CHECK_MSTATUS(argData.getFlagArgument(flag, 0, tmp_value));
+        *value = tmp_value;
+    }
+}
+
 void SyntaxParser::ParseMString(MArgDatabase argData, const char* flag, MString* value)
 {
     if (argData.isFlagSet(flag)) {
