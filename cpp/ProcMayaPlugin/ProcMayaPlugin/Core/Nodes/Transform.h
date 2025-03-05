@@ -11,6 +11,8 @@
 #include <maya/MFnMesh.h>
 #include <maya/MObject.h>
 
+#include "../SyntaxParser.h"
+
 class TransformNode : public MPxCommand {
 
 public:

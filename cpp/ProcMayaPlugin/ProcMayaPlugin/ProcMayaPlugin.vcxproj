@@ -149,6 +149,7 @@
     <ClCompile Include="Core\Nodes\CubeNode.cpp" />
     <ClCompile Include="Core\Nodes\Transform.cpp" />
     <ClCompile Include="Core\Shaders\StandardSurface.cpp" />
+    <ClCompile Include="Core\SyntaxParser.cpp" />
     <ClCompile Include="pluginMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="Core\Nodes\CubeNode.h" />
     <ClInclude Include="Core\Nodes\Transform.h" />
     <ClInclude Include="Core\Shaders\StandardSurface.h" />
+    <ClInclude Include="Core\SyntaxParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
