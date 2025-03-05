@@ -32,8 +32,8 @@ MStatus TransformNode::doIt(const MArgList& args)
 
     MString nodeName;
     MFloatVector translate(0.0f, 0.0f, 0.0f);
-    MFloatVector rotate(0.0f, 0.0f, 0.0f);
-    MFloatVector scale(1.0f, 1.0f, 1.0f);
+    double rotate[3] = { 0.0, 0.0, 0.0 };
+    double scale[3] = { 1.0, 1.0, 1.0 };
 
     SyntaxParser::ParseMString(argData, "-obj", &nodeName);
 
@@ -41,13 +41,13 @@ MStatus TransformNode::doIt(const MArgList& args)
     SyntaxParser::ParseFloat(argData, "-ty", &translate.y);
     SyntaxParser::ParseFloat(argData, "-tz", &translate.z);
 
-    SyntaxParser::ParseFloat(argData, "-rx", &rotate.x);
-    SyntaxParser::ParseFloat(argData, "-ry", &rotate.y);
-    SyntaxParser::ParseFloat(argData, "-rz", &rotate.z);
+    SyntaxParser::ParseDouble(argData, "-rx", &rotate[0]);
+    SyntaxParser::ParseDouble(argData, "-ry", &rotate[1]);
+    SyntaxParser::ParseDouble(argData, "-rz", &rotate[2]);
 
-    SyntaxParser::ParseFloat(argData, "-sx", &scale.x);
-    SyntaxParser::ParseFloat(argData, "-sy", &scale.y);
-    SyntaxParser::ParseFloat(argData, "-sz", &scale.z);
+    SyntaxParser::ParseDouble(argData, "-sx", &rotate[0]);
+    SyntaxParser::ParseDouble(argData, "-sy", &rotate[1]);
+    SyntaxParser::ParseDouble(argData, "-sz", &rotate[2]);
 
     MSelectionList sel;
     CHECK_MSTATUS(sel.add(nodeName));
@@ -58,7 +58,12 @@ MStatus TransformNode::doIt(const MArgList& args)
         return MS::kFailure;
     }
 
-    transformMesh(nodeObj, translate, rotate, scale);
+    MTransformationMatrix transformMatrix;
+    transformMatrix.setTranslation(translate, MSpace::kWorld);
+    transformMatrix.setRotation(rotate, MTransformationMatrix::RotationOrder::kXYZ);
+    transformMatrix.setScale(scale, MSpace::kWorld);
+
+    transformMesh(nodeObj, transformMatrix);
     MFnDependencyNode depNode(nodeObj);
     setResult(depNode.name());
 
@@ -67,19 +72,15 @@ MStatus TransformNode::doIt(const MArgList& args)
 
 
 
-void TransformNode::transformMesh(MObject obj, MFloatVector translate, MFloatVector rotate, MFloatVector scale)
+void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMatrix)
 {
     MFnDependencyNode depNode(obj);
     MGlobal::displayInfo(MString("Transform Obj : ") + depNode.name());
 
-    MGlobal::displayInfo(MString("Translate : ") + translate.x + MString(" ") + translate.y + MString(" ") + translate.z);
-    MGlobal::displayInfo(MString("Rotate : ") + rotate.x + MString(" ") + rotate.y + MString(" ") + rotate.z);
-    MGlobal::displayInfo(MString("Scale : ") + scale.x + MString(" ") + scale.y + MString(" ") + scale.z);
-
     MItMeshVertex vert_it(obj);
     for (; !vert_it.isDone(); vert_it.next()) {
         MPoint position = vert_it.position(MSpace::kWorld);
-        position += translate;
+        position *= transformMatrix.asMatrix();
         vert_it.setPosition(position, MSpace::kObject);
     }
 

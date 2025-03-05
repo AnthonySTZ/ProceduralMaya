@@ -10,6 +10,8 @@
 #include <maya/MSelectionList.h>
 #include <maya/MFnDependencyNode.h>
 #include <maya/MItMeshVertex.h>
+#include <maya/MTransformationMatrix.h>
+#include <maya/MMatrix.h>
 
 #include "../SyntaxParser.h"
 
@@ -19,6 +21,6 @@ public:
 	static void* creator();
 	static MSyntax syntax();
 	MStatus doIt(const MArgList& args) override;
-	static void transformMesh(MObject obj, MFloatVector translate, MFloatVector rotate, MFloatVector scale);
+	static void transformMesh(MObject obj, MTransformationMatrix transformMatrix);
 
 };
