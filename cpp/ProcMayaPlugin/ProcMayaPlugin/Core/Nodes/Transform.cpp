@@ -9,6 +9,8 @@ void* TransformNode::creator() {
 MSyntax TransformNode::syntax()
 {
     MSyntax syntax;
+    syntax.addFlag("-obj", "-object", MSyntax::kString);
+
     syntax.addFlag("-tx", "-translateX", MSyntax::kDouble);
     syntax.addFlag("-ty", "-translateY", MSyntax::kDouble);
     syntax.addFlag("-tz", "-translateZ", MSyntax::kDouble);
@@ -20,15 +22,20 @@ MSyntax TransformNode::syntax()
     syntax.addFlag("-sx", "-scaleX", MSyntax::kDouble);
     syntax.addFlag("-sy", "-scaleY", MSyntax::kDouble);
     syntax.addFlag("-sz", "-scaleZ", MSyntax::kDouble);
+
     return syntax;
 }
 
 MStatus TransformNode::doIt(const MArgList& args)
 {
     MArgDatabase argData(syntax(), args);
+
+    MString nodeName;
     MFloatVector translate(0.0f, 0.0f, 0.0f);
     MFloatVector rotate(0.0f, 0.0f, 0.0f);
     MFloatVector scale(1.0f, 1.0f, 1.0f);
+
+    SyntaxParser::ParseMString(argData, "-obj", &nodeName);
 
     SyntaxParser::ParseFloat(argData, "-tx", &translate.x);
     SyntaxParser::ParseFloat(argData, "-ty", &translate.y);
@@ -42,8 +49,17 @@ MStatus TransformNode::doIt(const MArgList& args)
     SyntaxParser::ParseFloat(argData, "-sy", &scale.y);
     SyntaxParser::ParseFloat(argData, "-sz", &scale.z);
 
-    MObject mesh = transformMesh(translate, rotate, scale);
-    MFnDependencyNode depNode(mesh);
+    MSelectionList sel;
+    CHECK_MSTATUS(sel.add(nodeName));
+    MObject nodeObj;
+    CHECK_MSTATUS(sel.getDependNode(0, nodeObj));
+    if (nodeObj.isNull()) {
+        MGlobal::displayError("Invalid object name: " + nodeName);
+        return MS::kFailure;
+    }
+
+    transformMesh(nodeObj, translate, rotate, scale);
+    MFnDependencyNode depNode(nodeObj);
     setResult(depNode.name());
 
     return MS::kSuccess;
@@ -51,11 +67,14 @@ MStatus TransformNode::doIt(const MArgList& args)
 
 
 
-MObject TransformNode::transformMesh(MFloatVector translate, MFloatVector rotate, MFloatVector scale)
+void TransformNode::transformMesh(MObject obj, MFloatVector translate, MFloatVector rotate, MFloatVector scale)
 {
+    MFnDependencyNode depNode(obj);
+    MGlobal::displayInfo(MString("Transform Obj : ") + depNode.name());
+
     MGlobal::displayInfo(MString("Translate : ") + translate.x + MString(" ") + translate.y + MString(" ") + translate.z);
     MGlobal::displayInfo(MString("Rotate : ") + rotate.x + MString(" ") + rotate.y + MString(" ") + rotate.z);
     MGlobal::displayInfo(MString("Scale : ") + scale.x + MString(" ") + scale.y + MString(" ") + scale.z);
 
-    return MObject();
+    return;
 }
