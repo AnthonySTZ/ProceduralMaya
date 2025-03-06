@@ -30,7 +30,10 @@
     <ClCompile Include="Core\Nodes\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\SyntaxParser.cpp">
+    <ClCompile Include="Core\utils\SyntaxParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Nodes\Merge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,7 +50,10 @@
     <ClInclude Include="Core\Nodes\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\SyntaxParser.h">
+    <ClInclude Include="Core\utils\SyntaxParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Nodes\Merge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

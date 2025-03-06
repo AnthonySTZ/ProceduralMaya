@@ -10,7 +10,7 @@
 #include <maya/MFnMesh.h>
 #include <maya/MObject.h>
 
-#include "../SyntaxParser.h"
+#include "../utils/SyntaxParser.h"
 #include "../Shaders/StandardSurface.h"
 
 class CubeNode : public MPxCommand {

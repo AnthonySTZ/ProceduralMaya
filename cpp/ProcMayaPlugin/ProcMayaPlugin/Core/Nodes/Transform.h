@@ -17,7 +17,7 @@
 #include <maya/MDagPath.h>
 #include <tbb/parallel_for.h>
 
-#include "../SyntaxParser.h"
+#include "../utils/SyntaxParser.h"
 
 class TransformNode : public MPxCommand {
 

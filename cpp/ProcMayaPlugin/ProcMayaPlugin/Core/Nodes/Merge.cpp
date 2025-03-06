@@ -15,5 +15,22 @@ MSyntax Merge::syntax()
 
 MStatus Merge::doIt(const MArgList& args)
 {
+    MArgDatabase argData(syntax(), args);
+
+    MString node1Name;
+    MString node2Name;
+
+    SyntaxParser::ParseMString(argData, "-obj1", &node1Name);
+    SyntaxParser::ParseMString(argData, "-obj2", &node2Name);
+
+    if (node1Name.isEmpty() || node2Name.isEmpty()) return MS::kFailure;
+
+    
+
     return MS::kSuccess;
+}
+
+void Merge::MergeObjs(MObject obj1, MObject obj2) 
+{
+
 }
