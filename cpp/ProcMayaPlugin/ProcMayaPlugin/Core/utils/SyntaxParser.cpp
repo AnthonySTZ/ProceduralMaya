@@ -14,7 +14,7 @@ void SyntaxParser::ParseMString(MArgDatabase argData, const char* flag, MString*
     }
 }
 
-void SyntaxParser::ParseUnsigned(MArgDatabase argData, const char* flag, unsigned int* value)
+void SyntaxParser::ParseInt(MArgDatabase argData, const char* flag, int* value)
 {
     if (argData.isFlagSet(flag)) {
         CHECK_MSTATUS(argData.getFlagArgument(flag, 0, *value));

@@ -56,9 +56,7 @@ MObject Merge::MergeObjs(MObject obj1, MObject obj2)
     MPointArray combinedVertices = vertices1;
     for (unsigned int i = 0; i < (unsigned int)vertices2.length(); i++) {
         combinedVertices.append(vertices2[i]);
-    }
-
-    
+    }    
 
     MIntArray tmpVertices;
 

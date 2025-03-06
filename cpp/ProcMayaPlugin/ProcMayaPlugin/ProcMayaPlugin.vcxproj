@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="Commands.cpp" />
     <ClCompile Include="Core\Nodes\CubeNode.cpp" />
+    <ClCompile Include="Core\Nodes\Duplicate.cpp" />
     <ClCompile Include="Core\Nodes\Merge.cpp" />
     <ClCompile Include="Core\Nodes\Transform.cpp" />
     <ClCompile Include="Core\Shaders\StandardSurface.cpp" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="Commands.h" />
     <ClInclude Include="Core\Nodes\CubeNode.h" />
+    <ClInclude Include="Core\Nodes\Duplicate.h" />
     <ClInclude Include="Core\Nodes\Merge.h" />
     <ClInclude Include="Core\Nodes\Transform.h" />
     <ClInclude Include="Core\Shaders\StandardSurface.h" />
