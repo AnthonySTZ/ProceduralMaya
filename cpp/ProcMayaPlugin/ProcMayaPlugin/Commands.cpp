@@ -3,7 +3,8 @@
 const std::vector<CommandEntry> commands = {
         {"cubeNode", CubeNode::creator, CubeNode::syntax},
         {"transformNode", TransformNode::creator, TransformNode::syntax},
-        {"mergeNode", Merge::creator, Merge::syntax}
+        {"mergeNode", Merge::creator, Merge::syntax},
+        {"duplicateNode", Duplicate::creator, Duplicate::syntax}
 };
 
 MStatus Commands::registerAllCommands(MFnPlugin& fnPlugin)

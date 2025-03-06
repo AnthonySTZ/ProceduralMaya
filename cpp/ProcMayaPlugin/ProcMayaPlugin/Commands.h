@@ -7,6 +7,7 @@
 #include "Core/Nodes/CubeNode.h"
 #include "Core/Nodes/Transform.h"
 #include "Core/Nodes/Merge.h"
+#include "Core/Nodes/Duplicate.h"
 
 struct CommandEntry {
 	const char* command;
