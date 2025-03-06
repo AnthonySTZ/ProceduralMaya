@@ -30,7 +30,3 @@ class Merge(BaseNode):
             return self.input(0).commandAtIndex(0)
         if self.input(1):
             return self.input(1).commandAtIndex(0)
-
-    def createMergeCommand(self, xform_1, xform_2):
-        command = "polyUnite " + " ".join(xform_1) + " " + " ".join(xform_2) + ";"
-        return command
