@@ -9,7 +9,7 @@
 
 class Merge : public MPxCommand{
 
-private:
+public:
 	static void* creator();
 	static MSyntax syntax();
 	MStatus doIt(const MArgList& args) override;
