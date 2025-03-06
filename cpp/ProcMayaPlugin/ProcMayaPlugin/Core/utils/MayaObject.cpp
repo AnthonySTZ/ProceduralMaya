@@ -11,3 +11,12 @@ MStatus MayaObject::FromName(MString name, MObject* obj)
     }
     return MS::kSuccess;
 }
+
+MObject MayaObject::getChildOf(MObject obj) {
+    MFnDagNode dagNode1(obj);
+    if (dagNode1.childCount() > 0) {
+        MObject shapeObj1 = dagNode1.child(0);
+        return shapeObj1;
+    }
+    return obj;
+}

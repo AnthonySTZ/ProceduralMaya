@@ -38,21 +38,13 @@ MStatus Merge::doIt(const MArgList& args)
     return MS::kSuccess;
 }
 
-static MObject getChildOf(MObject obj) {
-    MFnDagNode dagNode1(obj);
-    if (dagNode1.childCount() > 0) {
-        MObject shapeObj1 = dagNode1.child(0);
-        return shapeObj1;
-    }
-    return obj;
-}
+
 
 MObject Merge::MergeObjs(MObject obj1, MObject obj2)
 {
-    MObject shapeObj1 = getChildOf(obj1);
-    MObject shapeObj2 = getChildOf(obj2);
+    MObject shapeObj1 = MayaObject::getChildOf(obj1);
+    MObject shapeObj2 = MayaObject::getChildOf(obj2);
 
-    // Now use MFnMesh on the shape nodes
     MFnMesh meshFn1(shapeObj1);
     MFnMesh meshFn2(shapeObj2);
 
