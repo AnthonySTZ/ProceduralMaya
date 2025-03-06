@@ -48,7 +48,7 @@ class Transform(BaseNode):
         translate = self._parameters["Translate"].toList()
         rotate = self._parameters["Rotate"].toList()
         scale = self._parameters["Scale"].toList()
-        cube_obj = mc.transformNode(
+        obj = mc.transformNode(
             obj=xform,
             tx=translate[0],
             ty=translate[1],
@@ -60,4 +60,4 @@ class Transform(BaseNode):
             sy=scale[1],
             sz=scale[2],
         )
-        return cube_obj
+        return obj
