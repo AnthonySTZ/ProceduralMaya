@@ -15,6 +15,7 @@
 #include <maya/MFnMesh.h>
 #include <maya/MPointArray.h>
 #include <maya/MDagPath.h>
+#include <tbb/parallel_for.h>
 
 #include "../SyntaxParser.h"
 

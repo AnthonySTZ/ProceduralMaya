@@ -2,6 +2,9 @@
 
 #include <string>
 
+#include <chrono>
+using namespace std::chrono;
+
 void* TransformNode::creator() {
     return new TransformNode;
 }
@@ -90,12 +93,20 @@ void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMa
 
     fnMesh.getPoints(points, MSpace::kWorld);
 
-    for (unsigned int i = 0; i < points.length(); i++) {
-        points[i] *= fullTransformMatrix;
-    }
+    auto start = high_resolution_clock::now();
+
+    tbb::parallel_for(tbb::blocked_range<size_t>(0, points.length()), [&](const tbb::blocked_range<size_t>& range) {
+            for (size_t i = range.begin(); i < range.end(); i++) {
+                points[i] *= fullTransformMatrix;
+            }
+        });
+
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+
 
     fnMesh.setPoints(points, MSpace::kWorld);
-    MGlobal::displayInfo("Mesh transformed successfully.");
+    MGlobal::displayInfo(MString("Mesh transformed successfully in ") + duration.count() + MString("ms."));
 
     return;
 }
