@@ -53,7 +53,7 @@ MStatus TransformNode::doIt(const MArgList& args)
     SyntaxParser::ParseDouble(argData, "-sz", &scale[2]);
 
     MObject nodeObj;
-    MayaObject::FromName(nodeName, &nodeObj);
+    CHECK_MSTATUS(MayaObject::FromName(nodeName, &nodeObj));
 
     MTransformationMatrix transformMatrix;
     transformMatrix.setTranslation(translate, MSpace::kWorld);
