@@ -20,3 +20,14 @@ MObject MayaObject::getChildOf(MObject obj) {
     }
     return obj;
 }
+
+MFnMesh MayaObject::getMeshFrom(MObject obj)
+{
+    MFnDagNode dagNode(obj);
+    MDagPath dagPath;
+    dagNode.getPath(dagPath);
+
+    dagPath.extendToShape();
+
+    return MFnMesh(dagPath);
+}

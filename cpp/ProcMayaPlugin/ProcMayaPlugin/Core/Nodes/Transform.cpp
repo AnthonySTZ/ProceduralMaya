@@ -76,12 +76,7 @@ void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMa
 {
     MMatrix fullTransformMatrix = transformMatrix.asMatrix();
 
-    MFnDagNode dagNode(obj);
-    MDagPath dagPath;
-    dagNode.getPath(dagPath);
-
-    dagPath.extendToShape();
-    MFnMesh fnMesh(dagPath);
+    MFnMesh fnMesh = MayaObject::getMeshFrom(obj);
     MPointArray points;
 
     fnMesh.getPoints(points, MSpace::kWorld);
@@ -103,3 +98,5 @@ void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMa
 
     return;
 }
+
+// command transformNode -obj "pCube1" -tx 1.0
