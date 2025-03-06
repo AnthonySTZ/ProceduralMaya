@@ -18,6 +18,7 @@
 #include <tbb/parallel_for.h>
 
 #include "../utils/SyntaxParser.h"
+#include "../utils/MayaObject.h"
 
 class TransformNode : public MPxCommand {
 

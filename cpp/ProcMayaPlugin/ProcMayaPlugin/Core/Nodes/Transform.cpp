@@ -52,14 +52,8 @@ MStatus TransformNode::doIt(const MArgList& args)
     SyntaxParser::ParseDouble(argData, "-sy", &scale[1]);
     SyntaxParser::ParseDouble(argData, "-sz", &scale[2]);
 
-    MSelectionList sel;
-    CHECK_MSTATUS(sel.add(nodeName));
     MObject nodeObj;
-    CHECK_MSTATUS(sel.getDependNode(0, nodeObj));
-    if (nodeObj.isNull()) {
-        MGlobal::displayError("Invalid object name: " + nodeName);
-        return MS::kFailure;
-    }
+    MayaObject::FromName(nodeName, &nodeObj);
 
     MTransformationMatrix transformMatrix;
     transformMatrix.setTranslation(translate, MSpace::kWorld);

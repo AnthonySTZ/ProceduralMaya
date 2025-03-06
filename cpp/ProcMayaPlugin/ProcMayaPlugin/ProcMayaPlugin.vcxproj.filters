@@ -36,6 +36,9 @@
     <ClCompile Include="Core\Nodes\Merge.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\utils\MayaObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Nodes\CubeNode.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Nodes\Merge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\utils\MayaObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
