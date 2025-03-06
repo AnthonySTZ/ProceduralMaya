@@ -66,8 +66,7 @@ MStatus TransformNode::doIt(const MArgList& args)
     MGlobal::displayInfo(MString("Scale : ") + scale[0] + " " + scale[1] + " " + scale[2]);
 
     transformMesh(nodeObj, transformMatrix);
-    MFnDependencyNode depNode(nodeObj);
-    setResult(depNode.name());
+    setResult(nodeName);
 
     return MS::kSuccess;
 }

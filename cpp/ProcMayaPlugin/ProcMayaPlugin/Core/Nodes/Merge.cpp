@@ -25,7 +25,13 @@ MStatus Merge::doIt(const MArgList& args)
 
     if (node1Name.isEmpty() || node2Name.isEmpty()) return MS::kFailure;
 
-    
+
+    MObject node1Obj;
+    MObject node2Obj;
+    CHECK_MSTATUS(MayaObject::FromName(node1Name, &node1Obj));
+    CHECK_MSTATUS(MayaObject::FromName(node2Name, &node2Obj));
+
+    setResult(node1Name);
 
     return MS::kSuccess;
 }

@@ -6,6 +6,7 @@
 #include <maya/MArgDatabase.h>
 
 #include "../utils/SyntaxParser.h"
+#include "../utils/MayaObject.h"
 
 class Merge : public MPxCommand{
 
