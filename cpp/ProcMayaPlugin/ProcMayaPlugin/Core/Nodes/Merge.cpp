@@ -1,5 +1,8 @@
 #include "Merge.h"
 
+#include <chrono>
+using namespace std::chrono;
+
 void* Merge::creator()
 {
     return new Merge;
@@ -38,8 +41,6 @@ MStatus Merge::doIt(const MArgList& args)
     return MS::kSuccess;
 }
 
-
-
 MObject Merge::MergeObjs(MObject obj1, MObject obj2)
 {
     MObject shapeObj1 = MayaObject::getChildOf(obj1);
@@ -57,41 +58,31 @@ MObject Merge::MergeObjs(MObject obj1, MObject obj2)
         combinedVertices.append(vertices2[i]);
     }
 
-    MIntArray polygonCounts;
-    MIntArray polygonConnects;
+    
 
     MIntArray tmpVertices;
 
-    for (unsigned int i = 0; i < (unsigned int)meshFn1.numPolygons(); i++) {
-        meshFn1.getPolygonVertices(i, tmpVertices);
+    auto start = high_resolution_clock::now();
 
-        for (unsigned int j = 0; j < (unsigned int)tmpVertices.length(); j++) {
-            polygonConnects.append(tmpVertices[j]);
-        }
+    MIntArray polygonCounts, polygonConnects;
+    meshFn1.getVertices(polygonCounts, polygonConnects);
 
-        polygonCounts.append(tmpVertices.length());
+    MIntArray polygonCounts2, polygonConnects2;
+    meshFn2.getVertices(polygonCounts2, polygonConnects2);
+
+    for (unsigned int i = 0; i < polygonCounts2.length(); i++) {
+        polygonCounts.append(polygonCounts2[i]);
+    }
+    unsigned int vertexOffset = vertices1.length();
+    for (unsigned int i = 0; i < polygonConnects2.length(); i++) {
+        polygonConnects.append(polygonConnects2[i] + vertexOffset);
     }
 
-    unsigned int vertexOffset = vertices1.length(); 
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    MGlobal::displayInfo(MString("Merge in ") + duration.count() + MString("ms."));
 
-    for (unsigned int i = 0; i < (unsigned int)meshFn2.numPolygons(); i++) { 
-        meshFn2.getPolygonVertices(i, tmpVertices);
-
-        for (unsigned int j = 0; j < (unsigned int)tmpVertices.length(); j++) {
-            polygonConnects.append(tmpVertices[j] + vertexOffset);
-        }
-
-        polygonCounts.append(tmpVertices.length());
-    }
-
-    
     int numPolygons = polygonCounts.length();
-    
-    MGlobal::displayInfo(MString("Num Polygons : ") + numPolygons);
-    MGlobal::displayInfo(MString("Num Vertices1 : ") + vertices1.length());
-    MGlobal::displayInfo(MString("Num Vertices2: ") + vertices2.length());
-    MGlobal::displayInfo(MString("Polygon Counts: ") + polygonCounts.length());
-    MGlobal::displayInfo(MString("Polygon Connects: ") + polygonConnects.length());
 
     // Create new mesh
     MFnMesh newMeshFn;
@@ -109,3 +100,5 @@ MObject Merge::MergeObjs(MObject obj1, MObject obj2)
 }
 
 // command mergeNode -f "pCube1" -s "pCube2"
+// Merge in 22944ms.
+// Merge in 14684ms.
