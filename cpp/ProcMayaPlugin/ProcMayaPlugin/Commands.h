@@ -6,6 +6,7 @@
 #include <vector>
 #include "Core/Nodes/CubeNode.h"
 #include "Core/Nodes/Transform.h"
+#include "Core/Nodes/Merge.h"
 
 struct CommandEntry {
 	const char* command;
