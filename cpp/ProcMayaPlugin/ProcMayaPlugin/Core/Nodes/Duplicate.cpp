@@ -1,5 +1,8 @@
 #include "Duplicate.h"
 
+#include <chrono>
+using namespace std::chrono;
+
 void* Duplicate::creator()
 {
     return new Duplicate;
@@ -51,7 +54,7 @@ MStatus Duplicate::doIt(const MArgList& args)
     SyntaxParser::ParseDouble(argData, "-sz", &scale[2]);
 
     MObject nodeObj;
-    CHECK_MSTATUS(MayaObject::FromName(nodeName, &nodeObj));
+    CHECK_MSTATUS(MayaObject::FromName(nodeName, &nodeObj));    
 
     MTransformationMatrix transformMatrix;
     transformMatrix.setTranslation(translate, MSpace::kWorld);
@@ -59,16 +62,60 @@ MStatus Duplicate::doIt(const MArgList& args)
     transformMatrix.setScale(scale, MSpace::kWorld);
 
     MObject new_obj = DuplicateMesh(nodeObj, amount, transformMatrix);
-    setResult(nodeName);
+    MFnDependencyNode depNode(new_obj);
+    setResult(depNode.name());
 
     return MS::kSuccess;
 }
 
 MObject Duplicate::DuplicateMesh(MObject obj, int amount, MTransformationMatrix transformMatrix)
 {
+    MMatrix fullTransformMatrix = transformMatrix.asMatrix();
 
-    MObject shapeObj = MayaObject::getChildOf(obj);
-    MFnMesh meshFn1(shapeObj);
+    MFnMesh meshFn = MayaObject::getMeshFrom(obj);
 
-    return MObject();
+    MPointArray baseVertices;
+    meshFn.getPoints(baseVertices, MSpace::kWorld);
+
+    MPointArray combinedVertices;
+
+    MIntArray basePolygonCounts, basePolygonConnects, combinedPolygonCounts, combinedPolygonConnects;
+    meshFn.getVertices(basePolygonCounts, basePolygonConnects);   
+
+    auto start = high_resolution_clock::now();
+
+    for (unsigned int i = 0; i < amount; i++) {
+        for (unsigned int j = 0; j < (unsigned int)baseVertices.length(); j++) {
+            combinedVertices.append(baseVertices[j]);
+        }
+        for (unsigned int j = 0; j < basePolygonCounts.length(); j++) {
+            combinedPolygonCounts.append(basePolygonCounts[j]);
+        }
+        unsigned int vertexOffset = baseVertices.length() * i;
+        for (unsigned int j = 0; j < basePolygonConnects.length(); j++) {
+            combinedPolygonConnects.append(basePolygonConnects[j] + vertexOffset);
+        }
+        for (unsigned int k = 0; k < baseVertices.length(); k++) {
+            baseVertices[k] *= fullTransformMatrix;
+        }
+    }
+
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    MGlobal::displayInfo(MString("Duplicate in ") + duration.count() + MString("ms."));
+
+    int numPolygons = combinedPolygonCounts.length();
+
+    MFnMesh newMeshFn;
+    MObject newObj = newMeshFn.create(combinedVertices.length(), numPolygons, combinedVertices, combinedPolygonCounts, combinedPolygonConnects, MObject::kNullObj);
+    StandardSurface::AssignShaderTo(newObj);
+
+    // delete old obj
+    MFnDependencyNode depNode(obj);
+    MGlobal::executeCommand(MString("delete ") + depNode.name() + ";");
+
+    return newObj;
 }
+
+// command duplicateNode -obj "pCube1" -a 200 -tx 1.2 -ry 45
+// Duplicate in 138740ms with 6146 vertices.
