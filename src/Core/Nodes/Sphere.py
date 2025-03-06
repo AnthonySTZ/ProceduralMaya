@@ -29,7 +29,7 @@ class Sphere(BaseNode):
             return
 
         command = self.createSphereMelCommand()
-        return mel.eval(command)
+        return mel.eval(command)[0]
 
     def createSphereMelCommand(self):
         axis = " -ax " + self._parameters["Axis"].toStr()
