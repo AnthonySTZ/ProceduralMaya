@@ -13,6 +13,7 @@ For now, all the available nodes are working:
 - Cube
 - Sphere
 - Transform
+- Duplicate
 - Merge
 - Null
 
