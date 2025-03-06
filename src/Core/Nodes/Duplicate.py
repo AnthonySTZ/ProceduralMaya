@@ -27,17 +27,6 @@ class Duplicate(BaseNode):
         self._num_outputs = 1
         self._parameters = {
             "Amount": UnsignedInt(0),
-            "Transform Order": Types(
-                "Scale Rot Trans",
-                {
-                    "Scale Rot Trans": self.ScaRotTsl,
-                    "Scale Trans Rot": self.ScaTslRot,
-                    "Rot Scale Trans": self.RotScaTsl,
-                    "Rot Trans Scale": self.RotTslSca,
-                    "Trans Scale Rot": self.TslScaRot,
-                    "Trans Rot Scale": self.TslRotSca,
-                },
-            ),
             "Translate": Float3(0.0, 0.0, 0.0),
             "Rotate": Float3(0.0, 0.0, 0.0),
             "Scale": Float3(1.0, 1.0, 1.0),
