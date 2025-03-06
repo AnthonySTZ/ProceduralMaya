@@ -19,21 +19,12 @@
 
 #include "../SyntaxParser.h"
 
-enum TransformOrder {
-	SRT,
-	STR,
-	RST,
-	RTS,
-	TSR,
-	TRS,
-};
-
 class TransformNode : public MPxCommand {
 
 public:
 	static void* creator();
 	static MSyntax syntax();
 	MStatus doIt(const MArgList& args) override;
-	static void transformMesh(MObject obj, MTransformationMatrix transformMatrix, TransformOrder transformOrder);
+	static void transformMesh(MObject obj, MTransformationMatrix transformMatrix);
 
 };

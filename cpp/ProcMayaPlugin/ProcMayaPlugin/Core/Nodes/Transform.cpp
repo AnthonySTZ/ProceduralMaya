@@ -71,7 +71,7 @@ MStatus TransformNode::doIt(const MArgList& args)
     MGlobal::displayInfo(MString("Rotate : ") + rotate[0] + " " + rotate[1] + " " + rotate[2]);
     MGlobal::displayInfo(MString("Scale : ") + scale[0] + " " + scale[1] + " " + scale[2]);
 
-    transformMesh(nodeObj, transformMatrix, SRT);
+    transformMesh(nodeObj, transformMatrix);
     MFnDependencyNode depNode(nodeObj);
     setResult(depNode.name());
 
@@ -79,7 +79,7 @@ MStatus TransformNode::doIt(const MArgList& args)
 }
 
 
-void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMatrix, TransformOrder transformOrder)
+void TransformNode::transformMesh(MObject obj, MTransformationMatrix transformMatrix)
 {
     MMatrix fullTransformMatrix = transformMatrix.asMatrix();
 
