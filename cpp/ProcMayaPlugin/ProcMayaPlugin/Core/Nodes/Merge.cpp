@@ -43,11 +43,8 @@ MStatus Merge::doIt(const MArgList& args)
 
 MObject Merge::MergeObjs(MObject obj1, MObject obj2)
 {
-    MObject shapeObj1 = MayaObject::getChildOf(obj1);
-    MObject shapeObj2 = MayaObject::getChildOf(obj2);
-
-    MFnMesh meshFn1(shapeObj1);
-    MFnMesh meshFn2(shapeObj2);
+    MFnMesh meshFn1 = MayaObject::getMeshFrom(obj1);
+    MFnMesh meshFn2 = MayaObject::getMeshFrom(obj2);
 
     MPointArray vertices1, vertices2;
     meshFn1.getPoints(vertices1);
@@ -57,8 +54,6 @@ MObject Merge::MergeObjs(MObject obj1, MObject obj2)
     for (unsigned int i = 0; i < (unsigned int)vertices2.length(); i++) {
         combinedVertices.append(vertices2[i]);
     }    
-
-    MIntArray tmpVertices;
 
     auto start = high_resolution_clock::now();
 
