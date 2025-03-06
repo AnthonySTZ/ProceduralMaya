@@ -26,22 +26,28 @@ class Parameters(QWidget):
         self.setLayout(self._vbox)
         self._scene.nodeClicked.connect(self.setNode)
 
+        self.createTitle()
+        self.field_table = ParametersWidget()
+        self.field_table.valueChanged.connect(self._scene.updateCurrentRender)
+        self._vbox.addWidget(self.field_table)
+        self._vbox.addStretch()
+
     def setNode(self, node):
         self._node = node
         self.updateParameters()
         self._node.nameChanged.connect(self._node_name.setText)
 
     def updateParameters(self):
-        self.clearParams()
+        self._node_name.setText("")
+        self.field_table.clearParams()
         if self._node is None:
             return
 
-        self.createTitle()
-        self.createParameters()
-        self._vbox.addStretch()
+        self._node_name.setText(self._node.getName())
+        self.field_table.updateParams(self._node.getParameters())
 
     def createTitle(self):
-        self._node_name = QLineEdit(self._node.getName())
+        self._node_name = QLineEdit("")
         self._node_name.returnPressed.connect(
             lambda node_name=self._node_name: self.changeNodeName(node_name.text())
         )
@@ -54,18 +60,5 @@ class Parameters(QWidget):
         )
         self._vbox.addWidget(self._node_name)
 
-    def createParameters(self):
-        field_table = ParametersWidget(self._node.getParameters())
-        self._vbox.addWidget(field_table)
-        field_table.valueChanged.connect(self._scene.updateCurrentRender)
-
     def changeNodeName(self, name):
         self._scene.getNodeScene().renameNode(self._node.getName(), name)
-
-    def clearParams(self):
-        for i in reversed(range(self._vbox.count())):
-            item = self._vbox.itemAt(i)
-            if item.spacerItem():
-                self._vbox.removeItem(item)
-            else:
-                item.widget().setParent(None)

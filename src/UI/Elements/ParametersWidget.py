@@ -5,14 +5,13 @@ class ParametersWidget(QWidget):
 
     valueChanged = SIGNAL()
 
-    def __init__(self, parameters):
+    def __init__(self):
         super().__init__()
-        self._parameters = parameters
         self.buildUI()
 
     def buildUI(self):
-        layout = QGridLayout(self)
-        self.setLayout(layout)
+        self.gridlayout = QGridLayout(self)
+        self.setLayout(self.gridlayout)
 
         self.setStyleSheet(
             """
@@ -25,14 +24,20 @@ class ParametersWidget(QWidget):
             """
         )
 
+    def updateParams(self, parameters):
         i = 0
-        for param, value in self._parameters.items():
+        for param, value in parameters.items():
             label = QLabel(param)
             label.setAlignment(
                 Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignCenter
             )
             field_widget = value.getUI()
             value.valueChanged.connect(self.valueChanged.emit)
-            layout.addWidget(label, i, 0)
-            layout.addWidget(field_widget, i, 1)
+            self.gridlayout.addWidget(label, i, 0)
+            self.gridlayout.addWidget(field_widget, i, 1)
             i += 1
+
+    def clearParams(self):
+        for i in reversed(range(self.gridlayout.count())):
+            item = self.gridlayout.itemAt(i)
+            item.widget().setParent(None)
