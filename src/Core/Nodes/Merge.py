@@ -1,8 +1,7 @@
 from .BaseNode import BaseNode
-from Core.Field.Float import Float
 
 try:
-    import maya.mel as mel  # type: ignore
+    import maya.cmds as mc  # type: ignore
 except:
     pass
 
@@ -24,12 +23,8 @@ class Merge(BaseNode):
         if self.input(0) and self.input(1):
             first_xform = self.input(0).commandAtIndex(0)
             second_xform = self.input(1).commandAtIndex(0)
-            command = self.createMergeCommand(first_xform, second_xform)
-            merged_obj = mel.eval(command)
-            mel.eval("select -r " + " ".join(merged_obj) + ";")
-            mel.eval("DeleteHistory")
-            print("Merged : " + str(merged_obj[0]))
-            return [merged_obj[0]]
+            merged_obj = mc.mergeNode(f=first_xform, s=second_xform)
+            return merged_obj
 
         if self.input(0):
             return self.input(0).commandAtIndex(0)
