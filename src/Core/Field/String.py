@@ -1,0 +1,34 @@
+from PluginLib.CompactQt.Qt import (
+    QHBoxLayout,
+    QWidget,
+    QLineEdit,
+    SIGNAL,
+)
+from Core.Field.Field import Field
+
+
+class String(Field):
+    valueChanged = SIGNAL()
+
+    def __init__(self, value=""):
+        super().__init__()
+        self.value = value
+
+    def getUI(self):
+        hbox = QHBoxLayout()
+        hbox.setContentsMargins(0, 0, 0, 0)
+        widget = QWidget()
+        widget.setLayout(hbox)
+
+        line_edit = QLineEdit(str(self.value))
+        line_edit.returnPressed.connect(lambda le=line_edit: self.userChangedValue(le))
+        hbox.addWidget(line_edit)
+
+        return widget
+
+    def userChangedValue(self, line_edit):
+        self.setValue(line_edit.text())
+
+    def setValue(self, value):
+        self.value = str(value)
+        self.valueChanged.emit()
