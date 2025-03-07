@@ -40,6 +40,8 @@ class Transform(BaseNode):
             return
 
         current_xform = self.input(0).commandAtIndex(0)
+        if not mc.objExists(current_xform):
+            return ""
         self.transformMesh(current_xform)
 
         return current_xform

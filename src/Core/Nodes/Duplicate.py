@@ -42,6 +42,8 @@ class Duplicate(BaseNode):
             return
 
         current_xform = self.input(0).commandAtIndex(0)
+        if not mc.objExists(current_xform):
+            return ""
         dup_obj = self.duplicateMesh(current_xform)
 
         return dup_obj
