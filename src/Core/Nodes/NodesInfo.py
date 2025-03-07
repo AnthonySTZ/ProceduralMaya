@@ -8,6 +8,7 @@ class NodesInfo:
         from Core.Nodes.Duplicate import Duplicate
         from Core.Nodes.Merge import Merge
         from Core.Nodes.Null import Null
+        from Core.Nodes.Import import Import
 
-        nodes = [Cube, Sphere, Transform, Duplicate, Merge, Null]
+        nodes = [Cube, Sphere, Transform, Duplicate, Merge, Null, Import]
         return nodes
