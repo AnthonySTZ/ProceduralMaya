@@ -23,8 +23,12 @@ class Merge(BaseNode):
         if self.input(0) and self.input(1):
             first_xform = self.input(0).commandAtIndex(0)
             second_xform = self.input(1).commandAtIndex(0)
-            if not mc.objExists(first_xform) or not mc.objExists(second_xform):
+            if not mc.objExists(first_xform) and not mc.objExists(second_xform):
                 return ""
+            if not mc.objExists(first_xform):
+                return second_xform
+            if not mc.objExists(second_xform):
+                return first_xform
             merged_obj = mc.mergeNode(f=first_xform, s=second_xform)
             return merged_obj
 
