@@ -25,4 +25,9 @@ class Import(BaseNode):
         return obj
 
     def getMesh(self):
+        mesh = self._parameters["MeshName"].value
+        if mc.objExists(mesh):
+            dup_mesh = mc.duplicate(mesh)[0]
+            mc.showHidden(dup_mesh)
+            return dup_mesh
         return ""
