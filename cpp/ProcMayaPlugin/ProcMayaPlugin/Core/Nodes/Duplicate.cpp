@@ -56,6 +56,10 @@ MStatus Duplicate::doIt(const MArgList& args)
     MObject nodeObj;
     CHECK_MSTATUS(MayaObject::FromName(nodeName, &nodeObj));    
 
+    rotate[0] = Math::toRadians(rotate[0]);
+    rotate[1] = Math::toRadians(rotate[1]);
+    rotate[2] = Math::toRadians(rotate[2]);
+
     MTransformationMatrix transformMatrix;
     transformMatrix.setTranslation(translate, MSpace::kWorld);
     transformMatrix.setRotation(rotate, MTransformationMatrix::RotationOrder::kXYZ);

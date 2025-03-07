@@ -12,6 +12,7 @@
 #include "../utils/SyntaxParser.h"
 #include "../Shaders/StandardSurface.h"
 #include "../utils/MayaObject.h"
+#include "../utils/Math.h"
 
 class Duplicate : public MPxCommand {
 

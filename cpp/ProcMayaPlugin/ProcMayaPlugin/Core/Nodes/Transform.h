@@ -18,6 +18,7 @@
 
 #include "../utils/SyntaxParser.h"
 #include "../utils/MayaObject.h"
+#include "../utils/Math.h"
 
 class TransformNode : public MPxCommand {
 
