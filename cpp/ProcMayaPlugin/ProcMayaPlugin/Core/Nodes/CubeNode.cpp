@@ -51,7 +51,6 @@ MObject CubeNode::CreateCube(double width, double height, double depth)
     vertices.append(MPoint(xOffset, yOffset, zOffset));  // 6
     vertices.append(MPoint(-xOffset, yOffset, zOffset));  // 7
 
-    // Define the 6 faces of the cube (each face is a quad with 4 vertices)
     MIntArray polygonCounts;
     polygonCounts.append(4);  // First face
     polygonCounts.append(4);  // Second face
@@ -60,7 +59,6 @@ MObject CubeNode::CreateCube(double width, double height, double depth)
     polygonCounts.append(4);  // Fifth face
     polygonCounts.append(4);  // Sixth face
 
-    // Define the connectivity (vertex indices) for each face
     MIntArray polygonConnects;
     polygonConnects.append(0); polygonConnects.append(1); polygonConnects.append(2); polygonConnects.append(3);  // First face
     polygonConnects.append(4); polygonConnects.append(5); polygonConnects.append(6); polygonConnects.append(7);  // Second face
@@ -69,10 +67,8 @@ MObject CubeNode::CreateCube(double width, double height, double depth)
     polygonConnects.append(2); polygonConnects.append(3); polygonConnects.append(7); polygonConnects.append(6);  // Fifth face
     polygonConnects.append(3); polygonConnects.append(0); polygonConnects.append(4); polygonConnects.append(7);  // Sixth face
 
-    // Create the cube using MFnMesh
     MFnMesh fnMesh;
-    MObject parent = MObject::kNullObj; // No parent for this example
-    MObject cubeObj = fnMesh.create(vertices.length(), polygonCounts.length(), vertices, polygonCounts, polygonConnects, parent);
+    MObject cubeObj = fnMesh.create(vertices.length(), polygonCounts.length(), vertices, polygonCounts, polygonConnects, MObject::kNullObj);
 
     StandardSurface::AssignShaderTo(cubeObj);
 
