@@ -69,3 +69,7 @@ class Scene:
             print(e)
         print("Rendered " + str(self._last_mesh))
         mel.eval("select -clear;")
+
+    def deleteNode(self, node):
+        if node not in self._nodes():
+            return

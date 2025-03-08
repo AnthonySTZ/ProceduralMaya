@@ -23,3 +23,12 @@ def test_should_return_an_untaken_name_for_new_node():
     scene.addNode(cube)
     scene.addNode(cube2)
     assert scene.getUntakenName("Cube") == "Cube2"
+
+
+def test_delete_nodes():
+    scene = Scene()
+    cube = Cube()
+    transform = Transform()
+    scene.addNode(cube)
+    scene.addNode(transform)
+    transform.setInput(0, cube)
