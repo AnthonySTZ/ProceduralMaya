@@ -76,10 +76,13 @@ class Scene:
 
         deleted_node = self._nodes[node_name]
 
-        for node in deleted_node._outputs.keys():
-            connection = deleted_node._outputs[node]
+        for output_node in deleted_node._outputs.keys():
+            connection = deleted_node._outputs[output_node]
             input_index = connection.inputIndex()
-            print(input_index)
-            del node._inputs[input_index]
+            del output_node._inputs[input_index]
+
+        for input_conn in deleted_node._inputs.values():
+            node = input_conn.output_node()
+            del node._outputs[deleted_node]
 
         del self._nodes[node_name]
