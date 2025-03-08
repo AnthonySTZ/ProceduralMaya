@@ -74,4 +74,12 @@ class Scene:
         if node_name not in self._nodes.keys():
             return
 
+        deleted_node = self._nodes[node_name]
+
+        for node in deleted_node._outputs.keys():
+            connection = deleted_node._outputs[node]
+            input_index = connection.inputIndex()
+            print(input_index)
+            del node._inputs[input_index]
+
         del self._nodes[node_name]

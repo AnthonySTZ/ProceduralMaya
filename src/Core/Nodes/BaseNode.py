@@ -64,6 +64,7 @@ class BaseNode(QObject):
 
         connection = NodeConnection(input_node, output_index, self, input_index)
         self._inputs[input_index] = connection
+        input_node._outputs[self] = connection
 
     def inputConnection(self, index):
         """
