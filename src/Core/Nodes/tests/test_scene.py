@@ -28,7 +28,11 @@ def test_should_return_an_untaken_name_for_new_node():
 def test_delete_nodes():
     scene = Scene()
     cube = Cube()
+    cube.setName("MyCube")
     transform = Transform()
     scene.addNode(cube)
     scene.addNode(transform)
     transform.setInput(0, cube)
+    scene.deleteNode("MyCube")
+    assert scene.getNodes() == [transform]
+    assert transform.input(0) == None
