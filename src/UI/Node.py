@@ -61,6 +61,20 @@ class Node(QGraphicsObject):
         )
         self._outputs.clicked.connect(self.ioClicked.emit)
 
+    def delete(self):
+        for io in self._inputs.getIOs():
+            for conn in io.connections:
+                if conn is not None:
+                    conn.deleteLine()
+        for io in self._outputs.getIOs():
+            for conn in io.connections:
+                if conn is not None:
+                    conn.deleteLine()
+
+        self.blockSignals(True)
+        self.setParentItem(None)
+        self.deleteLater()
+
     def getNode(self):
         return self._node
 

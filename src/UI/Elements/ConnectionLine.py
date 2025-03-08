@@ -22,6 +22,8 @@ class ConnectionLine(QGraphicsLineItem):
         """
 
         self.defineInputAndOutputNodes(io_item_1, io_item_2)
+        io_item_1.connections.append(self)
+        io_item_2.connections.append(self)
 
         # Input of the outputNode already connected
         if self._output_node.input(self._output_index) is not None:
@@ -89,6 +91,11 @@ class ConnectionLine(QGraphicsLineItem):
         print("Delete Connection")
         self._output_node.setInput(self._output_index, None)
         self._node_scene.update()
+        self.deleteLine()
+
+    def deleteLine(self):
+        self._input_io.connections.remove(self)
+        self._output_io.connections.remove(self)
         self.setParentItem(None)
 
     def mousePressEvent(self, event):

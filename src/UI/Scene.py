@@ -73,6 +73,8 @@ class Scene(QGraphicsScene):
             self.resetSelection()
         elif event.key() == Qt.Key.Key_R:
             self.renderCurrentNode()
+        elif event.key() == Qt.Key.Key_Delete:
+            self.deleteCurrentNode()
 
     def renderCurrentNode(self):
         if self._current_selected_node is None:
@@ -89,6 +91,14 @@ class Scene(QGraphicsScene):
 
     def updateCurrentRender(self):
         self._node_scene.update()
+
+    def deleteCurrentNode(self):
+        if self._current_selected_node is None:
+            return
+        print("Delete : " + self._current_selected_node.getNode().getName())
+        self._node_scene.deleteNode(self._current_selected_node.getNode())
+        self._node_items.remove(self._current_selected_node)
+        self._current_selected_node.delete()
 
     def getNodeScene(self):
         return self._node_scene

@@ -23,6 +23,7 @@ class InputsOutputs(QGraphicsObject):
         self._type = type
         self._amount = amount
         self._node_item = node_item
+        self._ios = []
         self.buildUI()
 
     def buildUI(self):
@@ -37,6 +38,7 @@ class InputsOutputs(QGraphicsObject):
             io.setUserData("index", index)
             io.setParentItem(self)
             io.clicked.connect(lambda io=io: self.clicked.emit(io))
+            self._ios.append(io)
 
     def createIOItem(self, x, y):
         return IOItem(x, y, self.RADIUS, self.RADIUS, self._type, self._node_item)
@@ -50,6 +52,9 @@ class InputsOutputs(QGraphicsObject):
     def calcPointsHorizontalPosition(self):
         line_with = NodeRect.WIDTH - self.PADDING_WIDTH * 2 - self.RADIUS
         return logics.evenly_distribute_point_on_line(line_with, self._amount)
+
+    def getIOs(self):
+        return self._ios
 
     def boundingRect(self):
         return self._rect

@@ -8,6 +8,7 @@ class IOItem(AQClickableEllipseItem):
         self.setBrush(QBrush(Qt.GlobalColor.gray))
         self.setPen(QPen(Qt.GlobalColor.black))
         self._type = type
+        self.connections = []
         self._node_item = node_item
 
     def getType(self):
