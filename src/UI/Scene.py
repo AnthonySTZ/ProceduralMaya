@@ -1,4 +1,4 @@
-from PluginLib.CompactQt.Qt import QGraphicsScene, Qt, QPen, SIGNAL
+from PluginLib.CompactQt.Qt import QGraphicsScene, Qt, QPen, QColor, SIGNAL
 from UI.Elements.ConnectionLine import ConnectionLine
 from Core.Nodes.Scene import Scene as NodeScene
 from Core.Nodes.BaseNode import BaseNode
@@ -17,8 +17,8 @@ class Scene(QGraphicsScene):
         self._current_selected_node = None
 
     def buildGrid(self):
-        self.createGrid(20, Qt.GlobalColor.gray, 0.2)
-        self.createGrid(200, Qt.GlobalColor.black, 1)
+        self.createGrid(20, Qt.GlobalColor.gray, 0.15)
+        self.createGrid(200, QColor(10, 10, 10), 1.2)
 
     def createGrid(self, size, color, thickess):
         pen = QPen(color, thickess)

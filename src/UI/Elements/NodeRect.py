@@ -23,9 +23,9 @@ class NodeRect(AQMovableRectItem):
         self.buildUI()
 
     def buildUI(self):
-        brush = QBrush(QColor(26, 28, 33))
+        brush = QBrush(QColor(26, 28, 33, 230))
         self.setBrush(brush)
-        self.setPen(QPen(QColor(69, 69, 69)))
+        self.setPen(QPen(QColor(80, 80, 80), 1.5))
         self.addIcon()
         self.createTitle()
 
