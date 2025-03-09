@@ -16,6 +16,7 @@ class AQGraphicsTransformView(QGraphicsView):
         )
         self.setFrameStyle(QFrame.Shape.NoFrame)
         self.setTransformationAnchor(self.ViewportAnchor.NoAnchor)
+        self.setViewportUpdateMode(QGraphicsView.ViewportUpdateMode.FullViewportUpdate)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
