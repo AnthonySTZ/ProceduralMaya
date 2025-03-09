@@ -18,8 +18,11 @@ class MainWindow(QDialog):
 
         splitter = QSplitter()
 
+        scene_size = 8000
+
         scene = Scene()
-        scene.setSceneRect(-32000, -32000, 64000, 64000)
+        scene.setSceneRect(0, 0, scene_size, scene_size)
+        scene.buildGrid()
         nodes_viewer = View(scene)
         parameters_view = Parameters(scene)
 

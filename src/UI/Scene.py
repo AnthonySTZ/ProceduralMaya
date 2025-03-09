@@ -1,4 +1,4 @@
-from PluginLib.CompactQt.Qt import QGraphicsScene, Qt, SIGNAL
+from PluginLib.CompactQt.Qt import QGraphicsScene, Qt, QPen, SIGNAL
 from UI.Elements.ConnectionLine import ConnectionLine
 from Core.Nodes.Scene import Scene as NodeScene
 from Core.Nodes.BaseNode import BaseNode
@@ -15,6 +15,20 @@ class Scene(QGraphicsScene):
         self._current_io_item = None
         self._temp_connection = None
         self._current_selected_node = None
+
+    def buildGrid(self):
+        self.createGrid(20, Qt.GlobalColor.gray, 0.2)
+        self.createGrid(200, Qt.GlobalColor.black, 1)
+
+    def createGrid(self, size, color, thickess):
+        pen = QPen(color, thickess)
+        pen.setCosmetic(True)
+        for x in range(0, int(self.width()), size):
+            line = self.addLine(x, 0, x, int(self.height()), pen)
+            line.setZValue(-10)
+        for y in range(0, int(self.height()), size):
+            self.addLine(0, y, int(self.width()), y, pen)
+            line.setZValue(-10)
 
     def addNodeItem(self, node_item):
         self.addItem(node_item)

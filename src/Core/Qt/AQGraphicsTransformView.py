@@ -8,6 +8,7 @@ class AQGraphicsTransformView(QGraphicsView):
         self._scroll_pos = QPoint(0, 0)
         self._prev_scale = 1.0
         self.setDefaultFlags()
+        self.translate(-scene.width() / 2, -scene.height() / 2)
 
     def setDefaultFlags(self):
         self.setRenderHints(
