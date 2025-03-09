@@ -1,9 +1,4 @@
-from PluginLib.CompactQt.Qt import (
-    Qt,
-    QShortcut,
-    QKeySequence,
-    QCursor,
-)
+from PluginLib.CompactQt.Qt import Qt, QShortcut, QKeySequence, QCursor, QBrush, QColor
 from UI.Node import Node
 from UI.Elements.NodesMenu import NodesMenu
 from Core.Qt.AQGraphicsTransformView import AQGraphicsTransformView
@@ -16,6 +11,7 @@ class View(AQGraphicsTransformView):
         self.buildUI()
 
     def buildUI(self):
+        self.setBackgroundBrush(QBrush(QColor(38, 38, 38)))
         self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.customContextMenuRequested.connect(self.nodesContextMenu)
         tab_shortcut = QShortcut(QKeySequence(Qt.Key.Key_Tab), self)

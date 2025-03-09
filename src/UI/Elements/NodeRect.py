@@ -3,10 +3,10 @@ from PluginLib.CompactQt.Qt import (
     Qt,
     QGraphicsTextItem,
     QColor,
+    QPen,
     SIGNAL,
 )
 from Core.Qt.AQMovableRectItem import AQMovableRectItem
-from Core.Qt.AQClickableRectItem import AQClickableRectItem
 from UI.Elements.NodeIcon import NodeIcon
 
 
@@ -25,9 +25,9 @@ class NodeRect(AQMovableRectItem):
     def buildUI(self):
         brush = QBrush(QColor(26, 28, 33))
         self.setBrush(brush)
+        self.setPen(QPen(QColor(69, 69, 69)))
         self.addIcon()
         self.createTitle()
-        self.createRenderRect()
 
     def addIcon(self):
         height_padding = 2
@@ -52,21 +52,12 @@ class NodeRect(AQMovableRectItem):
         self._node_type.setPos(self.WIDTH, -self.HEIGHT + 8)
         self._node_type.setParentItem(self)
 
-    def createRenderRect(self):
-        render_width = 10
-        self._render_rect = AQClickableRectItem(
-            self.WIDTH - render_width, 0, render_width, self.HEIGHT
-        )
-        self._render_rect.setBrush(QBrush(QColor(26, 28, 33)))
-        self._render_rect.setParentItem(self)
-        self._render_rect.clicked.connect(self.renderClicked.emit)
-
     def setRenderActive(self, should_render):
         if should_render:
-            self._render_rect.setBrush(QBrush(Qt.GlobalColor.blue))
+            self.setPen(QPen(QColor(36, 100, 191)))
         else:
-            self._render_rect.setBrush(QBrush(QColor(26, 28, 33)))
-        self._render_rect.update()
+            self.setPen(QPen(QColor(69, 69, 69)))
+        self.update()
 
     def setName(self, name):
         self._name = name
