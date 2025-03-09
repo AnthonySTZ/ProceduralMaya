@@ -25,10 +25,10 @@ class Scene(QGraphicsScene):
         pen.setCosmetic(True)
         for x in range(0, int(self.width()), size):
             line = self.addLine(x, 0, x, int(self.height()), pen)
-            line.setZValue(-10)
+            line.setZValue(-50)
         for y in range(0, int(self.height()), size):
             self.addLine(0, y, int(self.width()), y, pen)
-            line.setZValue(-10)
+            line.setZValue(-50)
 
     def addNodeItem(self, node_item):
         self.addItem(node_item)
