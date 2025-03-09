@@ -50,6 +50,7 @@ class AQGraphicsTransformView(QGraphicsView):
         zoom_in_factor = 1.25
         zoom_out_factor = 1 / zoom_in_factor
         max_zoom = 3.0
+        min_zoom = 0.15
 
         # Save the scene pos
         try:
@@ -64,6 +65,8 @@ class AQGraphicsTransformView(QGraphicsView):
                 return
         else:
             zoom_factor = zoom_out_factor
+            if self._prev_scale <= min_zoom:
+                return
         self._prev_scale *= zoom_factor
         self.scale(zoom_factor, zoom_factor)
 
