@@ -4,6 +4,7 @@ from PluginLib.CompactQt.Qt import (
     Qt,
     QPainterPath,
     QPainterPathStroker,
+    QColor,
 )
 from UI.Elements.InputsOutputs import InputsOutputs
 
@@ -12,7 +13,7 @@ class ConnectionLine(QGraphicsLineItem):
     def __init__(self, node_scene):
         super().__init__()
         self._node_scene = node_scene
-        self.setPen(QPen(Qt.GlobalColor.white, 2))
+        self.setPen(QPen(QColor(133, 133, 133), 1.5))
         self.setZValue(-1)
         self._node_item = None
 
