@@ -54,7 +54,7 @@ class NodeRect(AQMovableRectItem):
 
     def setRenderActive(self, should_render):
         if should_render:
-            self.setPen(QPen(QColor(36, 100, 191)))
+            self.setPen(QPen(QColor(36, 100, 191), 3))
         else:
             self.setPen(QPen(QColor(69, 69, 69)))
         self.update()
