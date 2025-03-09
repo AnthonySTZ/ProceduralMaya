@@ -2,8 +2,7 @@ from PluginLib.CompactQt.Qt import (
     QBrush,
     Qt,
     QGraphicsTextItem,
-    QTextOption,
-    QGraphicsRectItem,
+    QColor,
     SIGNAL,
 )
 from Core.Qt.AQMovableRectItem import AQMovableRectItem
@@ -24,7 +23,7 @@ class NodeRect(AQMovableRectItem):
         self.buildUI()
 
     def buildUI(self):
-        brush = QBrush(Qt.GlobalColor.gray)
+        brush = QBrush(QColor(26, 28, 33))
         self.setBrush(brush)
         self.addIcon()
         self.createTitle()
@@ -58,7 +57,7 @@ class NodeRect(AQMovableRectItem):
         self._render_rect = AQClickableRectItem(
             self.WIDTH - render_width, 0, render_width, self.HEIGHT
         )
-        self._render_rect.setBrush(QBrush(Qt.GlobalColor.lightGray))
+        self._render_rect.setBrush(QBrush(QColor(26, 28, 33)))
         self._render_rect.setParentItem(self)
         self._render_rect.clicked.connect(self.renderClicked.emit)
 
@@ -66,7 +65,7 @@ class NodeRect(AQMovableRectItem):
         if should_render:
             self._render_rect.setBrush(QBrush(Qt.GlobalColor.blue))
         else:
-            self._render_rect.setBrush(QBrush(Qt.GlobalColor.lightGray))
+            self._render_rect.setBrush(QBrush(QColor(26, 28, 33)))
         self._render_rect.update()
 
     def setName(self, name):
