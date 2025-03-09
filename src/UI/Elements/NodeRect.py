@@ -11,8 +11,8 @@ from UI.Elements.NodeIcon import NodeIcon
 
 
 class NodeRect(AQMovableRectItem):
-    WIDTH = 90
-    HEIGHT = 25
+    WIDTH = 110
+    HEIGHT = 30
 
     renderClicked = SIGNAL()
 
@@ -30,7 +30,7 @@ class NodeRect(AQMovableRectItem):
         self.createTitle()
 
     def addIcon(self):
-        height_padding = 2
+        height_padding = 4
         icon_size = self.HEIGHT - height_padding * 2
         icon_pos_x = self.WIDTH / 2 - icon_size / 2
         icon = NodeIcon(self._node.getIcon(), icon_size)

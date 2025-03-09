@@ -5,6 +5,8 @@ from PluginLib.CompactQt.Qt import (
     QRectF,
     QGraphicsObject,
     QGraphicsItem,
+    QPainter,
+    QPainterPath,
 )
 
 
@@ -47,9 +49,16 @@ class AQMovableRectItem(QGraphicsObject):
         return self._rect
 
     def paint(self, painter, option, widget=None):
-        painter.setBrush(self._brush)
+
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        path = QPainterPath()
         painter.setPen(self._pen)
-        painter.drawRect(self._rect)
+        painter.setBrush(self._brush)
+
+        path.addRoundedRect(self._rect, 4, 4)
+        painter.setClipPath(path)
+        painter.fillPath(path, painter.brush())
+        painter.strokePath(path, painter.pen())
 
     def itemChange(self, change, value):
         if change == QGraphicsItem.GraphicsItemChange.ItemPositionChange:
