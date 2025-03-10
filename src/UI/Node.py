@@ -41,7 +41,10 @@ class Node(QGraphicsObject):
         self.title_rect.setRenderActive(True)
 
     def setSelected(self, isSelected):
-        pass
+        if isSelected:
+            self.title_rect.select()
+        else:
+            self.title_rect.deselect()
 
     def setRender(self, should_render):
         self._render = should_render

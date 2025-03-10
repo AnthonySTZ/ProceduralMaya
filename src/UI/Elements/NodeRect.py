@@ -34,6 +34,13 @@ class NodeRect(AQMovableRectItem):
         self.selection_rect = AQMovableRectItem(-2, -2, self.WIDTH + 4, self.HEIGHT + 4)
         self.selection_rect.setPen(QPen(QColor(252, 186, 3)))
         self.selection_rect.setParentItem(self)
+        self.selection_rect.hide()
+
+    def deselect(self):
+        self.selection_rect.hide()
+
+    def select(self):
+        self.selection_rect.show()
 
     def addIcon(self):
         height_padding = 4
