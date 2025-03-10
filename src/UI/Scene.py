@@ -39,7 +39,10 @@ class Scene(QGraphicsScene):
 
     def selectNode(self, node_item):
         self.nodeClicked.emit(node_item.getNode())
+        if self._current_selected_node is not None:
+            self._current_selected_node.setSelected(False)
         self._current_selected_node = node_item
+        self._current_selected_node.setSelected(True)
 
     def nodeScene(self):
         return self._node_scene
