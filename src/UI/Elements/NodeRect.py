@@ -35,6 +35,7 @@ class NodeRect(AQMovableRectItem):
         self.selection_rect = AQMovableRectItem(-2, -2, self.WIDTH + 4, self.HEIGHT + 4)
         self.selection_rect.setFlag(QGraphicsItem.GraphicsItemFlag.ItemIsMovable, False)
         self.selection_rect.setPen(QPen(QColor(252, 186, 3)))
+        self.selection_rect.setBrush(QBrush(QColor(252, 186, 3, 10)))
         self.selection_rect.setParentItem(self)
         self.selection_rect.hide()
 
