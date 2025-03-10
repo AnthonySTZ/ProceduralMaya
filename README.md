@@ -17,6 +17,7 @@ For now, all the available nodes are working:
 - Import (from scene)
 - Transform
 - Bend
+- Twist
 - Duplicate
 - Merge
 - Null
