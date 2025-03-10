@@ -40,6 +40,7 @@ class NodesMenu(QDialog):
         )
 
         self.node_list = QListWidget()
+        self.node_list.setMinimumHeight(200)
         self.node_list.setSizeAdjustPolicy(
             QListWidget.SizeAdjustPolicy.AdjustToContents
         )
@@ -70,6 +71,7 @@ class NodesMenu(QDialog):
         self.node_list.itemClicked.connect(self.userClicked)
 
         min_width = self.node_list.sizeHint().width() + 50
+
         self.setFixedWidth(min_width)
 
         search.setFocus()
