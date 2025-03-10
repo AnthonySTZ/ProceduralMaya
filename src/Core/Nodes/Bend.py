@@ -21,6 +21,7 @@ class Bend(BaseNode):
             "Curvature": Float(0.0),
             "Low Bound": Float(-1.0),
             "High Bound": Float(1.0),
+            "Rotation": Float3(0.0, 0.0, 0.0),
         }
 
     def commandAtIndex(self, index):
@@ -40,5 +41,15 @@ class Bend(BaseNode):
         return current_xform
 
     def bendMesh(self, xform):
-        obj = xform
-        return obj
+        curv = self._parameters["Curvature"].value
+        low_bound = self._parameters["Low Bound"].value
+        high_bound = self._parameters["High Bound"].value
+
+        rotation = self._parameters["Rotation"].toList()
+
+        bend_obj = mc.nonLinear(
+            xform, type="bend", curvature=curv, lowBound=low_bound, highBound=high_bound
+        )
+        mc.xform(bend_obj, rotation=rotation)
+        mc.select(xform)
+        mel.eval("DeleteHistory;")
