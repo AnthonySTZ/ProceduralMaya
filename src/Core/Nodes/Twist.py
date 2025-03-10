@@ -51,7 +51,7 @@ class Twist(BaseNode):
 
         twist_obj = mc.nonLinear(
             xform,
-            type="bend",
+            type="twist",
             startAngle=start_angle,
             endAngle=end_angle,
             lowBound=low_bound,
