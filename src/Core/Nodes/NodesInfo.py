@@ -9,6 +9,7 @@ class NodesInfo:
         from Core.Nodes.Merge import Merge
         from Core.Nodes.Null import Null
         from Core.Nodes.Import import Import
+        from Core.Nodes.Bend import Bend
 
-        nodes = [Cube, Sphere, Transform, Duplicate, Merge, Null, Import]
+        nodes = [Cube, Sphere, Transform, Duplicate, Merge, Null, Import, Bend]
         return nodes
