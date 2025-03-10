@@ -32,5 +32,5 @@ class Cube(BaseNode):
         width = self._parameters["width"].value
         height = self._parameters["height"].value
         depth = self._parameters["depth"].value
-        cube_obj = mc.cubeNode(w=width, h=height, d=depth)
+        cube_obj = mc.polyCube(w=width, h=height, d=depth)[0]
         return cube_obj
