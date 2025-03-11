@@ -5,17 +5,19 @@ class UnsignedInt(Int):
 
     def __init__(self, value=0):
         super().__init__(value)
+        self._slider_range = [0, 5]
 
     def userChangedValue(self, line_edit):
         value = line_edit.text()
         if value[0] == "-":
-            value = value[1:]
+            value = "0"
             line_edit.setText(value)
         self.setValue(value)
+        self.setSliderValue(self.value)
 
     def setValue(self, value):
         try:
-            self.value = abs(int(value))
+            self.value = max(0, int(value))
         except:
             self.value = 0
         self.valueChanged.emit()
