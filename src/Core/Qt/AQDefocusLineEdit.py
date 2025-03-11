@@ -9,6 +9,5 @@ class AQDefocusLineEdit(QLineEdit):
         super().__init__(text)
 
     def focusOutEvent(self, e):
-        print("Focus Out")
         self.defocus.emit()
         return super().focusOutEvent(e)
