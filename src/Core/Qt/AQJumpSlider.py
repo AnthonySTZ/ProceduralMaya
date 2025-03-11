@@ -6,6 +6,8 @@ class AQJumpSlider(QSlider):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setOrientation(Qt.Orientation.Horizontal)
+        self.setRange(0, 100)
+        self.setTickInterval(1)
         self._is_pressed = False
 
     def moveToMouse(self, mouse):
