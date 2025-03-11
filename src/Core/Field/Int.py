@@ -39,6 +39,7 @@ class Int(Field):
         self._slider = AQJumpSlider()
         self._slider.setTickInterval(10)
         self._slider.userChangedValue.connect(self.sliderValueChanged)
+        self.setSliderValue(self.value)
         hbox.addWidget(self._slider)
 
         return widget

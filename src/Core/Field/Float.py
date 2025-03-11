@@ -37,6 +37,8 @@ class Float(Field):
 
         self._slider = AQJumpSlider()
         self._slider.userChangedValue.connect(self.sliderValueChanged)
+        self.setSliderValue(self.value)
+
         hbox.addWidget(self._slider)
 
         return widget
