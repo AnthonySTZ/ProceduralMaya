@@ -1,10 +1,10 @@
 from PluginLib.CompactQt.Qt import (
     QHBoxLayout,
     QWidget,
-    QLineEdit,
     SIGNAL,
 )
 from Core.Field.Field import Field
+from Core.Qt.AQDefocusLineEdit import AQDefocusLineEdit
 
 
 class String(Field):
@@ -20,8 +20,9 @@ class String(Field):
         widget = QWidget()
         widget.setLayout(hbox)
 
-        line_edit = QLineEdit(str(self.value))
+        line_edit = AQDefocusLineEdit(str(self.value))
         line_edit.returnPressed.connect(lambda le=line_edit: self.userChangedValue(le))
+        line_edit.defocus.connect(lambda le=line_edit: self.userChangedValue(le))
         hbox.addWidget(line_edit)
 
         return widget
