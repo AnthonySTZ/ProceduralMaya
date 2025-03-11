@@ -33,7 +33,7 @@ class Float(Field):
         hbox.addWidget(self._line_edit)
 
         self._slider = AQJumpSlider()
-        self._slider.valueChanged.connect(self.sliderValueChanged)
+        self._slider.userChangedValue.connect(self.sliderValueChanged)
         hbox.addWidget(self._slider)
 
         return widget
@@ -47,12 +47,21 @@ class Float(Field):
         fit_min = self._slider_range[0]
         fit_max = self._slider_range[1]
 
-        fitted_value = round(logics.fit_value(value, max, min, fit_max, fit_min), 2)
+        fitted_value = round(logics.fit_value(value, min, max, fit_min, fit_max), 2)
         self._line_edit.setText(str(fitted_value))
-        self.setValue(fitted_value)
+        self.userChangedValue(self._line_edit)
+
+    def setSliderValue(self, value):
+        max = self._slider.maximum()
+        min = self._slider.minimum()
+        fit_min = self._slider_range[0]
+        fit_max = self._slider_range[1]
+        slider_value = logics.fit_value(value, fit_min, fit_max, min, max)
+        self._slider.setValue(int(slider_value))
 
     def userChangedValue(self, line_edit):
         self.setValue(line_edit.text())
+        self.setSliderValue(self.value)
 
     def setValue(self, value):
         try:
