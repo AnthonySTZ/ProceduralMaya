@@ -37,6 +37,7 @@ class Int(Field):
         hbox.addWidget(self._line_edit)
 
         self._slider = AQJumpSlider()
+        self._slider.setTickInterval(10)
         self._slider.userChangedValue.connect(self.sliderValueChanged)
         hbox.addWidget(self._slider)
 
