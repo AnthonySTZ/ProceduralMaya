@@ -1,12 +1,12 @@
 from PluginLib.CompactQt.Qt import (
     QHBoxLayout,
     QWidget,
-    QLineEdit,
     QIntValidator,
     SIGNAL,
 )
 from Core.Field.Field import Field
 from Core.Qt.AQJumpSlider import AQJumpSlider
+from Core.Qt.AQDefocusLineEdit import AQDefocusLineEdit
 from Core.Logic import logics
 
 
@@ -24,12 +24,16 @@ class Int(Field):
         widget = QWidget()
         widget.setLayout(hbox)
 
-        self._line_edit = QLineEdit(str(self.value))
+        self._line_edit = AQDefocusLineEdit(str(self.value))
         self._line_edit.setValidator(QIntValidator())
         self._line_edit.setFixedWidth(50)
         self._line_edit.returnPressed.connect(
             lambda le=self._line_edit: self.userChangedValue(le)
         )
+        self._line_edit.defocus.connect(
+            lambda le=self._line_edit: self.userChangedValue(le)
+        )
+        self._line_edit.focusOutEvent
         hbox.addWidget(self._line_edit)
 
         self._slider = AQJumpSlider()

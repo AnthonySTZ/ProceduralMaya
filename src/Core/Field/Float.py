@@ -1,12 +1,12 @@
 from PluginLib.CompactQt.Qt import (
     QHBoxLayout,
     QWidget,
-    QLineEdit,
     QDoubleValidator,
     SIGNAL,
 )
 from Core.Field.Field import Field
 from Core.Qt.AQJumpSlider import AQJumpSlider
+from Core.Qt.AQDefocusLineEdit import AQDefocusLineEdit
 from Core.Logic import logics
 
 
@@ -24,10 +24,13 @@ class Float(Field):
         widget = QWidget()
         widget.setLayout(hbox)
 
-        self._line_edit = QLineEdit(str(self.value))
+        self._line_edit = AQDefocusLineEdit(str(self.value))
         self._line_edit.setValidator(QDoubleValidator())
         self._line_edit.setFixedWidth(50)
         self._line_edit.returnPressed.connect(
+            lambda le=self._line_edit: self.userChangedValue(le)
+        )
+        self._line_edit.defocus.connect(
             lambda le=self._line_edit: self.userChangedValue(le)
         )
         hbox.addWidget(self._line_edit)
