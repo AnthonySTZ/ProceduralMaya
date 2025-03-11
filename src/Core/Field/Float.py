@@ -67,8 +67,10 @@ class Float(Field):
         self.setSliderValue(self.value)
 
     def setValue(self, value):
+        prev_value = self.value
         try:
             self.value = float(value)
         except:
             self.value = 0
-        self.valueChanged.emit()
+        if self.value != prev_value:
+            self.valueChanged.emit()

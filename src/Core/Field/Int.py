@@ -70,8 +70,10 @@ class Int(Field):
         return str(self.value)
 
     def setValue(self, value):
+        prev_value = self.value
         try:
             self.value = int(value)
         except:
             self.value = 0
-        self.valueChanged.emit()
+        if self.value != prev_value:
+            self.valueChanged.emit()

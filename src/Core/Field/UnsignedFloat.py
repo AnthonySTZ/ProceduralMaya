@@ -16,8 +16,10 @@ class UnsignedFloat(Float):
         self.setSliderValue(self.value)
 
     def setValue(self, value):
+        prev_value = self.value
         try:
             self.value = max(0, float(value))
         except:
             self.value = 0
-        self.valueChanged.emit()
+        if self.value != prev_value:
+            self.valueChanged.emit()
