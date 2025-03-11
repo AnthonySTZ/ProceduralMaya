@@ -50,7 +50,6 @@ class Scene:
         self.update()
 
     def update(self):
-        print(self._last_mesh)
         if self._last_mesh:
             try:
                 print("Last mesh : " + self._last_mesh)
