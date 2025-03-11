@@ -1,0 +1,27 @@
+from PluginLib.CompactQt.Qt import QSlider, Qt
+
+
+class AQJumpSlider(QSlider):
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setOrientation(Qt.Orientation.Horizontal)
+        self._is_pressed = False
+
+    def moveToMouse(self, mouse):
+        mouse.accept()
+        x = mouse.pos().x()
+        value = (self.maximum() - self.minimum()) * x / self.width() + self.minimum()
+        self.setValue(int(value))
+
+    def mousePressEvent(self, e):
+        if e.button() == Qt.MouseButton.LeftButton:
+            self._is_pressed = True
+            self.moveToMouse(e)
+
+    def mouseReleaseEvent(self, ev):
+        self._is_pressed = False
+
+    def mouseMoveEvent(self, e):
+        if self._is_pressed:
+            self.moveToMouse(e)
