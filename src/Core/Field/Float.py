@@ -4,10 +4,10 @@ from PluginLib.CompactQt.Qt import (
     QLineEdit,
     QDoubleValidator,
     SIGNAL,
-    QSizePolicy,
 )
 from Core.Field.Field import Field
 from Core.Qt.AQJumpSlider import AQJumpSlider
+from Core.Logic import logics
 
 
 class Float(Field):
@@ -47,9 +47,7 @@ class Float(Field):
         fit_min = self._slider_range[0]
         fit_max = self._slider_range[1]
 
-        fitted_value = round(
-            (value - min) / (max - min) * (fit_max - fit_min) + fit_min, 2
-        )
+        fitted_value = round(logics.fit_value(value, max, min, fit_max, fit_min), 2)
         self._line_edit.setText(str(fitted_value))
         self.setValue(fitted_value)
 
