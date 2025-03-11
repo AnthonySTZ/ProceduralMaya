@@ -1,7 +1,9 @@
-from PluginLib.CompactQt.Qt import QSlider, Qt
+from PluginLib.CompactQt.Qt import QSlider, Qt, SIGNAL
 
 
 class AQJumpSlider(QSlider):
+
+    userChangedValue = SIGNAL(int)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -14,6 +16,7 @@ class AQJumpSlider(QSlider):
         x = mouse.pos().x()
         value = (self.maximum() - self.minimum()) * x / self.width() + self.minimum()
         self.setValue(int(value))
+        self.userChangedValue.emit(int(value))
 
     def mousePressEvent(self, e):
         if e.button() == Qt.MouseButton.LeftButton:
