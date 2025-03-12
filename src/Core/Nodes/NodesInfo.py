@@ -11,6 +11,18 @@ class NodesInfo:
         from Core.Nodes.Import import Import
         from Core.Nodes.Bend import Bend
         from Core.Nodes.Twist import Twist
+        from Core.Nodes.Boolean import Boolean
 
-        nodes = [Cube, Sphere, Transform, Duplicate, Merge, Null, Import, Bend, Twist]
+        nodes = [
+            Cube,
+            Sphere,
+            Transform,
+            Duplicate,
+            Merge,
+            Null,
+            Import,
+            Bend,
+            Twist,
+            Boolean,
+        ]
         return nodes
