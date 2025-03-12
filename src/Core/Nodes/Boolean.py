@@ -3,6 +3,7 @@ from Core.Field.Types import Types
 
 try:
     import maya.cmds as mc  # type: ignore
+    import maya.mel as mel  # type: ignore
 except:
     pass
 
@@ -44,8 +45,12 @@ class Boolean(BaseNode):
                 return second_xform
             if not mc.objExists(second_xform):
                 return first_xform
-            merged_obj = mc.mergeNode(f=first_xform, s=second_xform)
-            return merged_obj
+            bool_obj = mc.polyBoolOp(
+                first_xform, second_xform, op=self._parameters["Operation"].getValue()
+            )
+            mc.select(bool_obj)
+            mel.eval("DeleteHistory;")
+            return bool_obj[0]
 
         if self.input(0):
             return self.input(0).commandAtIndex(0)
