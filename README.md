@@ -19,6 +19,7 @@ For now, all the available nodes are working:
 - Bend
 - Twist
 - Duplicate
+- Boolean
 - Merge
 - Null
 
