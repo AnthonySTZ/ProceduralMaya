@@ -12,6 +12,7 @@ class NodesInfo:
         from Core.Nodes.Bend import Bend
         from Core.Nodes.Twist import Twist
         from Core.Nodes.Boolean import Boolean
+        from Core.Nodes.Subdivide import Subdivide
 
         nodes = [
             Cube,
@@ -24,5 +25,6 @@ class NodesInfo:
             Bend,
             Twist,
             Boolean,
+            Subdivide,
         ]
         return nodes
