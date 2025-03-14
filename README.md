@@ -16,6 +16,7 @@ For now, all the available nodes are working:
 - Sphere
 - Import (from scene)
 - Transform
+- Subdivide
 - Bend
 - Twist
 - Duplicate
