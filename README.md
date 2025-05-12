@@ -26,4 +26,8 @@ For now, all the available nodes are working:
 
 I will continue to add more nodes to the list.
 
+![Image](./readme/interface.jpg)
+
+DEMO VIDEO BELOW 
+
 ![VIDEO](./readme/demo.gif)
